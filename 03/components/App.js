@@ -10,7 +10,7 @@ class App extends React.Component {
     render() {
         const { text } = this.state;
 
-        return <Box text={text} />;
+        return <Box />;
     }
 }
 

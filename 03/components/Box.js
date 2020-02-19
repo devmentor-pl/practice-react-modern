@@ -2,11 +2,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Div from './Div';
+import { TextContext, ColorContext } from '../context';
 
-const Box = props => {
-    const { text } = props;
+const Box = () => {
 
-    return <Div title={text} />;
+
+    const { Consumer: TextConsumer } = TextContext;
+    const { Consumer: ColorConsumer } = ColorContext;
+    return( 
+        <TextConsumer>
+            {
+                text=>(
+                    <ColorConsumer>
+                    {
+                        color => {
+                            <Div title={text} color />
+                        }
+                    }
+                )
+            }
+        );
 };
 
 Box.propTypes = {
