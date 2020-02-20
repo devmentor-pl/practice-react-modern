@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextContext } from './../context';
 
-const Div = () => {
+const Div = props => {
     const { title } = props;
     const { Provider } = TextContext;
     return (
