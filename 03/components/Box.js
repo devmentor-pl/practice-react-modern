@@ -5,23 +5,13 @@ import Div from './Div';
 import { TextContext, ColorContext } from '../context';
 
 const Box = () => {
-
-
     const { Consumer: TextConsumer } = TextContext;
     const { Consumer: ColorConsumer } = ColorContext;
-    return( 
+    return (
         <TextConsumer>
-            {
-                text=>(
-                    <ColorConsumer>
-                    {
-                        color => {
-                            <Div title={text} color />
-                        }
-                    }
-                )
-            }
-        );
+            {text => <ColorConsumer>{color => <Div title={text} color />}</ColorConsumer>}
+        </TextConsumer>
+    );
 };
 
 Box.propTypes = {
