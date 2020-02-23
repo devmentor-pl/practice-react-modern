@@ -2,15 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Div from './Div';
-import { TextContext, ColorContext } from '../context';
+import { TextContext } from '../context';
 
 const Box = () => {
-    const { Consumer: TextConsumer } = TextContext;
-    const { Consumer: ColorConsumer } = ColorContext;
+    const { Provider } = TextContext;
     return (
-        <TextConsumer>
-            {text => <ColorConsumer>{color => <Div title={text} color />}</ColorConsumer>}
-        </TextConsumer>
+        <Provider value="sibling">
+            <Div />
+        </Provider>
     );
 };
 
