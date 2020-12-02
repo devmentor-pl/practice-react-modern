@@ -5,10 +5,12 @@ import ClockTime from './ClockTime';
 import ClockDate from './ClockDate';
 
 const Clock = props => {
+    const { date } = props;
+
     return (
         <>
-            <ClockTime date={props.date} />
-            <ClockDate date={props.date} />
+            <ClockTime date={date} />
+            <ClockDate date={date} />
         </>
     );
 };
