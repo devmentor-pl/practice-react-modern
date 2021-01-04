@@ -20,7 +20,7 @@ Twoja konfguracja ma mieć określone zasady:
 
 Dodatkowo skonfiguruj swój IDE w taki sposób, aby podczas pisnaia kodu były podkreślane od razu błędy związane z odpowiednią strukturą kodu (w [VS Code](https://code.visualstudio.com/) rozwiązuje to rozszerzenie o nazwie `ESLint`).
 
-Równocześnie przy zapisie pliku, wszystkie możliwe błędy były korygowane przez ESLint-a, a przez Prettier-a (w [VS Code](https://code.visualstudio.com/) to rozszerzenie o nazwie `Prettier - Code formater`) odpowiednio formatowane.
+Równocześnie przy zapisie pliku, wszystkie możliwe błędy były korygowane nie przez ESLint-a, a przez Prettier-a (w [VS Code](https://code.visualstudio.com/) to rozszerzenie o nazwie `Prettier - Code formater`) odpowiednio formatowane.
 
 Pamiętaj, aby dodać do konfiguracji webpack-a [odpowiedni loader](https://github.com/webpack-contrib/eslint-loader), który będzie uruchamiał ESLint-a przy każdej zmianie pliku o rozszerzeniu `.js`.
 
