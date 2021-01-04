@@ -1,6 +1,8 @@
 {
   "extends": [
-    "airbnb"
+    "airbnb",
+    "prettier",
+    "prettier/react"
   ],
   "rules": {
     "react/jsx-filename-extension": [
