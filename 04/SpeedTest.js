@@ -7,7 +7,6 @@ const SpeedTest = () => {
     const [inputValue, setValue] = useState('');
     const [correctLetters, updateCorrectLetters] = useState(0)
     const [word, regenerateWord] = useRandomItem(['pies', 'kot', '1257', 'klątwa', 'a.b.c']);
-    // const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
     const timerRef = useRef(null);
     const renderTime = () => {
         timerRef.current = setInterval(() => {
