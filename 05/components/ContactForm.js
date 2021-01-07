@@ -7,10 +7,10 @@ import FormItem from './FormItem';
 
 function reducer(state, action) {
     switch(action.type) {
-    case 'testingReducer': {
+    case 'send': {
         return {
             ...state,
-            tested: true
+            send: true
         }
     }
     default:
@@ -19,23 +19,19 @@ function reducer(state, action) {
 }
 
 const initState = {
-    tested: false   
+    send: false   
 }
 
 const ContactForm = props => {
 // import account from './account';
     // eslint-disable-next-line react/prop-types
     const {formFields} = props;
-    [state, dispatch] = useReducer(reducer, initState)
-    const {tested} = state;
+    const [state, dispatch] = useReducer(reducer, initState)
+    const {send} = state; // tutaj nie wiem co dalej - jak pobrać wartości z inputów i przefiltrować je pod kątem errorów. I jak te errory zebrać i wyświetlić. Do omówienia :)
 
     const handleSubmit = e => {
         e.preventDefault()
-        // eslint-disable-next-line no-console
-        console.log(tested)
-        dispatch({type: 'testingReducer'})
-        // eslint-disable-next-line no-console
-        console.log(tested)
+        dispatch({type: 'send'})
     }
 
     // eslint-disable-next-line react/prop-types
