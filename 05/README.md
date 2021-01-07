@@ -16,7 +16,7 @@ Formularz powinien mieć przynajmniej kilka pól:
 
 Każde z pól powinno posiadać odpowiednią walidację, a użytkownik powinien zostać poinformowany o błędach.
 
-Postaraj się użyć `useReduce()` do zarządzania polami formularza.
+Postaraj się użyć `useReducer()` do zarządzania polami formularza.
 
 ## Zadanie dodatkowe
 
