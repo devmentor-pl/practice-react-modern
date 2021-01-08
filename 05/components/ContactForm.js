@@ -1,52 +1,103 @@
-import React, { useReducer} from 'react';
-// import { v4 as uuid } from 'uuid';
+/* eslint-disable react/prop-types */
+/* eslint-disable max-len */
+import React, { useReducer } from 'react';
+import { v4 as uuid } from 'uuid';
 import FormItem from './FormItem';
-// import ValidationRules from '../FormHelpers/ValidationRules';
-// import FormValidator from '../FormHelpers/FormValidator';
+import ValidationRules from '../FormHelpers/ValidationRules';
+import FormValidator from '../FormHelpers/FormValidator';
+// import account from './account';
 // import propTypes from 'prop-types';
 
-function reducer(state, action) {
-    switch(action.type) {
-    case 'send': {
-        return {
-            ...state,
-            send: true
+const ContactForm = (props) => {
+    const initState = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        title: '',
+        message: '',
+        errors: [],
+    };
+    const { formFields } = props;
+    const formFieldsNames = formFields.map(field => field.name)
+
+    function reducer(state, action) {
+        switch (action.type) {
+        case action.type: {
+            return {
+                ...state,
+                [action.type]: action.payload,
+            };
+        }
+        case 'errors': {
+            return {
+                ...state,
+                errors: [action.payload]
+            }
+        }
+        default: return state
         }
     }
-    default:
-        return state
-    }
-}
+    const [state, dispatch] = useReducer(reducer, initState);
 
-const initState = {
-    send: false   
-}
-
-const ContactForm = props => {
-// import account from './account';
-    // eslint-disable-next-line react/prop-types
-    const {formFields} = props;
-    const [state, dispatch] = useReducer(reducer, initState)
-    const {send} = state; // tutaj nie wiem co dalej - jak pobrać wartości z inputów i przefiltrować je pod kątem errorów. I jak te errory zebrać i wyświetlić. Do omówienia :)
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        dispatch({type: 'send'})
+    const createErrorItem = () => {
+        return state.errors.map(error => {
+            return (
+                <li key={error.id}>{error.msg}</li>
+            )  
+        })
+        
     }
 
-    // eslint-disable-next-line react/prop-types
-    const formItems = formFields.map(item => {
-        const {label, name, type, field, required} = item;
+    const createError = (rules, element) => {
+        return {
+            msg: rules[element].errMsg,
+            id: uuid()
+        }
+    }
+
+    const validateValues = (elementNames) => {
+        const validFuncs = new FormValidator();
+        const rules = new ValidationRules();
+        const errorsArr = [];
+        elementNames.forEach(elementName => {
+            const isValueCorrect = validFuncs[`is${  rules[elementName].type}`](state[elementName], rules[elementName].options)
+            if (!isValueCorrect) {
+                errorsArr.push(createError(rules, elementName))
+            }
+        })
+        return errorsArr
+        
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault(); // wiem, że z tym wysyłanie się nie powiedzie ;) (Chciałabym przy okazji omawiania zadań o tym porozmawiać)
+        const errors = validateValues(formFieldsNames);
+        dispatch({type: 'errors', payload: errors});
+    };
+
+    const formItems = formFields.map((item) => {
+        const { label, name, type, field, required } = item;
         return (
-            // eslint-disable-next-line max-len
-            <FormItem key={name} label={label} name={name} type={type} field={field} required={required}/>
-        )
-    })
-    // return (<form noValidate onSubmit={e => submitForm(e)}>
-    return (<form noValidate onSubmit={e => handleSubmit(e)}>
-        {formItems}
-        <button type='submit'>Wyślij</button>
-    </form>);
+            <FormItem
+                // {...item}
+                key={name}
+                label={label}
+                name={name}
+                type={type}
+                field={field}
+                required={required}
+                dispatch={dispatch}
+                value={state[name]}
+            />
+        );
+    });
+    return (
+        <form noValidate onSubmit={(e) => handleSubmit(e)}>
+            {formItems}
+            <button type="submit">Wyślij</button>
+            {state.errors.length !== 0 && <ul>{createErrorItem()}</ul>}
+        </form>
+    );
 };
 
 export default ContactForm;

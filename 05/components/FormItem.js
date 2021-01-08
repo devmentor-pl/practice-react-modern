@@ -1,29 +1,33 @@
-/* eslint-disable no-constant-condition */
 /* eslint-disable max-len */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import useAttributes from '../hooks'
 
-const FormItem = props => {
-    const attributes = useAttributes()
-    // eslint-disable-next-line react/prop-types
-    const {label, name, type, field, required} = props;
 
-    const createField = () => { 
-        if(field === 'input') {
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            return <input {...attributes} type={type} id={name} required={required}/>
-        } 
-        return <textarea id={name}/>
-        
-    }
+const FormItem = (props) => {
+    const { label, name, type, field, required, dispatch, value } = props;
+
+    const createField = () => {
+        if (field === 'input') {
+            return (
+                <input
+                    name={name}
+                    type={type}
+                    id={name}
+                    required={required}
+                    value={value}
+                    onChange={(e) => dispatch({ type: name, payload: e.target.value })}
+                />
+            );
+        }
+        return <textarea id={name} name={name} required={required} value={value} onChange={(e) => dispatch({ type: name, payload: e.target.value })}/>;
+    };
     return (
         <>
             <label htmlFor={name}>
-                {label}: 
-                {createField()}
+                {label}:{createField()}
             </label>
         </>
-    )
-}
+    );
+};
 
-export default FormItem
+export default FormItem;
