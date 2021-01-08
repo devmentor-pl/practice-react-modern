@@ -10,4 +10,27 @@
     <body>
         <div id="root"></div>
     </body>
+    <!-- ten cdn poniżej to tu chyba niepotrzebny? :P -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js">
+    </script> 
+    <script type="text/javascript">
+    // import account from './account'; - to nie tutaj. Trochę nie mogę wpaść na to, gdzie ten cały skrypt umieścić. Po prostu w osobnym pliku JS i tu go podpiąć?
+    (function(){
+        emailjs.init("xxx"); //Insert your User ID
+    })();
+    </script>
+    <script>
+        var templateParams = {
+        name: 'Sender',
+        notes: 'Test email'
+    };
+    
+    emailjs.send('xxx', 'xxx', templateParams) //Insert your email service ID and email template ID
+        .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+        console.log('FAILED...', error);
+        });
+    </script>
 </html>
