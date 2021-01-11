@@ -1,11 +1,10 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable max-len */
+/* eslint-disable */
 import React, { useReducer } from 'react';
 import { v4 as uuid } from 'uuid';
 import FormItem from './FormItem';
 import ValidationRules from '../FormHelpers/ValidationRules';
 import FormValidator from '../FormHelpers/FormValidator';
-// import account from './account';
+import account from '../account';
 // import propTypes from 'prop-types';
 
 const ContactForm = (props) => {
@@ -33,6 +32,17 @@ const ContactForm = (props) => {
             return {
                 ...state,
                 errors: [action.payload]
+            }
+        }
+        case 'clearForm': {
+            return {
+                ...state,
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                title: '',
+                message: '',
             }
         }
         default: return state
@@ -69,10 +79,36 @@ const ContactForm = (props) => {
         return errorsArr
         
     }
+
+    const handleMessageSend = () => {
+        const templateParams = {
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email,
+            phone: state.phone,
+            title: state.title,
+            message: state.message
+        };
+
+        const {userID, serverID, templateID} = account;
+        emailjs.init(userID);
+
+        emailjs.send(serverID, templateID, templateParams)
+            .then(response => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, error => {
+                console.log('FAILED...', error);
+            });
+    }
+
     const handleSubmit = (e) => {
-        e.preventDefault(); // wiem, że z tym wysyłanie się nie powiedzie ;) (Chciałabym przy okazji omawiania zadań o tym porozmawiać)
+        e.preventDefault();
         const errors = validateValues(formFieldsNames);
         dispatch({type: 'errors', payload: errors});
+        if(errors.length === 0) {
+            handleMessageSend();
+            dispatch({type: 'clearForm'}) // teraz nie przychodzi mi do głowy, jak wyczyścić pola formularza, bo to najwyraźniej nie zadziała :x
+        }
     };
 
     const formItems = formFields.map((item) => {
