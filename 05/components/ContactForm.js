@@ -97,7 +97,7 @@ const ContactForm = (props) => {
         dispatch({type: 'errors', payload: errors});
         if(errors.length === 0) {
             handleMessageSend();
-            dispatch({type: 'clearForm'}) // teraz nie przychodzi mi do głowy, jak wyczyścić pola formularza, bo to najwyraźniej nie zadziała :x
+            dispatch({type: 'clearForm'})
         }
     };
 
@@ -105,7 +105,6 @@ const ContactForm = (props) => {
         const { label, name, type, field, required } = item;
         return (
             <FormItem
-                // {...item}
                 key={name}
                 label={label}
                 name={name}
