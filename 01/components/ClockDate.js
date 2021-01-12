@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 const ClockDate = props => {
     function getCorrectMonthFormat(monthNumber) {
@@ -20,5 +20,9 @@ const ClockDate = props => {
         </section>
     );
 };
+
+ClockDate.propTypes = {
+    date: propTypes.instanceOf(Date).isRequired,
+}
 
 export default ClockDate;

@@ -1,1 +1,49 @@
-{}
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js"
+        ]
+      }
+    ],
+    "indent": [
+      "error",
+      4
+    ],
+    "react/jsx-indent": [
+      "error",
+      4
+    ],
+    "react/jsx-indent-props": [
+      "error",
+      4
+    ],
+    "react/state-in-constructor": [
+      0,
+      "never"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "comments": 100
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ]
+  },
+  "globals": {
+    "window": true,
+    "document": true
+  }
+}

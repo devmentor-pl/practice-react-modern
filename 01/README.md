@@ -4,7 +4,7 @@
 
 &nbsp;
 
-Pierwszym Twoim zadaniem będzie konfiguracja [ESLint](https://eslint.org/)-a oraz [Prettier](https://prettier.io/)-a tak, aby ze soba współpracowały.
+Pierwszym Twoim zadaniem będzie konfiguracja [ESLint](https://eslint.org/)a oraz [Prettier](https://prettier.io/)a tak, aby ze soba współpracowały.
 
 Konfiguracja powinna być wykonana w taki sposób, aby każdy z potencjalnych członków Twojego zespołu pisał kod zgodnie z ustalonymi regułami oraz był on w ten sam sposób formatowany.
 
@@ -18,11 +18,11 @@ Twoja konfguracja ma mieć określone zasady:
 - maksymalna długość wiersza to 100 znaków
 - znak używany do oznaczania ciągu znaków to [apostrof](https://pl.wikipedia.org/wiki/Apostrof)
 
-Dodatkowo skonfiguruj swój IDE w taki sposób, aby podczas pisnaia kodu były podkreślane od razu błędy związane z odpowiednią strukturą kodu (w [VS Code](https://code.visualstudio.com/) rozwiązuje to rozszerzenie o nazwie `ESLint`).
+Dodatkowo skonfiguruj swój IDE w taki sposób, aby podczas pisania kodu od razu były podkreślane błędy związane z odpowiednią strukturą kodu (w [VS Code](https://code.visualstudio.com/) rozwiązuje to rozszerzenie o nazwie `ESLint`).
 
-Równocześnie przy zapisie pliku, wszystkie możliwe błędy były korygowane przez ESLint-a, a przez Prettier-a (w [VS Code](https://code.visualstudio.com/) to rozszerzenie o nazwie `Prettier - Code formater`) odpowiednio formatowane.
+Niech wszystkie możliwe błędy są korygowane przez ESLinta, a odpowiednio formatowane przez Prettiera (w [VS Code](https://code.visualstudio.com/) to rozszerzenie o nazwie `Prettier - Code formater`).
 
-Pamiętaj, aby dodać do konfiguracji webpack-a [odpowiedni loader](https://github.com/webpack-contrib/eslint-loader), który będzie uruchamiał ESLint-a przy każdej zmianie pliku o rozszerzeniu `.js`.
+Pamiętaj, aby dodać do konfiguracji webpack-a [odpowiedni loader](https://github.com/webpack-contrib/eslint-loader), który będzie uruchamiał ESLinta przy każdej zmianie pliku o rozszerzeniu `.js`.
 
 W przedstawionym rozwiązaniu korzystamy z inicjalizatora właściwości, dzięki któremu definujemy `state` poza konstruktorem dlatego musisz jeszcze użyć [babel-eslint](https://github.com/babel/babel-eslint) jako parsera z odpowiednią konfiguracją.
 
