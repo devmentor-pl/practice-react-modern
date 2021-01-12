@@ -22,30 +22,20 @@ const ContactForm = (props) => {
 
     function reducer(state, action) {
         switch (action.type) {
-        case action.type: {
+        case 'errors': {
+            return {
+                ...state,
+                errors: action.payload
+            }
+        }
+        case 'clearForm': {
+            return initState
+        }
+        default:
             return {
                 ...state,
                 [action.type]: action.payload,
             };
-        }
-        case 'errors': {
-            return {
-                ...state,
-                errors: [action.payload]
-            }
-        }
-        case 'clearForm': {
-            return {
-                ...state,
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                title: '',
-                message: '',
-            }
-        }
-        default: return state
         }
     }
     const [state, dispatch] = useReducer(reducer, initState);
