@@ -21,8 +21,7 @@ const SpeedTest = () => {
     };
     const compareValue = value => {
         setValue(value);
-        // eslint-disable-next-line max-len
-        if(value === word) { // wygląda na to, że w tym miejscu nie będę mogła skorzystać z inputValue zamiast e.target.value
+        if(value === word) {
             updateCorrectLetters(correctLetters + word.length); 
             setValue('')
             regenerateWord(); 
@@ -30,8 +29,6 @@ const SpeedTest = () => {
     }
 
     const resetTest = () => {
-        // eslint-disable-next-line max-len
-        // czy przy tej ilości stanów (a potem resetów - jak poniżej) powinnam już pomyśleć o useReducer?
         updateCountdown(maxTime);
         updateCorrectLetters(0);
         setValue('');
