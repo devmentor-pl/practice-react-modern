@@ -32,7 +32,7 @@ const SpeedTest = () => {
     const resetTest = () => {
         // eslint-disable-next-line max-len
         // czy przy tej ilości stanów (a potem resetów - jak poniżej) powinnam już pomyśleć o useReducer?
-        updateCountdown(5);
+        updateCountdown(maxTime);
         updateCorrectLetters(0);
         setValue('');
         clearInterval(timerRef.current)
