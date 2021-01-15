@@ -13,10 +13,12 @@ const ClockTime = props => {
 
     return (
         <section>
-            {hours}:{minutes}:{seconds}
+        {hours}:{minutes}:{seconds}
         </section>
     );
 };
+
+
 
 ClockTime.propTypes = {
     date: PropTypes.instanceOf(Date).isRequired,
