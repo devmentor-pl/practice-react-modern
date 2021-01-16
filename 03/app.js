@@ -8,9 +8,9 @@ import { TextContext } from './context';
 const App = () => {
     return (
         <section>
-            <Box />
+            <Box text="text inside" />
             <TextContext.Provider value="sibling">
-                <Div />
+                <Div title="title" />
             </TextContext.Provider>
         </section>
     );
