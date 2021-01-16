@@ -20,5 +20,8 @@ const ClockDate = props => {
         </section>
     );
 };
+ClockDate.propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
+};
 
 export default ClockDate;
