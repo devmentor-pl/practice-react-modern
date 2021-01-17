@@ -5,15 +5,10 @@ import Validator from '../utils/Validator';
 // import account from './account';
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+/* eslint-disable default-case */
+/* eslint-disable indent */
 
 const ContactForm = () => {
-    const reducer = (state, action) => {
-        const newState = { ...state };
-        newState[action.type] = action.payload;
-        console.log('🚀 ~ reducer ~ newState', newState);
-        return newState;
-    };
-
     const init = {
         firstName: '',
         lastName: '',
@@ -24,33 +19,45 @@ const ContactForm = () => {
         errors: [],
     };
 
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case action.type:
+                const newState = { ...state };
+                newState[action.type] = action.payload;
+                return newState;
+            case 'errors':
+                return [...state[type], action.payload];
+        }
+    };
+
     const [state, dispatch] = useReducer(reducer, init);
 
-    const validateData = data => {
+    const validateData = () => {
         const validator = new Validator();
-
-        Object.keys(data).map(field => {
-            const result = validator[`is${field}Valid`](field, formFields[field].validationRules);
-            console.log(result);
-            // if (field === formFields.field) {
-            //     console.log('yeeey');
-            // } else {
-            //     console.log('naiii');
-            // }
-        });
-        // if all is good, return true
+        const values = Object.values(state);
+        const names = Object.keys(state);
+        for (let i = 0; i < names.length; i++) {
+            if (names[i] === 'errors') {
+                return null;
+            }
+            return validator.validate(names[i], values[i]);
+            // console.log('🚀 ~ validateData ~ err', err);
+            // eRRORES.push(err);
+        }
+        // console.log(eRRORES);
+        // if (eRRORES.length !== 0) {
+        //     dispatch({ type: 'errors', payload: eRRORES });
+        // }
     };
 
     const handleSubmit = form => {
         form.preventDefault();
-
+        const error = validateData();
+        console.log('🚀 ~ ContactForm ~ error', error);
+        errors.push(error);
         // validate data
-        if (validateData(state)) {
-            // confirm that you received
-            // save form to database (where?)
-            // zero the form
-            return true;
-        }
+
+        // clear the form
     };
 
     const renderFields = () => {

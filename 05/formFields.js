@@ -7,6 +7,7 @@ const formFields = {
         onChange: null,
         type: 'text',
         validationRules: {
+            errorMsg: 'Invalid first name',
             regex: /[a-zA-Z]/,
             minLength: 5,
             dataType: 'string',
@@ -20,6 +21,7 @@ const formFields = {
         onChange: null,
         type: 'text',
         validationRules: {
+            errorMsg: 'Invalid last name',
             regex: /[a-zA-Z]/,
             minLength: 5,
             dataType: 'string',
@@ -33,6 +35,7 @@ const formFields = {
         onChange: null,
         type: 'email',
         validationRules: {
+            errorMsg: 'Invalid e-mail',
             regex: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
             minLength: 6,
             dataType: 'string',
@@ -46,6 +49,7 @@ const formFields = {
         onChange: null,
         type: 'tel',
         validationRules: {
+            errorMsg: 'Invalid tel number',
             regex: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
             minLength: 8,
             dataType: 'number',
@@ -59,6 +63,7 @@ const formFields = {
         onChange: null,
         type: 'text',
         validationRules: {
+            errorMsg: 'Invalid topic',
             minLength: 3,
             dataType: 'text',
         },
@@ -71,6 +76,7 @@ const formFields = {
         onChange: null,
         type: 'string',
         validationRules: {
+            errorMsg: 'Invalid message',
             minLength: 20,
             dataType: 'string',
         },
