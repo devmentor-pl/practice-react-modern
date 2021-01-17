@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable default-case */
+/* eslint-disable indent */
+
 import React, { useReducer } from 'react';
 import formFields from '../formFields';
 import Input from './Input';
 import Validator from '../utils/Validator';
 // import account from './account';
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable default-case */
-/* eslint-disable indent */
 
 const ContactForm = () => {
     const init = {
@@ -16,7 +17,6 @@ const ContactForm = () => {
         tel: '',
         topic: '',
         message: '',
-        errors: [],
     };
 
     const reducer = (state, action) => {
@@ -34,28 +34,14 @@ const ContactForm = () => {
 
     const validateData = () => {
         const validator = new Validator();
-        const values = Object.values(state);
-        const names = Object.keys(state);
-        for (let i = 0; i < names.length; i++) {
-            if (names[i] === 'errors') {
-                return null;
-            }
-            return validator.validate(names[i], values[i]);
-            // console.log('🚀 ~ validateData ~ err', err);
-            // eRRORES.push(err);
-        }
-        // console.log(eRRORES);
-        // if (eRRORES.length !== 0) {
-        //     dispatch({ type: 'errors', payload: eRRORES });
-        // }
+        return validator.validate(state);
     };
 
     const handleSubmit = form => {
         form.preventDefault();
-        const error = validateData();
-        console.log('🚀 ~ ContactForm ~ error', error);
-        errors.push(error);
-        // validate data
+        const errors = validateData();
+        console.log('🚀 CONTACT errors', errors);
+        dispatch({ type: 'errors', payload: errors });
 
         // clear the form
     };

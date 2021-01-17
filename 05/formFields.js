@@ -39,6 +39,7 @@ const formFields = {
             regex: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
             minLength: 6,
             dataType: 'string',
+            isEmpty: false,
         },
     },
     tel: {
@@ -52,7 +53,8 @@ const formFields = {
             errorMsg: 'Invalid tel number',
             regex: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
             minLength: 8,
-            dataType: 'number',
+            dataType: 'string',
+            isEmpty: false,
         },
     },
     topic: {
@@ -66,6 +68,8 @@ const formFields = {
             errorMsg: 'Invalid topic',
             minLength: 3,
             dataType: 'text',
+            isEmpty: false,
+            regex: '',
         },
     },
     message: {
@@ -79,6 +83,8 @@ const formFields = {
             errorMsg: 'Invalid message',
             minLength: 20,
             dataType: 'string',
+            isEmpty: false,
+            regex: '',
         },
     },
 };
