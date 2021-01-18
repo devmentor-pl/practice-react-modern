@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 
 import './styles/ContactForm.css'
+import FormRow from './FormRow'
 
 // import account from './account';
 
@@ -13,96 +14,67 @@ const initialState = {
     message: '',  
 }
 const reducer = (state, action) => {
-    switch(action.type) {
-    case 'set-firstName': return {...state, firstName: action.payload}
-    case 'set-lastName': return {...state, lastName: action.payload}
-    case 'set-email': return {...state, email: action.payload}
-    case 'set-phone': return {...state, phone: action.payload}
-    case 'set-subject': return {...state, subject: action.payload}
-    case 'set-message': return {...state, message: action.payload}
-    default: throw new Error();
-    }
+    const allowedActions = ['set-firstName', 'set-lastName', 'set-email',
+        'set-phone', 'set-subject', 'set-message']
+    const actionType = action.type
+
+    if(allowedActions.includes(actionType)) {
+        const fieldName = actionType.substring(4);
+
+        return {...state, [fieldName]: action.payload}
+    } 
+    throw new Error();
+    
 }
 
 const ContactForm = () => {
     // console.log(account);
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const RowFirstName = <p>
-        <label htmlFor='firstName'>First name*:
-            <input type='text' 
-                id='firstName'
-                value={ state.firstName }
-                onChange={ e => dispatch({ type: 'set-firstName', payload: e.target.value }) }
-                placeholder='minimum two characters' 
-                minLength='2' 
-                required />
-        </label>
-    </p>
-    const RowLastName = <p>
-        <label htmlFor='lastName'>Last name*:
-            <input type='text'
-                id='lastName'
-                value={ state.lastName }
-                onChange={ e => dispatch({ type: 'set-lastName', payload: e.target.value }) }
-                placeholder='minimum two characters' 
-                minLength='2' 
-                required />
-        </label>
-    </p>
-    const RowEmail = <p>
-        <label htmlFor='email'>Email*:
-            <input type='email' 
-                id='email'
-                value={ state.email }
-                onChange={ e => dispatch({ type: 'set-email', payload: e.target.value }) }
-                placeholder='valid email address' 
-                required />
-        </label>
-    </p>
-    const RowPhone = <p>
-        <label htmlFor='phone'>Phone number:
-            <input type='tel' 
-                id='phone'
-                value={ state.phone }
-                onChange={ e => dispatch({ type: 'set-phone', payload: e.target.value }) }
-                placeholder='xxx-xxx-xxx' 
-                pattern='[0-9]{3}-[0-9]{3}-[0-9]{3}' />
-        </label>
-    </p>
-    const RowSubject = <p>
-        <label htmlFor='subject'>Subject*:
-            <input type='text' 
-                id='subject'
-                value={ state.subject }
-                onChange={ e => dispatch({ type: 'set-subject', payload: e.target.value }) }
-                placeholder='minimum five characters' 
-                minLength='5' 
-                required />
-        </label>
-    </p>
-    const RowMessage = <p>
-        <label htmlFor='message'>Message*:
-            <textarea 
-                id='message'
-                value={ state.message }
-                onChange={ e => 
-                    dispatch({ type: 'set-message', payload: e.target.value }) }              
-                rows="4" 
-                cols="50" 
-                required />
-        </label>
-    </p>
-    
-    return <form onSubmit={ e => {
+    const RowFirstName = {
+        labelText: 'First name: *', tag: 'input', type: 'text', id: 'firstName', 
+        value: state.firstName, onChangeHandler: dispatch, actionType: 'set-firstName', 
+        placeholder: 'minimum two characters',  minLength: '2', required: true
+    }
+    const RowLastName = {
+        labelText: 'Last Name: *', tag: 'input', type: 'text', id: 'lastName', 
+        value: state.lastName, onChangeHandler: dispatch, actionType: 'set-lastName', 
+        placeholder: 'minimum two characters',  minLength: '2', required: true
+    }
+    const RowEmail = {
+        labelText: 'Email: *', tag: 'input', type: 'email', id: 'email', value: state.email,
+        onChangeHandler: dispatch, actionType: 'set-email', 
+        placeholder: 'valid email address',  minLength: '3', required: true
+    }
+    const RowPhone = {
+        labelText: 'Phone number:', tag: 'input', type: 'tel', id: 'tel', value: state.phone,
+        onChangeHandler: dispatch, actionType: 'set-phone', pattern: '[0-9]{3}-[0-9]{3}-[0-9]{3}',
+        placeholder: 'xxx-xxx-xxx',  minLength: '', required: false
+    }
+    const RowSubject = {
+        labelText: 'Subject: *', tag: 'input', type: 'text', id: 'subject', value: state.subject,
+        onChangeHandler: dispatch, actionType: 'set-subject',
+        placeholder: 'minimum five characters',  minLength: '5', required: true
+    }
+    const RowMessage = {
+        labelText: 'Message: *', tag: 'textarea', id: 'message', value: state.message,
+        onChangeHandler: dispatch, actionType: 'set-message', rows: '4', cols: '50',
+        placeholder: 'minimum ten characters',  minLength: '10', required: true
+    }
+
+    const submitHandler = e => {
         e.preventDefault();
-        window.alert('Form completed sucessfuly')}}>
-        { RowFirstName }
-        { RowLastName }
-        { RowEmail }
-        { RowPhone }
-        { RowSubject }
-        { RowMessage }
+        window.alert('Form completed sucessfuly')
+    }
+    
+    return <form onSubmit={ submitHandler }>
+        <FormRow definition={ RowFirstName }  />
+        <FormRow definition={ RowLastName }  />
+        <FormRow definition={ RowEmail }  />
+        <FormRow definition={ RowPhone }  />
+        <FormRow definition={ RowSubject }  />
+        <FormRow definition={ RowMessage }  />
+
         <p>Fields with * are required</p>
         <p>
             <input type='submit' />

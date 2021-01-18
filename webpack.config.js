@@ -22,8 +22,8 @@ module.exports = {
                 // będą brane pod uwagę
                 exclude: /node_modules/,
                 // określam wykluczenia
-                // use: ['babel-loader', 'eslint-loader'],
-                use: ['babel-loader'],
+                use: ['babel-loader', 'eslint-loader'],
+                // use: ['babel-loader'],
                 // określam jakie loader-y
                 // mają być wykorzystywane
             },

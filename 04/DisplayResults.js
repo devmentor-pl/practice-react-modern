@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import {v4 as uuid} from 'uuid';
-
 const DisplayResults = (props) => {
     const { results } = props
 
     const Results = results.map(result => {
-        return <li key={ uuid() }>{ `Wyraz ${result.word} został napisany w 
-                        ${result.seconds > 0 ? result.seconds : 1} sekund` }</li>
+        return <li key={ result.id }>{ `Wyraz ${result.word} został napisany w 
+                        ${ result.seconds } sekund` }</li>
     })
 
     return (

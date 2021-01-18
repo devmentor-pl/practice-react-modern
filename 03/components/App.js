@@ -1,17 +1,21 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
+import Div from './Div';
 
-class App extends React.Component {
-    state = {
-        text: 'React HelloWorld Modern!',
-    };
+import { TextContext } from '../context';
 
-    render() {
-        const { text } = this.state;
+const App = () => {
+    const {Provider} = TextContext;
 
-        return <Box text={text} />;
-    }
-}
+    return (
+        <section>
+            <Box />
+            <Provider value='sibling'>
+                <Div />
+            </Provider>
+        </section>
+    );
+};
 
 export default App;

@@ -1,3 +1,5 @@
+import {v4 as uuid} from 'uuid';
+
 import React, { useEffect, useState, useRef } from 'react';
 import useRandomItem from './hook';
 
@@ -14,8 +16,8 @@ const SpeedTest = () => {
 
     const startClock = () => {
         clockRef.current = setInterval(() => {
-            setSeconds(value => value + 1);
-        }, 1000);
+            setSeconds(value => Math.round((value + 0.1) * 100) / 100);
+        }, 100);
     }
 
     const stopClock = () => {
@@ -30,7 +32,7 @@ const SpeedTest = () => {
         if(enteredText === word) {
             stopClock();
             clockRef.current = null
-            setResults([...results, {word, seconds}])
+            setResults([...results, {word, seconds, id: uuid()}])
             regenerateWord();
             setSeconds(0);
             setEnteredText('')
@@ -41,6 +43,7 @@ const SpeedTest = () => {
     return (
         <div>
             <h1>{word}</h1>
+            <h4>{ `czas wprowadzania wyrazu: ${ seconds }` }</h4>
             <input  ref={ inputRef }
                 value={ enteredText }
                 onChange={ e => setEnteredText(e.target.value) }
