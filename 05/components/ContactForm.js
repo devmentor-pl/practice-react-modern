@@ -21,6 +21,7 @@ const ContactForm = () => {
         errors: [],
     };
 
+    // eslint-disable-next-line consistent-return
     const reducer = (state, action) => {
         const newState = { ...state };
 
@@ -48,16 +49,13 @@ const ContactForm = () => {
 
     const displayErrors = () => {
         const errorItem = { color: 'red' };
-
-        const errorList = state.errors;
-        const errorItems = errorList.map(err => {
+        const errorItems = state.errors.map(err => {
             return (
                 <li key={uuid()} style={errorItem}>
                     {err}
                 </li>
             );
         });
-
         return (
             <>
                 <h3>Fields you need to fix: </h3>

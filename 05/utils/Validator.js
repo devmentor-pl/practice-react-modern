@@ -28,14 +28,13 @@ export default class Validator {
                 const { errorMsg, regex, minLength, dataType } = fieldProperties.validationRules;
                 const value = state[fieldProperties.name];
 
-                // const regexError = regex && !regex.test(value)
-
                 if (regex && !regex.test(value)) {
                     addError(errorMsg);
                 }
                 if (minLength && value.length < minLength) {
                     addError(errorMsg);
                 }
+                // eslint-disable-next-line valid-typeof
                 if (dataType && !(typeof value === dataType)) {
                     addError(errorMsg);
                 }
