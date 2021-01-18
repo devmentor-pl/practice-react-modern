@@ -1,16 +1,16 @@
 // ./src/components/Box.js
 import React from 'react';
-import PropTypes from 'prop-types';
 import Div from './Div';
+import { TextContext } from '../context';
 
-const Box = props => {
-    const { text } = props;
+const Box = () => {
+    const { Provider } = TextContext;
 
-    return <Div title={text} />;
-};
-
-Box.propTypes = {
-    text: PropTypes.string.isRequired,
+    return (
+        <Provider value="sibling">
+            <Div/>
+        </Provider>
+    )
 };
 
 export default Box;

@@ -1,0 +1,86 @@
+const formFields = {
+    firstName: {
+        label: 'First Name',
+        placeholder: 'First Name',
+        name: 'firstName',
+        value: '',
+        onChange: null,
+        type: 'text',
+        validationRules: {
+            errorMsg: 'Invalid first name',
+            regex: /[a-zA-Z]/,
+            minLength: 5,
+            dataType: 'string',
+        },
+    },
+    lastName: {
+        label: 'Last Name',
+        placeholder: 'Last Name',
+        name: 'lastName',
+        value: '',
+        onChange: null,
+        type: 'text',
+        validationRules: {
+            errorMsg: 'Invalid last name',
+            regex: /[a-zA-Z]/,
+            minLength: 5,
+            dataType: 'string',
+        },
+    },
+    email: {
+        label: 'E-mail',
+        placeholder: 'E-mail',
+        name: 'email',
+        value: '',
+        onChange: null,
+        type: 'email',
+        validationRules: {
+            errorMsg: 'Invalid e-mail',
+            regex: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+            minLength: 6,
+            dataType: 'string',
+        },
+    },
+    tel: {
+        label: 'Tel number',
+        placeholder: 'Tel number',
+        name: 'tel',
+        value: '',
+        onChange: null,
+        type: 'tel',
+        validationRules: {
+            errorMsg: 'Invalid tel number',
+            regex: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
+            minLength: 8,
+            dataType: 'string',
+        },
+    },
+    topic: {
+        label: 'Topic',
+        placeholder: 'Topic',
+        name: 'topic',
+        value: '',
+        onChange: null,
+        type: 'text',
+        validationRules: {
+            errorMsg: 'Invalid topic',
+            minLength: 3,
+            dataType: 'string',
+        },
+    },
+    message: {
+        label: 'Message',
+        placeholder: 'Message',
+        name: 'message',
+        value: '',
+        onChange: null,
+        type: 'string',
+        validationRules: {
+            errorMsg: 'Invalid message',
+            minLength: 20,
+            dataType: 'string',
+        },
+    },
+};
+
+export default formFields;
