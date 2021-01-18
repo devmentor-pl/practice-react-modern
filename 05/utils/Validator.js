@@ -8,8 +8,8 @@ import formFields from '../formFields';
 export default class Validator {
     validate(state) {
         const errorList = [];
-        const fieldNames = Object.keys(state); // array firstname, lastname, email, tel...
-        const values = Object.values(state); // array
+        const fieldNames = Object.keys(state);
+        const values = Object.values(state);
 
         const addError = err => {
             if (!errorList.includes(err)) {
@@ -20,18 +20,15 @@ export default class Validator {
         fieldNames.forEach(field => {
             const fieldProperties = formFields[field];
 
-            if (fieldNames.name === 'errors') {
+            if (field === 'errors') {
                 return;
             }
+
             if (fieldProperties.name === field) {
-                const {
-                    errorMsg,
-                    regex,
-                    minLength,
-                    dataType,
-                    isEmpty,
-                } = fieldProperties.validationRules;
+                const { errorMsg, regex, minLength, dataType } = fieldProperties.validationRules;
                 const value = state[fieldProperties.name];
+
+                // const regexError = regex && !regex.test(value)
 
                 if (regex && !regex.test(value)) {
                     addError(errorMsg);
@@ -39,7 +36,7 @@ export default class Validator {
                 if (minLength && value.length < minLength) {
                     addError(errorMsg);
                 }
-                if (dataType && typeof value !== dataType) {
+                if (dataType && !(typeof value === dataType)) {
                     addError(errorMsg);
                 }
             }

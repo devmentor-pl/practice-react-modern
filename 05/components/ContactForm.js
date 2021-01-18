@@ -4,9 +4,10 @@
 /* eslint-disable indent */
 
 import React, { useReducer } from 'react';
-import formFields from '../formFields';
+import { v4 as uuid } from 'uuid';
 import Input from './Input';
 import Validator from '../utils/Validator';
+import formFields from '../formFields';
 // import account from './account';
 
 const ContactForm = () => {
@@ -17,16 +18,21 @@ const ContactForm = () => {
         tel: '',
         topic: '',
         message: '',
+        errors: [],
     };
 
     const reducer = (state, action) => {
+        const newState = { ...state };
+
         switch (action.type) {
+            case 'clear':
+                return action.payload;
+            case 'errors':
+                newState.errors = action.payload;
+                return newState;
             case action.type:
-                const newState = { ...state };
                 newState[action.type] = action.payload;
                 return newState;
-            case 'errors':
-                return [...state[type], action.payload];
         }
     };
 
@@ -37,13 +43,43 @@ const ContactForm = () => {
         return validator.validate(state);
     };
 
+    const clearForm = () => dispatch({ type: 'clear', payload: init });
+    const sendErrors = errors => dispatch({ type: 'errors', payload: errors });
+
+    const displayErrors = () => {
+        const errorItem = { color: 'red' };
+
+        const errorList = state.errors;
+        const errorItems = errorList.map(err => {
+            return (
+                <li key={uuid()} style={errorItem}>
+                    {err}
+                </li>
+            );
+        });
+
+        return (
+            <>
+                <h3>Fields you need to fix: </h3>
+                <ul>{errorItems}</ul>
+            </>
+        );
+    };
+
+    const saveData = () => {
+        console.log('your message has been successfully submitted');
+    };
+
     const handleSubmit = form => {
         form.preventDefault();
         const errors = validateData();
-        console.log('🚀 CONTACT errors', errors);
-        dispatch({ type: 'errors', payload: errors });
 
-        // clear the form
+        if (errors.length > 0) {
+            sendErrors(errors);
+        } else {
+            saveData();
+            clearForm();
+        }
     };
 
     const renderFields = () => {
@@ -66,6 +102,7 @@ const ContactForm = () => {
     return (
         <form noValidate onSubmit={handleSubmit} name="form">
             {renderFields()}
+            {state.errors ? displayErrors() : null}
             <button type="submit">Submit</button>
         </form>
     );
