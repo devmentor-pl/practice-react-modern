@@ -3,12 +3,13 @@
 /* eslint-disable default-case */
 /* eslint-disable indent */
 
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
+import emailjs from 'emailjs-com';
 import { v4 as uuid } from 'uuid';
 import Input from './Input';
 import Validator from '../utils/Validator';
 import formFields from '../formFields';
-// import account from './account';
+import { userID, templateID, serviceID } from '../account';
 
 const ContactForm = () => {
     const init = {
@@ -38,6 +39,7 @@ const ContactForm = () => {
     };
 
     const [state, dispatch] = useReducer(reducer, init);
+    const [receipt, setReceipt] = useState('');
 
     const validateData = () => {
         const validator = new Validator();
@@ -64,8 +66,48 @@ const ContactForm = () => {
         );
     };
 
-    const saveData = () => {
-        console.log('your message has been successfully submitted');
+    const composeEmail = () => {
+        const { topic, firstName, lastName, tel, message } = state;
+        const fromName = `${firstName} ${lastName}`;
+        return {
+            topic,
+            fromName,
+            message,
+            tel,
+        };
+    };
+
+    const sendEmail = async email => {
+        const successMsg = 'Your message has been successfully sent';
+        const errorMsg = 'Your message has NOT been sent';
+
+        const serverResp = await emailjs.send(serviceID, templateID, email, userID).then(
+            res => {
+                if (res.status === 200) {
+                    console.log('sukces');
+                    return Promise.resolve(successMsg);
+                }
+                console.log('something went wrong with api');
+                return Promise.reject(errorMsg);
+            },
+            err => {
+                console.log(err);
+            },
+        );
+        return serverResp;
+    };
+
+    // const setSuccessMessage = () => {
+    //     setConfirmation('Your message has been successfully sent');
+    // };
+    // const setErrorMessage = () => {
+    //     setConfirmation('Your message has NOT been sent');
+    // };
+
+    const handleEmail = async () => {
+        const email = composeEmail();
+        const respond = await sendEmail(email);
+        setReceipt(respond);
     };
 
     const handleSubmit = form => {
@@ -75,7 +117,7 @@ const ContactForm = () => {
         if (errors.length > 0) {
             sendErrors(errors);
         } else {
-            saveData();
+            handleEmail();
             clearForm();
         }
     };
@@ -99,6 +141,7 @@ const ContactForm = () => {
 
     return (
         <form noValidate onSubmit={handleSubmit} name="form">
+            <h2 style={{ color: 'red', fontSize: '20px' }}>{receipt}</h2>
             {renderFields()}
             {state.errors ? displayErrors() : null}
             <button type="submit">Submit</button>

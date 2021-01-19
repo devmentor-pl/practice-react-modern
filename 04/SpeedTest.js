@@ -4,7 +4,7 @@ import useRandomItem from './hook';
 const SpeedTest = () => {
     const intervalRef = useRef(null);
     const timeLimitSec = 10;
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JS', 'usb']);
+    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JS']);
     const [text, setText] = useState('');
     const [time, setTime] = useState(0);
     const [points, setPoints] = useState(0);
@@ -20,18 +20,20 @@ const SpeedTest = () => {
                 }
                 stopInterval();
                 return 0;
-            }); // tutaj mnie linter grzecznie informuje o tym ze 'time' zostalo juz zadeklarowane w 'scope above', dlatego zmienilem na tic. jaka jest praktyka?
+            });
         }, 1000);
     };
 
-    const handleUserInput = ({ target: { value } }) => {
-        setText(value);
+    const handleSubmit = e => {
+        console.log('subtmi');
+        e.preventDefault();
         if (text && text === word) {
             setPoints(points + 1);
             setLength(length + word.length);
             setText('');
             regenerateWord();
         }
+        return null;
     };
 
     const zeroClock = () => {
@@ -44,6 +46,10 @@ const SpeedTest = () => {
             zeroClock();
             startInterval();
         }
+    };
+
+    const handleInput = ({ target: { value } }) => {
+        setText(value);
     };
 
     const handleRestart = () => {
@@ -60,7 +66,7 @@ const SpeedTest = () => {
     }, []);
 
     return (
-        <div>
+        <form onSubmit={handleSubmit} name="form">
             <h1>{word}</h1>
             <h2>
                 Time: {time} / {timeLimitSec} s.
@@ -74,14 +80,14 @@ const SpeedTest = () => {
             <input
                 ref={intervalRef}
                 value={text}
-                onChange={handleUserInput}
+                onChange={handleInput}
                 onBlur={stopInterval}
                 onFocus={handleClock}
             />
             <button name="restart" type="button" onClick={handleRestart}>
                 Restart
             </button>
-        </div>
+        </form>
     );
 };
 
