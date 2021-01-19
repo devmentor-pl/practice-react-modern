@@ -107,7 +107,7 @@ const ContactForm = () => {
 
             
                 <button  className="btn" type="submit">send!</button>
-                <span>Everything went well! THANKS</span>
+                {/* <span>Everything went well! THANKS</span> */}
             </form>
         </div>
 

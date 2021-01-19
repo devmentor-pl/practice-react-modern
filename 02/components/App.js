@@ -7,7 +7,8 @@ class App extends React.Component {
 
  state = {
      text: 'React HelloWorld Modern!',
- };
+ };.
+ gi
 
  render() {
      const { text } = this.state;
@@ -15,7 +16,7 @@ class App extends React.Component {
        
      return  (
          <Provider value = {text}>
-             <Box text = {text} />;
+             <Box />;
          </Provider>
      )
  }

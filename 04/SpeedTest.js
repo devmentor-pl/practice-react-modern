@@ -31,12 +31,20 @@ const SpeedTest = () => {
 
     const startTime = () => {
         inputRef.current = setInterval(() => {
-            setCounter(value => value + 1)   
-            // (jak zrobic warunek, że tylko do 1 minuty ma odliczać ?)  
-            // if(value === 60) {
-            //     console.log('finish, max 60 sec ')
-            // }   
+
+             setCounter((value) => {
+                const nextValue = value + 1;
+                if (nextValue === 60) {
+                    stopTime();
+                }
+
+                return nextValue;
+            });
+             
         }, 1000);
+
+        
+
         
   
     };
