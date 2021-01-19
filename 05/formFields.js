@@ -9,7 +9,7 @@ const formFields = {
         validationRules: {
             errorMsg: 'Invalid first name',
             regex: /[a-zA-Z]/,
-            minLength: 5,
+            minLength: 2,
             dataType: 'string',
         },
     },
@@ -23,7 +23,7 @@ const formFields = {
         validationRules: {
             errorMsg: 'Invalid last name',
             regex: /[a-zA-Z]/,
-            minLength: 5,
+            minLength: 2,
             dataType: 'string',
         },
     },
@@ -77,7 +77,7 @@ const formFields = {
         type: 'string',
         validationRules: {
             errorMsg: 'Invalid message',
-            minLength: 20,
+            minLength: 16,
             dataType: 'string',
         },
     },
