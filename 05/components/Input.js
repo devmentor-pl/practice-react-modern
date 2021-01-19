@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Input = props => {
     const { value, placeholder, type, id, name, dispatch } = props;
@@ -15,6 +15,15 @@ const Input = props => {
             />
         </label>
     );
+};
+
+Input.propTypes = {
+    value: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
 export default Input;

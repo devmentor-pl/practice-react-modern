@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 /* eslint-disable default-case */
 /* eslint-disable indent */
 
@@ -96,13 +95,6 @@ const ContactForm = () => {
         );
         return serverResp;
     };
-
-    // const setSuccessMessage = () => {
-    //     setConfirmation('Your message has been successfully sent');
-    // };
-    // const setErrorMessage = () => {
-    //     setConfirmation('Your message has NOT been sent');
-    // };
 
     const handleEmail = async () => {
         const email = composeEmail();
