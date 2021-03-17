@@ -1,20 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import ClockTime from './ClockTime';
-import ClockDate from './ClockDate';
+import ClockTime from './ClockTime'
+import ClockDate from './ClockDate'
 
 const Clock = props => {
-    return (
-        <>
-            <ClockTime date={props.date} />
-            <ClockDate date={props.date} />
-        </>
-    );
-};
+   const [timeDate, dateDate] = props
+   return (
+      <>
+         <ClockTime date={timeDate} />
+         <ClockDate date={dateDate} />
+      </>
+   )
+}
 
 Clock.propTypes = {
-    date: PropTypes.instanceOf(Date).isRequired,
-};
+   date: PropTypes.instanceOf(Date).isRequired,
+}
 
-export default Clock;
+export default Clock

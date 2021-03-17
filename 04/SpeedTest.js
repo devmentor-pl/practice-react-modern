@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
-import useRandomItem from './hook';
+import React, { useEffect } from "react";
+import useRandomItem from "./hook";
 
 const SpeedTest = () => {
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
+    const [word, regenerateWord] = useRandomItem([
+        "devmentor.pl",
+        "abc",
+        "JavaScript"
+    ]);
 
     useEffect(() => {
         regenerateWord();

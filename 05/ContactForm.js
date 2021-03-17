@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import account from './account';
+import account from "./account";
 
 const ContactForm = () => {
     console.log(account);

@@ -1,10 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import ContactForm from './ContactForm';
+import ContactForm from "./ContactForm";
 
-const App = () => {
-    return <ContactForm />;
-};
+const App = () => <ContactForm />;
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+ReactDOM.render(<App />, document.querySelector("#root"));
