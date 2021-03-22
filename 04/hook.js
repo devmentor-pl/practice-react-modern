@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useRandomItem = itemsList => {
-    if (!Array.isArray(itemsList))
-        throw new Error("Parameter itemsList is not an array!");
+    if (!Array.isArray(itemsList)) throw new Error('Parameter itemsList is not an array!');
 
     const [state, setState] = useState(null);
 

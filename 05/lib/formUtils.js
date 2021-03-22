@@ -73,12 +73,10 @@ export const onInputChange = (name, value, dispatch, formState) => {
     for (let i = 0; i < keys.length; i += 1) {
         if (Object.prototype.hasOwnProperty.call(formState, keys[i])) {
             const item = formState[keys[i]];
-            // Check if the current field has error
             if (keys[i] === name && hasError) {
                 isFormValid = false;
                 break;
             } else if (keys[i] !== name && item.hasError) {
-                // Check if any other field has error
                 isFormValid = false;
                 break;
             }
