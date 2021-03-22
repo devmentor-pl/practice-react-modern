@@ -4,20 +4,18 @@ import {ColorContext, TextContext} from './context.js'
 
 
 const Div = () => {
-    //const {Consumer: ColorConsumer} = ColorContext
-    //const {Consumer: TextConsumer} = TextContext
-    const {DefaultColor} = ColorContext
-    const {DefaultText} = TextContext
-    console.log(DefaultColor)
+    const {Consumer: ColorConsumer} = ColorContext
+    const {Consumer: TextConsumer} = TextContext
+    
     return(
-    <DefaultColor>    
+    <ColorConsumer>    
         {
             color =>
                 (<div style={
                     {border: '1px solid',
                     borderColor: color
                 }}>
-                    <DefaultText>
+                    <TextConsumer>
                         {
                             text => (
                                 
@@ -25,7 +23,7 @@ const Div = () => {
                                 
                             )
                         }
-                    </DefaultText>
+                    </TextConsumer>
                     <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
                     lacinia, justo et posuere viverra, ligula turpis egestas nisi, id iaculis
@@ -37,7 +35,7 @@ const Div = () => {
                     </p>
                 </div>)
         }
-    </DefaultColor>
+    </ColorConsumer>
 )};
 
 export default Div;

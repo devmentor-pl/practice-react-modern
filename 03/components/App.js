@@ -5,11 +5,13 @@ import Div from "./Div";
 import {ColorContext, TextContext} from './context.js'
 
 const App = () => {
-    const {Provider} = ColorContext
-    const {Consumer: TextConsumer} = TextContext
+    const {Provider} = TextContext
+    
     return(
         <section>
+            <Provider value='sibling'>
             <Box />
+            </Provider>
             <Div />
         </section>
     )
