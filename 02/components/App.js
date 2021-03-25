@@ -1,7 +1,7 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
-import { TextContext } from './context.js';
+import TextContext from './context';
 
 class App extends React.Component {
     state = {

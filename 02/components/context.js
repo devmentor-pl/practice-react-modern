@@ -1,4 +1,4 @@
 import React from 'react';
 
 const TextContext = React.createContext();
-export { TextContext };
+export default TextContext;

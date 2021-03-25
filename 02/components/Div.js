@@ -1,10 +1,8 @@
 // ./src/components/Div.js
 import React from 'react';
-import PropTypes from 'prop-types';
-import { TextContext } from './context.js';
+import TextContext from './context';
 
-const Div = props => {
-    //const { title } = props;
+const Div = () => {
     const { Consumer } = TextContext;
 
     return (
@@ -22,9 +20,5 @@ const Div = props => {
         </div>
     );
 };
-
-//Div.propTypes = {
-//    title: PropTypes.string.isRequired
-//};
 
 export default Div;

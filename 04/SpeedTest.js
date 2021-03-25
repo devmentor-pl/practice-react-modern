@@ -1,17 +1,40 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useReducer } from 'react';
 import useRandomItem from './hook';
+import './style.css';
+import Table from './table';
 
 const SpeedTest = () => {
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
+    const [generatedWord, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
 
     useEffect(() => {
         regenerateWord();
     }, []);
 
     const [text, setText] = useState('');
-    const [time, setTime] = useState(0);
+    const [taskTime, setTime] = useState(0);
     const [timeArray, setArray] = useState([]);
+
+    function reducer(state, action) {
+        switch (action.type) {
+            case 'word':
+                return { word: text, time: 0, init: true };
+            case 'time':
+                setText('');
+                return {
+                    word: state.word,
+                    time: timeArray[timeArray.length - 1],
+                    init: false,
+                };
+            default:
+                throw new Error();
+        }
+    }
+
     const [signs, setSigns] = useState(0);
+    const [results, dispatch] = useReducer(reducer, {
+        time: false,
+    });
+    const [resultArray, setResArr] = useState([]);
 
     function commonSameCount(s1, s2) {
         const s1Array = s1.split('');
@@ -24,15 +47,16 @@ const SpeedTest = () => {
             index = s2Array.findIndex(elementSec => elementSec === element);
             if (index >= 0) {
                 count += 1;
-                s2Array.splice(index, 1);
+                return s2Array.splice(index, 1);
             }
+            return false;
         });
         return count;
     }
 
     const intervalRef = useRef();
 
-    const timerFunc = () => {
+    const countTime = () => {
         const id = setInterval(() => {
             setTime(prevTime => prevTime + 1);
         }, 1000);
@@ -41,37 +65,42 @@ const SpeedTest = () => {
     };
 
     useEffect(() => {
-        if (word && text) {
-            const counted = commonSameCount(word, text);
-            console.log(counted);
+        if (generatedWord && text) {
+            const counted = commonSameCount(generatedWord, text);
             setSigns(counted);
         }
-        if (text === word) {
-            setText('');
+        if (text === generatedWord) {
+            setArray(oldArray => [...oldArray, taskTime]);
+
+            dispatch({ type: 'word' });
+            dispatch({ type: 'time' });
             clearInterval(intervalRef.current);
-            setArray(oldArray => [...oldArray, time]);
             setTime(0);
             regenerateWord();
-            timerFunc();
+            countTime();
         }
     }, [text]);
+
     useEffect(() => {
-        console.log(timeArray);
-    }, [timeArray]);
+        if (results.time !== false) {
+            setResArr(oldArray => [...oldArray, results]);
+        }
+    }, [results.time]);
     return (
-        <div>
-            <h1>
-                {word}
-                {time}
-            </h1>
+        <div className="container">
+            <h1 className="container__heading">Wylosowany wyraz: {generatedWord}</h1>
+            <div>
+                <h1 className="container__heading">Czas w sekundach: {taskTime}</h1>
+            </div>
             <input
                 value={text}
                 onChange={event => {
                     setText(event.target.value);
                 }}
-                onFocus={() => timerFunc()}
+                onFocus={() => countTime()}
                 onBlur={() => clearInterval(intervalRef.current)}
             />
+            <Table tableData={resultArray} />
         </div>
     );
 };

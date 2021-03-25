@@ -32,7 +32,7 @@ export const validateInput = (name, value) => {
                 error = '';
             }
             break;
-        case 'phone-number':
+        case 'phoneNumber':
             if (!/^[0-9]{9}$/.test(value)) {
                 hasError = true;
                 error = 'Invalid Phone number. Use 9 digits only';

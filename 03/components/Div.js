@@ -1,6 +1,6 @@
 // ./src/components/Div.js
 import React from 'react';
-import { ColorContext, TextContext } from './context.js';
+import { ColorContext, TextContext } from './context';
 
 const Div = () => {
     const { Consumer: ColorConsumer } = ColorContext;

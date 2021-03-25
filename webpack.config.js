@@ -26,6 +26,10 @@ module.exports = {
                 // określam jakie loader-y
                 // mają być wykorzystywane
             },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
         ],
         // obecnie brak dodatkowych ustawień
     },

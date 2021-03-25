@@ -2,7 +2,7 @@
 import React from 'react';
 import Box from './Box';
 import Div from './Div';
-import { ColorContext, TextContext } from './context.js';
+import { TextContext } from './context';
 
 const App = () => {
     const { Provider } = TextContext;
