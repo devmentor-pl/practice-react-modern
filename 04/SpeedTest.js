@@ -30,7 +30,7 @@ const SpeedTest = () => {
         }
     }
 
-    const [signs, setSigns] = useState(0);
+    const [, setSigns] = useState(0);
     const [results, dispatch] = useReducer(reducer, {
         time: false,
     });
@@ -78,14 +78,17 @@ const SpeedTest = () => {
             setTime(0);
             regenerateWord();
             countTime();
+            if (results.time !== false) {
+            setResArr(oldArray => [...oldArray, results]); // to tu nie zadziala i z ifem i bez, specjalnie utworzylem results.time, zebybylo wiadomo kiedy aktualizowac
+            }
         }
     }, [text]);
 
-    useEffect(() => {
-        if (results.time !== false) {
-            setResArr(oldArray => [...oldArray, results]);
-        }
-    }, [results.time]);
+    // useEffect(() => {
+    //     if (results.time !== false) {
+    //         setResArr(oldArray => [...oldArray, results]);
+    //     }
+    // }, [results.time]);
     return (
         <div className="container">
             <h1 className="container__heading">Wylosowany wyraz: {generatedWord}</h1>

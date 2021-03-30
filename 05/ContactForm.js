@@ -1,10 +1,10 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 
 // import account from './account';
 import { UPDATE_FORM, onInputChange, onFocusOut, validateInput } from './lib/formUtils';
 
 const ContactForm = () => {
-    const [showError, setShowError] = useState(false);
+    // const [, setShowError] = useState(false);
 
     const initialState = {
         name: { value: '', touched: false, hasError: true, error: '' },
@@ -16,10 +16,10 @@ const ContactForm = () => {
     };
 
     const formsReducer = (state, action) => {
+        const { name, value, hasError, error, touched, isFormValid } = action.data;
+
         switch (action.type) {
             case UPDATE_FORM:
-                // eslint-disable-next-line no-case-declarations
-                const { name, value, hasError, error, touched, isFormValid } = action.data;
                 return {
                     ...state,
                     [name]: { ...state[name], value, hasError, error, touched },
@@ -37,15 +37,18 @@ const ContactForm = () => {
         let isFormValid = true;
 
         // eslint-disable-next-line no-restricted-syntax
-        for (const name in formState) {
-            if (Object.prototype.hasOwnProperty.call(formState, name)) {
-                const item = formState[name];
+        const keys = Object.keys(formState);
+        const values = Object.values(formState);
+        for (let i = 0; i < keys.length; i += 1) {
+            if (Object.prototype.hasOwnProperty.call(formState, keys[i])) {
+                const item = formState[keys[i]];
+                const name = keys[i];
                 const { value } = item;
-                const { hasError, error } = validateInput(name, value);
+                const { hasError, error } = validateInput(keys[i], value);
                 if (hasError) {
                     isFormValid = false;
                 }
-                if (name) {
+                if (keys[i]) {
                     dispatch({
                         type: UPDATE_FORM,
                         data: {
@@ -60,16 +63,23 @@ const ContactForm = () => {
                 }
             }
         }
+        // for (const name in formState) {
+            
+        // }
 
-        if (!isFormValid) {
-            setShowError(true);
-        } else {
-            window.location.reload(false);
+        // if (!isFormValid) {
+        //     setShowError(true);
+        // } else {
+        //     window.location.reload(false);
+        // }
+
+        if (isFormValid) {
+            window.location.reload(false)
         }
 
-        setTimeout(() => {
-            setShowError(false);
-        }, 5000);
+        // setTimeout(() => {
+        //     setShowError(false);
+        // }, 5000);
     };
 
     // console.log(account);
