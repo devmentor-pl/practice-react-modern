@@ -1,86 +1,121 @@
 import React, { useReducer } from 'react';
-
+// import useErrors from './hook';
 
 const ContactForm = () => {
+    const init = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        tel: '',
+        date: '',
+        time: '',
+        comment: '',
+    };
 
-    const init = { firstName: '', lastName: '', email: '', tel: '', date: '', time: '', comment: '' };
-
-    const reducer = (state, {name, value}) => {
-        return { ...state, [name]: value};
-    }
+    const reducer = (state, { name, value }) => {
+        return { ...state, [name]: value };
+    };
 
     const [state, dispatch] = useReducer(reducer, init);
     const { firstName, lastName, email, tel, date, time, comment } = state;
 
-
     const validationPhoneNumber = () => {
         const reg = /([0-9]{3})-([0-9]{3})-([0-9]{3})/;
-        return reg.test(tel)
-    }
+        return reg.test(tel);
+    };
 
     const validationData = () => {
         const reg = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
-        return reg.test(date)
-    }
+        return reg.test(date);
+    };
 
     const validationTime = () => {
         const reg = /([0-9]{2}):([0-9]{2})/;
-        return reg.test(time)
-    }
+        return reg.test(time);
+    };
 
-    const validationForm = (errors) => {
+    const validationForm = errors => {
         if (firstName.length === 0 || firstName.length <= 1) {
-            errors.push('Field firstname is required! \n');
+            errors.push('Field firstname is required!');
         }
         if (lastName.length === 0 || lastName.length <= 1) {
-            errors.push('Field lastname is required! \n');
+            errors.push('Field lastname is required!');
         }
         if (!email.includes('@')) {
-            errors.push('Email need @ sign! \n');
+            errors.push('Email need @ sign!');
         }
         if (!validationPhoneNumber()) {
             errors.push('Phone number is incorrect! (Write e.g 500-500-500) \n');
         }
         if (!validationData()) {
-            errors.push('Date is incorrect! \n');
+            errors.push('Date is incorrect!');
         }
         if (!validationTime()) {
-            errors.push('Time is incorrect! \n');
+            errors.push('Time is incorrect!');
         }
         if (comment.length === 0 || comment.length <= 1) {
-            errors.push('Field comment is required! \n');
+            errors.push('Field comment is required!');
         }
-    }
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
-
         const errors = [];
+
+        // const errors = useErrors(state);
+
         validationForm(errors);
 
         if (errors.length > 0) {
-            window.alert(errors)
+            window.alert(errors.join(',  '));
         } else {
-            window.alert('Dane zostały poprawnie wprowadzone i wysłane !!!')
+            window.alert('Dane zostały poprawnie wprowadzone i wysłane !!!');
         }
-    }
+    };
 
-    return(
+    return (
         <section onSubmit={handleSubmit}>
             <h1>ContactForm</h1>
             <form noValidate>
-                <input name="firstName" value={firstName} type="text" onChange={ e => dispatch(e.target)} placeholder="Name" required />
-                <input name="lastName" value={lastName} type="text" onChange={ e => dispatch(e.target)} placeholder="LastName" required />
-                <input name="email" value={email} type="email" onChange={ e => dispatch(e.target)} placeholder="Email" required />
-                <input name="tel" value={tel} type="tel" onChange={ e => dispatch(e.target)} placeholder="phone" />
-                <input name="date" value={date} type="date" onChange={ e => dispatch(e.target)} />
-                <input name="time" value={time} type="time" onChange={ e => dispatch(e.target)} />
+                <input
+                    name="firstName"
+                    value={firstName}
+                    type="text"
+                    onChange={e => dispatch(e.target)}
+                    placeholder="Name"
+                    required
+                />
+                <input
+                    name="lastName"
+                    value={lastName}
+                    type="text"
+                    onChange={e => dispatch(e.target)}
+                    placeholder="LastName"
+                    required
+                />
+                <input
+                    name="email"
+                    value={email}
+                    type="email"
+                    onChange={e => dispatch(e.target)}
+                    placeholder="Email"
+                    required
+                />
+                <input
+                    name="tel"
+                    value={tel}
+                    type="tel"
+                    onChange={e => dispatch(e.target)}
+                    placeholder="phone"
+                />
+                <input name="date" value={date} type="date" onChange={e => dispatch(e.target)} />
+                <input name="time" value={time} type="time" onChange={e => dispatch(e.target)} />
 
                 <input type="submit" value="Send" />
             </form>
-            <textarea name="comment" value={comment} onChange={ e => dispatch(e.target)} required />
+            <textarea name="comment" value={comment} onChange={e => dispatch(e.target)} required />
         </section>
-    )
+    );
 };
 
 export default ContactForm;

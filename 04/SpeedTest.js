@@ -2,40 +2,44 @@ import React, { useState, useEffect, useRef } from 'react';
 import useRandomItem from './hook';
 
 const SpeedTest = () => {
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript', 'abcdefgh', 'programista']);
+    const [word, regenerateWord] = useRandomItem([
+        'devmentor.pl',
+        'abc',
+        'JavaScript',
+        'abcdefgh',
+        'programista',
+    ]);
 
     const [counter, setCounter] = useState(0);
     const intervalRef = useRef(null);
-    
+
     const [text, setText] = useState('');
-    
+
     const stopInterval = () => {
-        clearInterval( intervalRef.current );
-    }
+        clearInterval(intervalRef.current);
+    };
 
     const handleChange = e => {
         const { value } = e.target;
         setText(value);
-    }
+        if (word === value) {
+            const result = Math.round(text.length / (counter / 60));
+            console.log(`Twoja szybkość pisania wynosi: ${result} [znak/min]`);
+            setCounter(0);
+            regenerateWord();
+            setText('');
+        }
+    };
 
     const startInterval = () => {
         intervalRef.current = setInterval(() => {
             setCounter(value => value + 1);
         }, 1000);
-    }
+    };
 
     useEffect(() => {
         regenerateWord();
     }, []);
-
-    useEffect(() => {
-        if(word === text) {
-            console.log(`Długość tekstu wynosi: ${text.length}`);
-            setCounter(0);
-            regenerateWord();
-            setText('');
-        }
-    }, [text]);
 
     return (
         <div>
@@ -43,9 +47,10 @@ const SpeedTest = () => {
             <input
                 name="text"
                 value={text}
-                onFocus={() => startInterval()} 
+                onFocus={() => startInterval()}
                 onBlur={() => stopInterval()}
-                onChange={handleChange}/>
+                onChange={handleChange}
+            />
             <h1>{counter}</h1>
         </div>
     );

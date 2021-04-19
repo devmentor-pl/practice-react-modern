@@ -1,17 +1,17 @@
-const taskNumber = "05";
+const taskNumber = '05';
 // numer przerabianego zadania
 
-const path = require("path");
+const path = require('path');
 // importuję bibliotękę [path] z [node.js]
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // importuję odpowiedni plugin
 module.exports = {
     entry: `./${taskNumber}/app.js`,
     // definiuje plik wejściowy
     output: {
-        path: path.resolve(__dirname, "build"),
+        path: path.resolve(__dirname, 'build'),
         // definiuje ścieżką wyjściową
-        filename: "app.min.js"
+        filename: 'app.min.js',
         // definiuję nazwę pliku wyjściowego
     },
     module: {
@@ -25,17 +25,17 @@ module.exports = {
                 use: ['babel-loader', 'eslint-loader'],
                 // określam jakie loader-y
                 // mają być wykorzystywane
-            }
-        ]
-    // obecnie brak dodatkowych ustawień
+            },
+        ],
+        // obecnie brak dodatkowych ustawień
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: `./${taskNumber}/index.html`,
             // wskazuje plik źródłowy
-            filename: "index.html"
+            filename: 'index.html',
             // określan nazwę dla pliku
-        })
-    ]
+        }),
+    ],
 };
 // eksportuję ustawienia dla webpack-a
