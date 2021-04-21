@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 const useErrors = state => {
     const [errors, setError] = useState([]);
+
     const { firstName, lastName, email, tel, date, time, comment } = state;
 
     const validationPhoneNumber = () => {
@@ -19,33 +20,33 @@ const useErrors = state => {
         return reg.test(time);
     };
 
-    setError(() => {
+    const validationForm = () => {
+        const arrError = [];
         if (firstName.length === 0 || firstName.length <= 1) {
-            errors.push('Field firstname is required!');
-        }
-        if (firstName.length === 0 || firstName.length <= 1) {
-            errors.push('Field firstname is required!');
+            arrError.push('Field firstname is required!');
         }
         if (lastName.length === 0 || lastName.length <= 1) {
-            errors.push('Field lastname is required!');
+            arrError.push('Field lastname is required!');
         }
         if (!email.includes('@')) {
-            errors.push('Email need @ sign!');
+            arrError.push('Email need @ sign!');
         }
         if (!validationPhoneNumber()) {
-            errors.push('Phone number is incorrect! (Write e.g 500-500-500) \n');
+            arrError.push('Phone number is incorrect! (Write e.g 500-500-500) \n');
         }
         if (!validationData()) {
-            errors.push('Date is incorrect!');
+            arrError.push('Date is incorrect!');
         }
         if (!validationTime()) {
-            errors.push('Time is incorrect!');
+            arrError.push('Time is incorrect!');
         }
         if (comment.length === 0 || comment.length <= 1) {
-            errors.push('Field comment is required!');
+            arrError.push('Field comment is required!');
         }
-    });
-    return errors;
+        setError(arrError);
+    };
+
+    return [errors, validationForm];
 };
 
 export default useErrors;

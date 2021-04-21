@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-// import useErrors from './hook';
+import useErrors from './hook';
 
 const ContactForm = () => {
     const init = {
@@ -19,54 +19,16 @@ const ContactForm = () => {
     const [state, dispatch] = useReducer(reducer, init);
     const { firstName, lastName, email, tel, date, time, comment } = state;
 
-    const validationPhoneNumber = () => {
-        const reg = /([0-9]{3})-([0-9]{3})-([0-9]{3})/;
-        return reg.test(tel);
-    };
-
-    const validationData = () => {
-        const reg = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
-        return reg.test(date);
-    };
-
-    const validationTime = () => {
-        const reg = /([0-9]{2}):([0-9]{2})/;
-        return reg.test(time);
-    };
-
-    const validationForm = errors => {
-        if (firstName.length === 0 || firstName.length <= 1) {
-            errors.push('Field firstname is required!');
-        }
-        if (lastName.length === 0 || lastName.length <= 1) {
-            errors.push('Field lastname is required!');
-        }
-        if (!email.includes('@')) {
-            errors.push('Email need @ sign!');
-        }
-        if (!validationPhoneNumber()) {
-            errors.push('Phone number is incorrect! (Write e.g 500-500-500) \n');
-        }
-        if (!validationData()) {
-            errors.push('Date is incorrect!');
-        }
-        if (!validationTime()) {
-            errors.push('Time is incorrect!');
-        }
-        if (comment.length === 0 || comment.length <= 1) {
-            errors.push('Field comment is required!');
-        }
-    };
+    const [errors, validationForm] = useErrors(state);
 
     const handleSubmit = e => {
         e.preventDefault();
-        const errors = [];
 
-        // const errors = useErrors(state);
+        validationForm();
 
-        validationForm(errors);
-
-        if (errors.length > 0) {
+        if (errors.length === 0) {
+            window.alert('Tablica błędów jest pusta');
+        } else if (errors.length > 0) {
             window.alert(errors.join(',  '));
         } else {
             window.alert('Dane zostały poprawnie wprowadzone i wysłane !!!');
