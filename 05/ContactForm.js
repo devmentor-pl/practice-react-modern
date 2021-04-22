@@ -19,16 +19,14 @@ const ContactForm = () => {
     const [state, dispatch] = useReducer(reducer, init);
     const { firstName, lastName, email, tel, date, time, comment } = state;
 
-    const [errors, validationForm] = useErrors(state);
+    const [validationForm] = useErrors(state);
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        validationForm();
+        const errors = validationForm();
 
-        if (errors.length === 0) {
-            window.alert('Tablica błędów jest pusta');
-        } else if (errors.length > 0) {
+        if (errors.length > 0) {
             window.alert(errors.join(',  '));
         } else {
             window.alert('Dane zostały poprawnie wprowadzone i wysłane !!!');

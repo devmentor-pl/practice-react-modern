@@ -3,6 +3,8 @@ import { useState } from 'react';
 const useErrors = state => {
     const [errors, setError] = useState([]);
 
+    console.log(errors); // Musiałem to tak dać żeby nie było błędów, generanie cały hook useState mógłbym wyrzucić z kodu i by działało to tak samo, teraz zapisuje te dane do errors (zmienna która jest aktualizowana) ale wsumie to nie potrzebne
+
     const { firstName, lastName, email, tel, date, time, comment } = state;
 
     const validationPhoneNumber = () => {
@@ -44,9 +46,10 @@ const useErrors = state => {
             arrError.push('Field comment is required!');
         }
         setError(arrError);
-    };
 
-    return [errors, validationForm];
+        return arrError;
+    };
+    return [validationForm];
 };
 
 export default useErrors;
