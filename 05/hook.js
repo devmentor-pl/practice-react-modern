@@ -1,10 +1,4 @@
-import { useState } from 'react';
-
 const useErrors = state => {
-    const [errors, setError] = useState([]);
-
-    console.log(errors); // Musiałem to tak dać żeby nie było błędów, generanie cały hook useState mógłbym wyrzucić z kodu i by działało to tak samo, teraz zapisuje te dane do errors (zmienna która jest aktualizowana) ale wsumie to nie potrzebne
-
     const { firstName, lastName, email, tel, date, time, comment } = state;
 
     const validationPhoneNumber = () => {
@@ -23,31 +17,30 @@ const useErrors = state => {
     };
 
     const validationForm = () => {
-        const arrError = [];
+        const errors = [];
         if (firstName.length === 0 || firstName.length <= 1) {
-            arrError.push('Field firstname is required!');
+            errors.push('Field firstname is required!');
         }
         if (lastName.length === 0 || lastName.length <= 1) {
-            arrError.push('Field lastname is required!');
+            errors.push('Field lastname is required!');
         }
         if (!email.includes('@')) {
-            arrError.push('Email need @ sign!');
+            errors.push('Email need @ sign!');
         }
         if (!validationPhoneNumber()) {
-            arrError.push('Phone number is incorrect! (Write e.g 500-500-500) \n');
+            errors.push('Phone number is incorrect! (Write e.g 500-500-500) \n');
         }
         if (!validationData()) {
-            arrError.push('Date is incorrect!');
+            errors.push('Date is incorrect!');
         }
         if (!validationTime()) {
-            arrError.push('Time is incorrect!');
+            errors.push('Time is incorrect!');
         }
         if (comment.length === 0 || comment.length <= 1) {
-            arrError.push('Field comment is required!');
+            errors.push('Field comment is required!');
         }
-        setError(arrError);
 
-        return arrError;
+        return errors;
     };
     return [validationForm];
 };
