@@ -2,11 +2,16 @@
 import React from 'react';
 import Box from './Box';
 import Div from './Div';
+import { TextContext } from './context';
 
 const App = () => {
+    const { Provider } = TextContext;
+
     return (
         <section>
-            <Box />
+            <Provider value="sibling">
+                <Box />
+            </Provider>
             <Div />
         </section>
     );
