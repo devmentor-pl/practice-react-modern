@@ -9,16 +9,22 @@ const ClockDate = props => {
         return day.toString().padStart(2, '0');
     }
 
-    const { date } = props;
-    const year = date.getFullYear();
-    const month = getCorrectMonthFormat(date.getMonth());
-    const day = getCorrectDayFormat(date.getDate());
+    const {
+        date: { getDate, getFullYear, getMonth },
+    } = props;
+    const year = getFullYear();
+    const month = getCorrectMonthFormat(getMonth());
+    const day = getCorrectDayFormat(getDate());
 
     return (
         <section>
             {year}:{month}:{day}
         </section>
     );
+};
+
+ClockDate.propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ClockDate;
