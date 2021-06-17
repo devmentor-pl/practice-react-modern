@@ -10,15 +10,21 @@ const ClockDate = props => {
     }
 
     const { date } = props;
+
     const year = date.getFullYear();
     const month = getCorrectMonthFormat(date.getMonth());
     const day = getCorrectDayFormat(date.getDate());
+    
 
     return (
         <section>
             {year}:{month}:{day}
         </section>
     );
+};
+
+ClockDate.propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ClockDate;
