@@ -58,7 +58,7 @@ const SpeedTest = () => {
                 value={textInput}   
             />
 
-            <p>Number of correct letters: <span style={{color: "red"}}>{wordCount}</span> in <span style={{color: "red"}}>{counter} sec</span> </p>
+            <p>Liczba poprawnych liter <span style={{color: "red"}}>{wordCount}</span> w czasie <span style={{color: "red"}}>{counter} sekund</span> </p>
         </div>
     );
 };
