@@ -1,4 +1,4 @@
-const taskNumber = "05";
+const taskNumber = "04";
 // numer przerabianego zadania
 
 const path = require("path");
@@ -22,7 +22,7 @@ module.exports = {
         // będą brane pod uwagę
         exclude: /node_modules/,
         // określam wykluczenia
-        use: ["babel-loader"]
+        use: ['babel-loader', 'eslint-loader']
         // określam jakie loader-y
         // mają być wykorzystywane
       }
