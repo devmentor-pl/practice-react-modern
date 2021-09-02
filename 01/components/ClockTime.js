@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import style from '../styles/style';
+
 const ClockTime = props => {
     function getCorrectFormatNumber(number) {
         return number.toString().padStart(2, '0');
@@ -11,7 +13,7 @@ const ClockTime = props => {
     const seconds = getCorrectFormatNumber(date.getSeconds());
 
     return (
-        <section>
+        <section style={style}>
             {hours}:{minutes}:{seconds}
         </section>
     );
