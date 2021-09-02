@@ -9,6 +9,7 @@ const App = () => {
     const { Provider: TextProvider } = TextContext;
     return (
         <section>
+            <Box />
             <TextProvider value="sibiling">
                 <Div />
             </TextProvider>
