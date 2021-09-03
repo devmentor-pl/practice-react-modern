@@ -15,11 +15,11 @@ Twoja konfguracja ma mieć określone zasady:
 
 - kod pisany zgodnie z regułami AirBnB ([JavaScript](https://github.com/airbnb/javascript), [React](https://airbnb.io/javascript/react/))
 - pliki JS mogą zawierać kod JSX
-- liczba spaci w odstępach to 4
+- liczba spacji w odstępach to 4
 - maksymalna długość wiersza to 100 znaków
 - znak używany do oznaczania ciągu znaków to [apostrof](https://pl.wikipedia.org/wiki/Apostrof)
 
-Dodatkowo skonfiguruj swój IDE w taki sposób, aby podczas pisnaia kodu były podkreślane od razu błędy związane z odpowiednią strukturą kodu (w [VS Code](https://code.visualstudio.com/) rozwiązuje to rozszerzenie o nazwie `ESLint`).
+Dodatkowo skonfiguruj swój IDE w taki sposób, aby podczas pisania kodu były podkreślane od razu błędy związane z odpowiednią strukturą kodu (w [VS Code](https://code.visualstudio.com/) rozwiązuje to rozszerzenie o nazwie `ESLint`).
 
 Równocześnie przy zapisie pliku, wszystkie możliwe błędy były korygowane przez ESLint-a, a przez Prettier-a (w [VS Code](https://code.visualstudio.com/) to rozszerzenie o nazwie `Prettier - Code formater`) odpowiednio formatowane.
 
@@ -27,11 +27,11 @@ Pamiętaj, aby dodać do konfiguracji webpack-a [odpowiedni loader](https://gith
 
 W przedstawionym rozwiązaniu korzystamy z inicjalizatora właściwości, dzięki któremu definujemy `state` poza konstruktorem dlatego musisz jeszcze użyć [babel-eslint](https://github.com/babel/babel-eslint) jako parsera z odpowiednią konfiguracją.
 
-Jak już to wszystko zrobisz i uruchomisz kod to postaraj sie naprawić błędy zgodnie z informacją z terminala.
+Jak już to wszystko zrobisz i uruchomisz kod to postaraj się naprawić błędy zgodnie z informacją z terminala.
 
 ## Webpack
 
-W pliku `./webpack.config.js` (w katalogu głównym) znajdziesz gotową konfigurację Webpacka dla React. Znajduje się tam zmienna `taskNumber`, która przechwowuje informacje o zadaniu, które w danym momencie przerabiasz.
+W pliku `./webpack.config.js` (w katalogu głównym) znajdziesz gotową konfigurację Webpacka dla React. Znajduje się tam zmienna `taskNumber`, która przechowuje informacje o zadaniu, które w danym momencie przerabiasz.
 
 Za każdym razem będziesz musiał modyfikować zawartość tej zmiennej i ponownie uruchamiać tryb developerski. Pamiętasz jak to zrobić? Gdzie zapisany jest skrót do odpowiedniej komendy?
 

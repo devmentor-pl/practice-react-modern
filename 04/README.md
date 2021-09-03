@@ -24,7 +24,7 @@ W state (`useState()`) będziemy musieli przechowywać co namniej kilka element�
 
 Odliczanie czasu będziemy wykonywać w momencie kiedy pole `<input />` jest aktywne oraz zatrzymywać kiedy przestało być aktywne. Oznacza to, że `setInterval()` powinien być uruchamiany w `onFocus`, a czyszczony w momencie `onBlur`. Aby przechowywać identyfikator interwalu użyj referencji tj. `useRef`.
 
-W momencie zamontownaia (`useEffect()`) wygeneruj pierwsze słowo. Za kazdym razem, gdy zostanie wprowadzony jakiś tekst do pola `<input />` (też `useEffect(() => {...}, [text])` ) sprawdzaj czy wprowadzony tekst jest równy wylosowanemu wyrazowi.
+W momencie zamontowania (`useEffect()`) wygeneruj pierwsze słowo. Za każdym razem, gdy zostanie wprowadzony jakiś tekst do pola `<input />` (też `useEffect(() => {...}, [text])` ) sprawdzaj czy wprowadzony tekst jest równy wylosowanemu wyrazowi.
 
 &nbsp;
 
