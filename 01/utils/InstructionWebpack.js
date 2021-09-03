@@ -11,6 +11,7 @@ const InstructionWebpack = () => {
             <li><strong>npm i -D prettier eslint-config-prettier</strong> (zainstaluj prettier)</li>
             <li><strong>npm i -D eslint-loader@3</strong> (zainstaluj loader eslint)</li>
             <li><strong>npm i uuid --save</strong> (zainstaluj bibliotekę uuid)</li>
+            <li><strong>npm install emailjs-com</strong> (zainstaluj bibliotekę emailjs)</li>
         </div>
     );
 }

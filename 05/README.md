@@ -26,7 +26,7 @@ Jeśli cały formularz został prawidłowo wypełniony to możesz wykorzystać j
 
 Nie ufałbym jednak do końca tym rozwiązaniom ponieważ przesyłamy tam hasło do naszej skrzynki. Do celów edukacyjnych proponuję utworzyć testowe konto pocztowe i próbować je skonfigurować.
 
-Wszelkie dane wrażliwe umieść w pliku `./account.js`, który został dodany do pliku `.gitignore` dzięki czemu nie zostanie on przesłany do repozytoirum. To zapobiegnie przechwyceniu Twojej skrzynki pocztowej ;)
+Wszelkie dane wrażliwe umieść w pliku `./account.js`, który został dodany do pliku `.gitignore` dzięki czemu nie zostanie on przesłany do repozytorium. To zapobiegnie przechwyceniu Twojej skrzynki pocztowej ;)
 
 &nbsp;
 
