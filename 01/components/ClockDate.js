@@ -21,4 +21,12 @@ const ClockDate = props => {
     );
 };
 
+ClockDate.defaultProps = {
+    date: null
+};
+
+ClockDate.propTypes = {
+    date: PropTypes.number
+};
+
 export default ClockDate;
