@@ -24,7 +24,8 @@
                     "some": ["nesting", "id"]
                 }
             }
-        ]
+        ],
+        "extends": "eslint:recommended"
     },
     "globals": { "window": true, "document": true }
 }
