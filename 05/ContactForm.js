@@ -2,14 +2,39 @@ import React, { useReducer, useState } from 'react';
 import { UPDATE_FORM, handleChange, onFocusOut, clearForm } from './formHandler';
 import validate from './ValidationRules';
 
+const FormWrapperStyles = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100vw',
+    flexDirection: 'column'
+};
+
 const FormStyles = {
     display: 'flex',
     flexDirection: 'column',
-    width: '500px'
+    width: '500px',
+    margin: '2rem'
 };
 
 const MsgStyles = {
-    height: '100px'
+    height: '100px',
+    marginBottom: '0.5rem'
+};
+
+const InputStyles = {
+    marginBottom: '0.3rem'
+};
+
+const ErrorMsgStyles = {
+    fontSize: '0.8rem',
+    color: 'red'
+};
+
+const ErrorSubmitStyles = {
+    color: 'red',
+    border: '1px solid red',
+    padding: '0.5rem'
 };
 
 const ContactForm = () => {
@@ -78,8 +103,10 @@ const ContactForm = () => {
     };
 
     return (
-        <div>
-            {showError && formState.isFormValid && <div>Please fill all the fields correctly</div>}
+        <div style={FormWrapperStyles}>
+            {showError && formState.isFormValid && (
+                <div style={ErrorSubmitStyles}>Please fill all the fields correctly</div>
+            )}
             <form style={FormStyles} onSubmit={e => handleSubmit(e)}>
                 <label htmlFor="fullName">Name and surname:</label>
                 <input
@@ -91,9 +118,10 @@ const ContactForm = () => {
                     onBlur={e => {
                         onFocusOut('fullName', e.target.value, dispatch, formState);
                     }}
+                    style={InputStyles}
                 />
                 {formState.fullName.touched && formState.fullName.hasError && (
-                    <div>{formState.fullName.error}</div>
+                    <div style={ErrorMsgStyles}>{formState.fullName.error}</div>
                 )}
                 <label htmlFor="email">Email:</label>
                 <input
@@ -105,9 +133,10 @@ const ContactForm = () => {
                     onBlur={e => {
                         onFocusOut('email', e.target.value, dispatch, formState);
                     }}
+                    style={InputStyles}
                 />
                 {formState.email.touched && formState.email.hasError && (
-                    <div>{formState.email.error}</div>
+                    <div style={ErrorMsgStyles}>{formState.email.error}</div>
                 )}
                 <label htmlFor="phone">Mobile:</label>
                 <input
@@ -119,9 +148,10 @@ const ContactForm = () => {
                     onBlur={e => {
                         onFocusOut('phone', e.target.value, dispatch, formState);
                     }}
+                    style={InputStyles}
                 />
                 {formState.phone.touched && formState.phone.hasError && (
-                    <div>{formState.phone.error}</div>
+                    <div style={ErrorMsgStyles}>{formState.phone.error}</div>
                 )}
                 <label htmlFor="title">Title:</label>
                 <input
@@ -133,9 +163,10 @@ const ContactForm = () => {
                     onBlur={e => {
                         onFocusOut('title', e.target.value, dispatch, formState);
                     }}
+                    style={InputStyles}
                 />
                 {formState.title.touched && formState.title.hasError && (
-                    <div>{formState.title.error}</div>
+                    <div style={ErrorMsgStyles}>{formState.title.error}</div>
                 )}
                 <label htmlFor="message">Your message:</label>
                 <textarea
@@ -150,7 +181,7 @@ const ContactForm = () => {
                     }}
                 />
                 {formState.message.touched && formState.message.hasError && (
-                    <div>{formState.message.error}</div>
+                    <div style={ErrorMsgStyles}>{formState.message.error}</div>
                 )}
                 <input type="submit" value="Send" />
             </form>
