@@ -34,9 +34,7 @@ export const onFocusOut = (name, value, dispatch, formState) => {
     const { hasError, error } = validate(name, value);
     let isFormValid = true;
     for (const key in formState) {
-        console.log(key);
         const item = formState[key];
-        console.log(formState[key]);
         if (key === name && hasError) {
             isFormValid = false;
             break;
@@ -55,6 +53,20 @@ export const onFocusOut = (name, value, dispatch, formState) => {
             error,
             touched: true,
             isFormValid
+        }
+    });
+};
+
+export const clearForm = (name, dispatch) => {
+    dispatch({
+        type: 'UPDATE_FORM',
+        data: {
+            name,
+            value: '',
+            hasError: true,
+            error: '',
+            touched: false,
+            isFormValid: false
         }
     });
 };
