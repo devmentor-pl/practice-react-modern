@@ -99,6 +99,8 @@ const ContactForm = () => {
             clearForm('phone', dispatch);
             clearForm('title', dispatch);
             clearForm('message', dispatch);
+            isFormValid = false;
+            setShowError(false);
         }
     };
 
