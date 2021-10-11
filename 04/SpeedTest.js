@@ -44,19 +44,19 @@ const SpeedTest = () => {
         return () => handleStop();
     };
 
-    const handleKeyDown = e => {
-        if (e.key === 'Enter') {
-            handleStop();
-        }
-    };
-
     useEffect(() => {
         regenerateWord();
     }, []);
 
-    // Jak uzyc useEffect do sprawdzania input? jesli uzywam mojej funkcji jako dependecies to useEffect odpala sie caly czas?
-    // Jesli uzywam handleKeyDown do zatrzymania odliczania i zmiany slowa to potem timer sie nie odpala (bo focus jest caly czas.)
-    // Mozna by bylo zrobic dodatkowy button jak "next"?
+    useEffect(() => {
+        if (inputValue !== '' && checkIfCorrect(word, inputValue)) {
+            clearInterval(intervalRef.current);
+            regenerateWord();
+            setTimer(0);
+            setInputValue('');
+            handleStart();
+        }
+    }, [inputValue]);
 
     return (
         <div>
@@ -67,7 +67,6 @@ const SpeedTest = () => {
                 onChange={handleChange}
                 onFocus={handleStart}
                 onBlur={handleStop}
-                onKeyDown={handleKeyDown}
             />
             <p>Time: {timer}</p>
         </div>
