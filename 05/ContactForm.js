@@ -94,11 +94,12 @@ const ContactForm = () => {
             setShowError(true);
         } else {
             alert('Message sent!');
-            clearForm('fullName', dispatch);
-            clearForm('email', dispatch);
-            clearForm('phone', dispatch);
-            clearForm('title', dispatch);
-            clearForm('message', dispatch);
+            const keys = Object.keys(init);
+            keys.forEach((key, i) => {
+                if (key !== 'isFormValid') {
+                    clearForm(key, dispatch);
+                } else return;
+            });
             isFormValid = false;
             setShowError(false);
         }
