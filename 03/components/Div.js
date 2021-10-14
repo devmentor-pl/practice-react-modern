@@ -1,10 +1,17 @@
 // ./src/components/Div.js
-import React from 'react';
+import React, { useContext } from 'react';
+import { TextContext, ColorContext } from '../context';
 
 const Div = () => {
+    const textContext = useContext(TextContext);
+    const colorContext = useContext(ColorContext);
+    const myStyles = {
+        border: `1px solid ${colorContext}`
+    };
+
     return (
-        <div>
-            <h1>??</h1>
+        <div style={ myStyles }>
+            <h1>{ textContext }</h1>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia, justo et posuere viverra,
                 ligula turpis egestas nisi, id iaculis augue ex non nisi. Class aptent taciti sociosqu ad litora

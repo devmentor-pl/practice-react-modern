@@ -1,6 +1,7 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
+import { BoxContext } from './src/context';
 
 class App extends React.Component {
     state = {
@@ -8,9 +9,13 @@ class App extends React.Component {
     };
 
     render() {
+        const { Provider } = BoxContext;
         const { text } = this.state;
-
-        return <Box text={text} />;
+        return (
+            <Provider value={ text }>
+                <Box />
+            </Provider>
+        )
     }
 }
 
