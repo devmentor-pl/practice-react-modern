@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { UPDATE_FORM, handleChange, onFocusOut, clearForm } from './formHandler';
+import { UPDATE_FORM, handleChange, loopFormState, onFocusOut, clearForm } from './formHandler';
 import validate from './ValidationRules';
 
 const FormWrapperStyles = {
@@ -17,9 +17,10 @@ const FormStyles = {
     margin: '2rem'
 };
 
-const MsgStyles = {
-    height: '100px',
-    marginBottom: '0.5rem'
+const InputContainerStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '500px'
 };
 
 const InputStyles = {
@@ -39,11 +40,17 @@ const ErrorSubmitStyles = {
 
 const ContactForm = () => {
     const init = {
-        fullName: { value: '', touched: false, hasError: true, error: '' },
-        email: { value: '', touched: false, hasError: true, error: '' },
-        phone: { value: '', touched: false, hasError: true, error: '' },
-        title: { value: '', touched: false, hasError: true, error: '' },
-        message: { value: '', touched: false, hasError: true, error: '' },
+        fullName: {
+            value: '',
+            touched: false,
+            hasError: true,
+            error: '',
+            label: 'Name and surname'
+        },
+        email: { value: '', touched: false, hasError: true, error: '', label: 'Email' },
+        phone: { value: '', touched: false, hasError: true, error: '', label: 'Mobile' },
+        title: { value: '', touched: false, hasError: true, error: '', label: 'Title' },
+        message: { value: '', touched: false, hasError: true, error: '', label: 'Message' },
         isFormValid: false
     };
 
@@ -105,87 +112,40 @@ const ContactForm = () => {
         }
     };
 
+    const renderFields = () => {
+        return Object.entries(init).map(([key, value]) => {
+            if (key === 'isFormValid') {
+                return null;
+            }
+            return (
+                <div style={InputContainerStyles} key={key}>
+                    <label htmlFor={key}>{value.label}</label>
+                    <input
+                        type="text"
+                        name={key}
+                        id={key}
+                        value={formState[key].value}
+                        onChange={e => handleChange(key, e.target.value, dispatch, formState)}
+                        onBlur={e => {
+                            onFocusOut(key, e.target.value, dispatch, formState);
+                        }}
+                        style={InputStyles}
+                    />
+                    {formState[key].touched && formState[key].hasError && (
+                        <div style={ErrorMsgStyles}>{formState[key].error}</div>
+                    )}
+                </div>
+            );
+        });
+    };
+
     return (
         <div style={FormWrapperStyles}>
             {showError && formState.isFormValid && (
                 <div style={ErrorSubmitStyles}>Please fill all the fields correctly</div>
             )}
             <form style={FormStyles} onSubmit={e => handleSubmit(e)}>
-                <label htmlFor="fullName">Name and surname:</label>
-                <input
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    value={formState.fullName.value}
-                    onChange={e => handleChange('fullName', e.target.value, dispatch, formState)}
-                    onBlur={e => {
-                        onFocusOut('fullName', e.target.value, dispatch, formState);
-                    }}
-                    style={InputStyles}
-                />
-                {formState.fullName.touched && formState.fullName.hasError && (
-                    <div style={ErrorMsgStyles}>{formState.fullName.error}</div>
-                )}
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    value={formState.email.value}
-                    onChange={e => handleChange('email', e.target.value, dispatch, formState)}
-                    onBlur={e => {
-                        onFocusOut('email', e.target.value, dispatch, formState);
-                    }}
-                    style={InputStyles}
-                />
-                {formState.email.touched && formState.email.hasError && (
-                    <div style={ErrorMsgStyles}>{formState.email.error}</div>
-                )}
-                <label htmlFor="phone">Mobile:</label>
-                <input
-                    type="text"
-                    name="phone"
-                    id="phone"
-                    value={formState.phone.value}
-                    onChange={e => handleChange('phone', e.target.value, dispatch, formState)}
-                    onBlur={e => {
-                        onFocusOut('phone', e.target.value, dispatch, formState);
-                    }}
-                    style={InputStyles}
-                />
-                {formState.phone.touched && formState.phone.hasError && (
-                    <div style={ErrorMsgStyles}>{formState.phone.error}</div>
-                )}
-                <label htmlFor="title">Title:</label>
-                <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    value={formState.title.value}
-                    onChange={e => handleChange('title', e.target.value, dispatch, formState)}
-                    onBlur={e => {
-                        onFocusOut('title', e.target.value, dispatch, formState);
-                    }}
-                    style={InputStyles}
-                />
-                {formState.title.touched && formState.title.hasError && (
-                    <div style={ErrorMsgStyles}>{formState.title.error}</div>
-                )}
-                <label htmlFor="message">Your message:</label>
-                <textarea
-                    type="text"
-                    name="message"
-                    id="message"
-                    value={formState.message.value}
-                    onChange={e => handleChange('message', e.target.value, dispatch, formState)}
-                    style={MsgStyles}
-                    onBlur={e => {
-                        onFocusOut('message', e.target.value, dispatch, formState);
-                    }}
-                />
-                {formState.message.touched && formState.message.hasError && (
-                    <div style={ErrorMsgStyles}>{formState.message.error}</div>
-                )}
+                {renderFields()}
                 <input type="submit" value="Send" />
             </form>
         </div>

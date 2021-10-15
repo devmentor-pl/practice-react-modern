@@ -30,9 +30,38 @@ export const handleChange = (name, value, dispatch, formState) => {
     });
 };
 
+export const loopFormState = (name, value, hasError, error, dispatch, formState, boolean) => {
+    let isFormValid = true;
+    for (const key in formState) {
+        const item = formState[key];
+        if (key === name && hasError) {
+            isFormValid = false;
+            break;
+        } else if (key !== name && item.hasError) {
+            isFormValid = false;
+            break;
+        }
+    }
+
+    dispatch({
+        type: 'UPDATE_FORM',
+        data: {
+            name,
+            value,
+            hasError,
+            error,
+            touched: boolean,
+            isFormValid
+        }
+    });
+};
+
 export const onFocusOut = (name, value, dispatch, formState) => {
     const { hasError, error } = validate(name, value);
-    let isFormValid = true;
+    loopFormState(name, value, hasError, error, dispatch, formState, true);
+};
+
+/* let isFormValid = true;
     for (const key in formState) {
         const item = formState[key];
         if (key === name && hasError) {
@@ -54,8 +83,7 @@ export const onFocusOut = (name, value, dispatch, formState) => {
             touched: true,
             isFormValid
         }
-    });
-};
+    }); */
 
 export const clearForm = (name, dispatch) => {
     dispatch({
