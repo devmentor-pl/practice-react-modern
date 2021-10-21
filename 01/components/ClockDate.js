@@ -21,4 +21,9 @@ const ClockDate = props => {
     );
 };
 
+
+ClockDate.propTypes = {
+    date: PropTypes.instanceOf(Date)
+}
+
 export default ClockDate;

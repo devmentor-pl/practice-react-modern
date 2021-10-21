@@ -6,6 +6,7 @@ const ClockTime = props => {
         return number.toString().padStart(2, '0');
     }
     const { date } = props;
+   
     const hours = getCorrectFormatNumber(date.getHours());
     const minutes = getCorrectFormatNumber(date.getMinutes());
     const seconds = getCorrectFormatNumber(date.getSeconds());
@@ -18,7 +19,7 @@ const ClockTime = props => {
 };
 
 ClockTime.propTypes = {
-    date: PropTypes.instanceOf(Date).isRequired,
+    date: PropTypes.instanceOf(Date),
 };
 
 export default ClockTime;

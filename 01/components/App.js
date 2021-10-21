@@ -1,3 +1,4 @@
+// import { instanceOf } from 'prop-types';
 import React from 'react';
 
 import Clock from './Clock';
@@ -19,8 +20,9 @@ class App extends React.Component {
     }
 
     render() {
+        
         const { date } = this.state;
-
+        
         return date ? <Clock date={date} /> : null;
     }
 }
