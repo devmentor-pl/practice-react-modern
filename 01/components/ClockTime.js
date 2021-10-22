@@ -19,7 +19,7 @@ const ClockTime = props => {
 };
 
 ClockTime.propTypes = {
-    date: PropTypes.instanceOf(Date),
+    date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ClockTime;

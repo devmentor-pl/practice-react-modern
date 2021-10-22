@@ -2,13 +2,18 @@
 import React from 'react';
 import Box from './Box';
 import Div from './Div';
+import {ColorContext} from './../context'
 
 const App = () => {
+    const {Provider} = ColorContext;
+ 
     return (
-        <section>
-            <Box />
-            <Div />
-        </section>
+        <Provider >
+            <section>
+                <Box />
+                <Div />
+            </section>
+        </Provider >
     );
 };
 
