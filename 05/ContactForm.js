@@ -35,10 +35,10 @@ const ContactForm = () => {
             console.log('wysłane')
             console.log(state);
             // dispatch(state=init)
-            useReducer(reducer, init);
-            const reducer = (state, init) => {
-                return {init};
-            }
+            // useReducer(reducer, init);
+            // const reducer = (state, init) => {
+            //     return {init};
+            // }
         }
     }
 
