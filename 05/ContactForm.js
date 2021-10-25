@@ -12,9 +12,16 @@ const ContactForm = () => {
         title: '',
         message: ''
     }
-    const reducer = (state, {name, value}) => {
-        return {...state, [name]:value};
+    const reducer = (state, action) => {
+        switch(action.type) {
+            case 'reset':
+                return action.value;
+            default:
+                const {name, value} = action;
+                return {...state, [name]:value};
+        }
     }
+
     const [state, dispatch] = useReducer(reducer, init);
     const {firstName, lastName, email, phone, title, message} = state;
     const validateData = () => {
@@ -34,6 +41,7 @@ const ContactForm = () => {
         e.preventDefault();
         if (validateData()) {
             console.log(state);
+            dispatch({type: 'reset', value: init})
         }
     }
 
@@ -42,7 +50,7 @@ const ContactForm = () => {
         <label htmlFor ="lastName">Nazwisko<input name="lastName" value={lastName} onChange={ e => dispatch(e.target)}/></label>
         <label htmlFor ="email"> Adres email<input name="email" value={email} onChange={ e => dispatch(e.target)}/></label>
         <label htmlFor="phone"> Telefon<input name="phone" value={phone}  onChange={ e => dispatch(e.target)}/></label>
-        <label htmlFor="title"> Temat<input name="title" value={title} onChange={ e => dispatch(e.target)}/></label>
+        <label htmlFor="title"> Temat<input name="title" value={title} onChange={e => dispatch(e.target)}/></label>
         <label htmlFor="message">Treść wiadomości<input name="message" value={message} onChange={ e => dispatch(e.target)}/></label>
         <input type="submit"/>    
     </form>);
