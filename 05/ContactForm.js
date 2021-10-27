@@ -1,11 +1,11 @@
 import React, {useState, useReducer} from 'react';
-// import account from './account';
 import emailjs from "emailjs-com";
-import ValidateData from './ValidateData'
+import {v4 as uuid} from 'uuid';
+import ValidateData from './ValidateData';
+import {serviceID, templateID, userID} from './account';
 
 
 const ContactForm = () => {
-    // console.log(account);
     const init ={
         firstName: '',
         lastName: '',
@@ -18,40 +18,47 @@ const ContactForm = () => {
         switch (action.type) {
         case 'reset':
             return init;
-        default:
-            const {name, value} = action;
+        case 'change':
+            const {name, value} = action.element;
             return {...state, [name]:value};
+        default:
+            return state;
         }
     }
 
     const [state, dispatch] = useReducer(reducer, init);
     const {firstName, lastName, email, phone, title, message} = state;
-    // const errors = ValidateData(state);
-    const displayErrors = (err) => {
-        return err.map(el=><li>{el}</li>);
-     }
-    
+    const [err, setErr] = useState([])
+        
     const handleForm = (e) => {
         e.preventDefault();
         const errors = ValidateData(state)
-        if (errors.length>0) {
-            return displayErrors(errors);
-        } else { console.log(state);
-            dispatch({type: 'reset'})}
+        if (errors.length === 0) {
+            dispatch({type: 'reset'});
+            emailjs.sendForm(serviceID, templateID, e.target, userID) 
+                .then((result) => {
+                    console.log('SUCCESS!', result);
+                }, (error)=> {
+                    console.log('FAILED...', error.text);
+                });
+        }
+        const copyErrors = errors.map(error=>{
+            return {text: error, id: uuid()}});
+        setErr(copyErrors);
     }
 
     return (
         <>
             <form onSubmit={(e)=> handleForm(e)}>
-                <label htmlFor="firstName">Imię<input name="firstName" value={firstName} onChange={ e => dispatch(e.target)}/></label>
-                <label htmlFor ="lastName">Nazwisko<input name="lastName" value={lastName} onChange={ e => dispatch(e.target)}/></label>
-                <label htmlFor ="email"> Adres email<input name="email" value={email} onChange={ e => dispatch(e.target)}/></label>
-                <label htmlFor="phone"> Telefon<input name="phone" value={phone}  onChange={ e => dispatch(e.target)}/></label>
-                <label htmlFor="title"> Temat<input name="title" value={title} onChange={e => dispatch(e.target)}/></label>
-                <label htmlFor="message">Treść wiadomości<textarea name="message" value={message} onChange={ e => dispatch(e.target)}/></label>
+                <label htmlFor="firstName">Imię<input name="firstName" value={firstName} onChange={ e => dispatch({type: 'change', element: e.target})}/></label>
+                <label htmlFor ="lastName">Nazwisko<input name="lastName" value={lastName} onChange={ e => dispatch({type: 'change', element: e.target})}/></label>
+                <label htmlFor ="email"> Adres email<input name="email" value={email} onChange={ e => dispatch({type: 'change', element: e.target})}/></label>
+                <label htmlFor="phone"> Telefon<input name="phone" value={phone}  onChange={ e => dispatch({type: 'change', element: e.target})}/></label>
+                <label htmlFor="title"> Temat<input name="title" value={title} onChange={e => dispatch({type: 'change', element: e.target})}/></label>
+                <label htmlFor="message">Treść wiadomości<textarea name="message" value={message} onChange={ e => dispatch({type: 'change', element: e.target})}/></label>
                 <input type="submit"/>    
             </form>
-            <ul> {() => displayErrors()} </ul>
+            {err.length>0 && <ul>{err.map(({text, id})=><li key={id}>{text}</li>)}</ul>}
         </>
     );
 };
