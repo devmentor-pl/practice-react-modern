@@ -6,6 +6,7 @@ const ClockTime = props => {
         return number.toString().padStart(2, '0');
     }
     const { date } = props;
+   
     const hours = getCorrectFormatNumber(date.getHours());
     const minutes = getCorrectFormatNumber(date.getMinutes());
     const seconds = getCorrectFormatNumber(date.getSeconds());
