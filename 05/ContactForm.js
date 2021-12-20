@@ -2,7 +2,7 @@ import React from 'react';
 
 import account from './account';
 
-const ContactForm = () => {
+const ContactForm = function () {
     console.log(account);
     return <form>??</form>;
 };

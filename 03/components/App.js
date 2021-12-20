@@ -3,7 +3,7 @@ import React from 'react';
 import Box from './Box';
 import Div from './Div';
 
-const App = () => {
+const App = function () {
     return (
         <section>
             <Box />

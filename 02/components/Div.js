@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Div = props => {
+const Div = function (props) {
     const { title } = props;
 
     return (

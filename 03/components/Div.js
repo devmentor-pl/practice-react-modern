@@ -1,7 +1,7 @@
 // ./src/components/Div.js
 import React from 'react';
 
-const Div = () => {
+const Div = function () {
     return (
         <div>
             <h1>??</h1>
