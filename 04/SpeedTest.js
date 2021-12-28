@@ -6,6 +6,7 @@ const SpeedTest = function () {
     const [inputValue, setInputValue] = useState('');
     const [timer, setTimer] = useState(0);
     const intervalRef = useRef(null);
+    const [letters, setLetters] = useState(0);
 
     useEffect(() => {
         regenerateWord();
@@ -13,7 +14,7 @@ const SpeedTest = function () {
 
     const startTimer = () => {
         intervalRef.current = setInterval(() => {
-            setTimer(timer + 1);
+            setTimer((prevState) => prevState + 1);
         }, 1000);
     };
 
@@ -22,8 +23,8 @@ const SpeedTest = function () {
         if (inputValue === word) {
             setInputValue('');
             regenerateWord();
+            setLetters((prevState) => prevState + word.length);
             console.log('correct');
-            // startTimer();
         }
     };
 
@@ -35,8 +36,6 @@ const SpeedTest = function () {
         setInputValue(e.target.value);
     };
 
-   
-
     const stopTimer = () => {
         clearInterval(intervalRef.current);
     };
@@ -46,6 +45,7 @@ const SpeedTest = function () {
             <h1>{word}</h1>
             <input onBlur={stopTimer} onFocus={startTimer} value={inputValue} onChange={onChange} />
             <p>{timer}</p>
+            <p>Letters per second: {(letters / timer).toFixed(2)}</p>
         </div>
     );
 };
