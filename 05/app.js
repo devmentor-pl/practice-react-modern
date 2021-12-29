@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import ContactForm from './ContactForm';
 
-const App = () => {
+const App = function () {
     return <ContactForm />;
 };
 
