@@ -1,5 +1,6 @@
 // ./src/components/App.js
 import React from 'react';
+import TextContext from '../context';
 import Box from './Box';
 
 class App extends React.Component {
@@ -9,8 +10,12 @@ class App extends React.Component {
 
     render() {
         const { text } = this.state;
-
-        return <Box text={text} />;
+        const { Provider } = TextContext;
+        return (
+            <Provider value={text}>
+                <Box />
+            </Provider>
+        );
     }
 }
 
