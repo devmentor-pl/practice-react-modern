@@ -1,12 +1,12 @@
-import React, { useReducer, useState } from 'react';
-import { getNameRegex, getEmailRegex, getPhoneRegex } from './tools/validationHelper';
+import React, { useState, useEffect } from 'react';
 import ContactFormValidation from './ContactFormValidation';
+import fields from './tools/fieldsObj';
 // import account from './account/account';
 
 function ContactForm() {
-    // console.log(account);
     const validation = new ContactFormValidation();
-
+    let errors = {};
+    let errorsCounter = 0;
     const init = {
         userName: '',
         userEmail: '',
@@ -14,94 +14,53 @@ function ContactForm() {
         userSubject: '',
         userMessage: '',
     };
-    const errors = {};
-    let errorsCount = 0;
+    const [inputValue, setInputValue] = useState(init);
+    const [newErrors, setErrors] = useState(errors);
 
-    const fields = [
-        {
-            name: 'userName',
-            type: 'text',
-            placeholder: 'Your name',
-            validationRules: { isRequired: true, regex: getNameRegex() },
-        },
-        {
-            name: 'userEmail',
-            type: 'email',
-            placeholder: 'Your email',
-            validationRules: { isRequired: true, regex: getEmailRegex() },
-        },
-        {
-            name: 'userPhone',
-            type: 'number',
-            placeholder: 'Your number',
-            validationRules: { isRequired: false, regex: getPhoneRegex() },
-        },
-        {
-            name: 'userSubject',
-            type: 'text',
-            placeholder: 'Your subject',
-            validationRules: { isRequired: true, regex: null },
-        },
-        {
-            name: 'userMessage',
-            type: 'textarea',
-            placeholder: 'Your message',
-            validationRules: { isRequired: true, regex: null },
-        },
-    ];
-
-    const reducer = (state, { name, value }) => {
-        const newState = { ...state };
-        newState[name] = value;
-        return newState;
+    const handleInputs = (curr) => {
+        const { name, value } = curr;
+        // console.log(name, '|', value);
+        // console.log(curr.name, '|', curr.value);
+        setInputValue({ ...inputValue, [name]: value });
     };
-
-    const [state, dispatch] = useReducer(reducer, init);
 
     const validateInputs = (e) => {
-        fields.forEach((field) => {
-            errors[field.name] = [];
-        });
+        [errors, errorsCounter] = validation.run(fields, inputValue);
+        // console.log(errors);
+        setErrors(newErrors);
+        // console.log(errors, '|', newErrors);
 
-        fields.forEach((field) => {
-            const value = state[field.name];
-            if (field.validationRules.isRequired) {
-                if (validation.isEmpty(value)) {
-                    errors[field.name].push('Field is require');
-                }
-                if (field.validationRules.regex) {
-                    if (validation.checkDataCorrectness(field.validationRules.regex, value)) {
-                        errors[field.name].push('Incorrect format');
-                    }
-                }
-            }
-            if (!field.validationRules.isRequired) {
-                if (!validation.isEmpty(value)) {
-                    if (validation.checkDataCorrectness(field.validationRules.regex, value)) {
-                        errors[field.name].push('Incorrect format');
-                    }
-                }
-            }
-            errorsCount += errors[field.name].length;
-        });
-
-        if (errorsCount > 0) {
+        if (errorsCounter > 0) {
+            setErrors(errors);
+            console.log(newErrors);
             e.preventDefault();
-            console.log(errors);
+            // console.log(errors);
         }
     };
-    // const { userName, userEmail, userPhone, userSubject, userMessage } = state;
-    console.log(errors);
+
+    // useEffect(() => {
+    // console.log('test');
+    // }, [errors]);
+
     return (
         <div>
-            <form onSubmit={validateInputs} onChange={(e) => dispatch(e.target)}>
+            <form onSubmit={validateInputs} onChange={(e) => handleInputs(e.target)}>
                 {fields.map((el) => {
+                    const { type, name, value, placeholder } = el;
+                    console.log(errors);
                     return (
                         <div>
-                            <input type={el.type} name={el.name} value={el.value} placeholder={el.placeholder} />
+                            <input
+                                type={type}
+                                name={name}
+                                value={value}
+                                placeholder={placeholder}
+                                autoComplete="off"
+                                formNoValidate
+                            />
                             <span>
-                                {errors[el.name] && errors[el.name].length > 0
-                                    ? errors[el.name].map((i) => <li>{i}</li>)
+                                {errors[name] && errors[name].length > 0
+                                    ? errors[name].map((i) => <li>{i}</li>)
                                     : 'Test'}
                             </span>
                         </div>
@@ -114,3 +73,11 @@ function ContactForm() {
 }
 
 export default ContactForm;
+
+// const reducer = (state, { name, value }) => {
+//     const newState = { ...state };
+//     newState[name] = value;
+//     return newState;
+// };
+
+// const [state, dispatch] = useReducer(reducer, init);

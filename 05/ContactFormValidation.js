@@ -13,6 +13,38 @@ class ContactFormValidation {
         }
         return false;
     }
+
+    run(fields, state) {
+        const errors = {};
+        let errorsCount = 0;
+        fields.forEach((field) => {
+            errors[field.name] = [];
+        });
+
+        fields.forEach((field) => {
+            const value = state[field.name];
+            if (field.validationRules.isRequired) {
+                if (this.isEmpty(value)) {
+                    errors[field.name].push('Field is require');
+                }
+                if (field.validationRules.regex) {
+                    if (this.checkDataCorrectness(field.validationRules.regex, value)) {
+                        errors[field.name].push('Incorrect format');
+                    }
+                }
+            }
+            if (!field.validationRules.isRequired) {
+                if (!this.isEmpty(value)) {
+                    if (this.checkDataCorrectness(field.validationRules.regex, value)) {
+                        errors[field.name].push('Incorrect format');
+                    }
+                }
+            }
+            errorsCount += errors[field.name].length;
+        });
+
+        return [errors, errorsCount];
+    }
 }
 
 export default ContactFormValidation;
