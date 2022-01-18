@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import useRandomItem from './hook';
 
 function SpeedTest() {
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
-    const [inputValue, setValue] = useState('');
+    const [word, regenerateWord] = useRandomItem(['comfortable', 'available', 'sustainable', 'obvious', 'easy']);
     const [counter, setCounter] = useState(0);
-    const [wordsLength, setWordsLength] = useState(0);
+    const [inputValue, setInputValue] = useState('');
+    const [lettersCounter, setlettersCounter] = useState(0);
     const intervalRef = useRef(null);
 
     useEffect(() => {
@@ -17,22 +17,22 @@ function SpeedTest() {
         clearInterval(intervalRef.current);
     };
 
-    const startTimer = () => {
+    function startTimer() {
         intervalRef.current = setInterval(() => {
             setCounter((value) => value + 1);
         }, 1000);
         return () => stopTimer();
-    };
+    }
 
     const onChange = (e) => {
-        setValue(e.target.value);
+        setInputValue(e.target.value);
     };
 
     useEffect(() => {
         if (inputValue === word) {
-            setWordsLength(wordsLength + word.length);
-            setValue('');
             regenerateWord();
+            setInputValue('');
+            setlettersCounter(lettersCounter + word.length);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputValue]);
@@ -42,7 +42,7 @@ function SpeedTest() {
             <h1>Your word is: {word}</h1>
             <input value={inputValue} onChange={onChange} onFocus={startTimer} onBlur={stopTimer} />
             <span>
-                You wrote: {wordsLength} letters in {counter} sec
+                You wrote: {lettersCounter} letters in {counter} sec
             </span>
         </div>
     );
