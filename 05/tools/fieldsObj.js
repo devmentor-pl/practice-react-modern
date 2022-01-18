@@ -16,7 +16,7 @@ const fields = [
     {
         name: 'userPhone',
         type: 'number',
-        placeholder: 'Your number',
+        placeholder: 'Your phone number',
         validationRules: { isRequired: false, regex: getPhoneRegex() },
     },
     {

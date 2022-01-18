@@ -26,23 +26,25 @@ class ContactFormValidation {
             if (field.validationRules.isRequired) {
                 if (this.isEmpty(value)) {
                     errors[field.name].push('Field is require');
-                }
-                if (field.validationRules.regex) {
-                    if (this.checkDataCorrectness(field.validationRules.regex, value)) {
+                    //some kind of errors
+                } else if (field.validationRules.regex) {
+                    if (!this.checkDataCorrectness(field.validationRules.regex, value)) {
                         errors[field.name].push('Incorrect format');
                     }
                 }
             }
+
             if (!field.validationRules.isRequired) {
                 if (!this.isEmpty(value)) {
-                    if (this.checkDataCorrectness(field.validationRules.regex, value)) {
+                    // console.log('notEmpty');
+                    if (this.checkDataCorrectness(field.validationRules.regex, parseInt(parsedValue))) {
                         errors[field.name].push('Incorrect format');
                     }
                 }
             }
             errorsCount += errors[field.name].length;
         });
-
+        console.log(errors);
         return [errors, errorsCount];
     }
 }
