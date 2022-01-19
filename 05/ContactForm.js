@@ -2,8 +2,6 @@ import React, { useState, useReducer, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import ContactFormValidation from './ContactFormValidation';
 import fields from './tools/fieldsObj';
-// init("user_V4RPdgQVCCobouk7D9u0G");
-// import account from './account/account';
 
 function ContactForm() {
     const styleInputs = {
