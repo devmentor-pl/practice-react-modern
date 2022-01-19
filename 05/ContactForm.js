@@ -1,7 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import ContactFormValidation from './ContactFormValidation';
 import fields from './tools/fieldsObj';
-// import{ init } from '@emailjs/browser';
 // init("user_V4RPdgQVCCobouk7D9u0G");
 // import account from './account/account';
 
@@ -47,39 +47,36 @@ function ContactForm() {
     };
 
     const [state, dispatch] = useReducer(reducer, init);
+    const form = useRef();
 
     function prepareMessage() {
-        const { userName, userEmail, userMessage } = state;
         const sendSettings = {
-            service_id: 'service_l4cd3yo',
-            template_id: 'template_now6lni',
-            user_id: 'user_V4RPdgQVCCobouk7D9u0G',
-            data: {
-                from_name: userName,
-                to_name: userEmail,
-                message: userMessage,
-            },
+            serviceId: 'service_l4cd3yo',
+            templateId: 'template_now6lni',
+            userId: 'user_V4RPdgQVCCobouk7D9u0G',
         };
         return sendSettings;
     }
 
-    function sendMessage() {
+    const sendEmail = () => {
+        // e.preventDefault();
         const messageDetails = prepareMessage();
-        console.log(messageDetails);
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(messageDetails),
-            headers: { 'Content-Type': 'application/json' },
-        };
-        return fetch('https://api.emailjs.com/api/v1.0/email/send', options)
+        // const { userName, userEmail, userMessage } = state;
+        // const templateParams = {
+        //     to_name: userName,
+        //     from_name: userEmail,
+        //     message: userMessage,
+        // };
+        const { serviceId, templateId, userId } = messageDetails;
+        emailjs
+            .sendForm(serviceId, templateId, form.current, userId)
             .then((resp) => {
-                if (resp.ok) {
-                    return resp.json();
-                }
-                return Promise.reject(resp);
+                console.log(resp); //eslint-disable-line
             })
-            .catch((err) => err.message);
-    }
+            .catch((err) => {
+                console.log(err.message); //eslint-disable-line
+            });
+    };
 
     const validateInputs = (e) => {
         [errors, errorsCounter] = validation.run(fields, state);
@@ -91,13 +88,13 @@ function ContactForm() {
             alert("You've just sent a message"); //eslint-disable-line
             setErrors('');
             e.preventDefault();
-            sendMessage();
+            sendEmail();
         }
     };
 
     return (
         <div>
-            <form style={centerSubmit} onSubmit={validateInputs} onChange={(e) => dispatch(e.target)}>
+            <form style={centerSubmit} ref={form} onSubmit={validateInputs} onChange={(e) => dispatch(e.target)}>
                 {fields.map((el) => {
                     const { type, name, value, placeholder } = el;
                     return (
