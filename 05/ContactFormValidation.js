@@ -37,7 +37,7 @@ class ContactFormValidation {
             if (!field.validationRules.isRequired) {
                 if (!this.isEmpty(value)) {
                     // console.log('notEmpty');
-                    if (this.checkDataCorrectness(field.validationRules.regex, parseInt(parsedValue))) {
+                    if (this.checkDataCorrectness(field.validationRules.regex, value)) {
                         errors[field.name].push('Incorrect format');
                     }
                 }

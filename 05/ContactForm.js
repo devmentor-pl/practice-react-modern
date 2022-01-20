@@ -77,6 +77,7 @@ function ContactForm() {
     };
 
     const validateInputs = (e) => {
+        e.preventDefault();
         [errors, errorsCounter] = validation.run(fields, state);
 
         if (errorsCounter > 0) {
