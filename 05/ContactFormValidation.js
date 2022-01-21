@@ -34,14 +34,12 @@ class ContactFormValidation {
                 }
             }
 
-            if (!field.validationRules.isRequired) {
-                if (!this.isEmpty(value)) {
-                    // console.log('notEmpty');
-                    if (this.checkDataCorrectness(field.validationRules.regex, value)) {
-                        errors[field.name].push('Incorrect format');
-                    }
+            if (field.validationRules.regex) {
+                if (!this.checkDataCorrectness(field.validationRules.regex, value)) {
+                    errors[field.name].push('Incorrect format');
                 }
             }
+
             errorsCount += errors[field.name].length;
         });
         console.log(errors);

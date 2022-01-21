@@ -59,12 +59,6 @@ function ContactForm() {
     const sendEmail = () => {
         // e.preventDefault();
         const messageDetails = prepareMessage();
-        // const { userName, userEmail, userMessage } = state;
-        // const templateParams = {
-        //     to_name: userName,
-        //     from_name: userEmail,
-        //     message: userMessage,
-        // };
         const { serviceId, templateId, userId } = messageDetails;
         emailjs
             .sendForm(serviceId, templateId, form.current, userId)
