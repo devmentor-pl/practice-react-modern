@@ -1,4 +1,8 @@
 import React from 'react';
 
-export const ColorContext = React.createContext('red');
+const init = {
+    borderStyle: '1px solid red',
+};
+
+export const ColorContext = React.createContext(init);
 export const TextContext = React.createContext('nested');
