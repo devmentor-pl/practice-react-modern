@@ -1,28 +1,27 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
 import Clock from './Clock';
 
-class App extends React.Component {
-    state = {
-        date: new Date(),
-    };
+function App() {
+    // state = {
+    //     date: new Date(),
+    // };
 
-    componentDidMount() {
-        this.intervalId = setInterval(() => {
-            const date = new Date();
-            this.setState({ date });
+    const [date, setDate] = useState(new Date());
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            // const date = new Date();
+            setDate(new Date());
         }, 1000);
-    }
 
-    componentWillUnmunt() {
-        clearInterval(this.intervalId);
-    }
+        return () => {
+            clearInterval(intervalId);
+        };
+    });
 
-    render() {
-        const { date } = this.state;
+    // const { date } = state;
 
-        return date ? <Clock date={date} /> : null;
-    }
+    return date ? <Clock date={date} /> : null;
 }
 
 export default App;
