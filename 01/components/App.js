@@ -3,7 +3,7 @@ import React from 'react';
 import Clock from './Clock';
 
 class App extends React.Component {
-    state = {
+    state = { // został mi 1 błąd: State initialization should be in a constructor, mam dodany do .eslintrc  "parser": "@babel/eslint-parser", i zasintalowany: npm i @babel/eslint-parser@7 -D
         date: new Date(),
     };
 
@@ -14,7 +14,7 @@ class App extends React.Component {
         }, 1000);
     }
 
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
