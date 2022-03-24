@@ -2,8 +2,8 @@
 import React from 'react';
 import Div from './Div';
 
-function Box (){ 
+function Box (){
     return <Div/>
-};
+}
 
 export default Box;

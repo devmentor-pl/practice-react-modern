@@ -6,7 +6,7 @@ import TitleContext from '../context';
 function App () {
     return (
         <TitleContext.Provider value='React HelloWorld Modern'>
-            <Box/>;
+            <Box/>
         </TitleContext.Provider>
     )
 }

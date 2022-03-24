@@ -16,8 +16,7 @@ function Div () {
                 sagittis vitae, lobortis vitae ex. Donec congue dui leo, at auctor est laoreet gravida.
             </p>
         </div>
-    );
-
-};
+    )
+}
 
 export default Div;
