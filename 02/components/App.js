@@ -1,17 +1,14 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
+import TitleContext from '../context';
 
-class App extends React.Component {
-    state = {
-        text: 'React HelloWorld Modern!',
-    };
-
-    render() {
-        const { text } = this.state;
-
-        return <Box text={text} />;
-    }
+function App () {
+    return (
+        <TitleContext.Provider value='React HelloWorld Modern'>
+            <Box/>;
+        </TitleContext.Provider>
+    )
 }
 
 export default App;
