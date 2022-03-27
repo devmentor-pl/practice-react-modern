@@ -1,0 +1,13 @@
+/* .form__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 800px;
+    padding:50px;
+} */
+
+body{
+    background-color: aqua;
+}
+
