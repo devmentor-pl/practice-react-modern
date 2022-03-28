@@ -1,16 +1,16 @@
-const validation = (value) => {
+const formValidation = (value) => {
     console.log(value);
 
     const errors = {};
     const regExpName = /^[a-zA-Z]{2,30}/
-    const regExpEmail = /^[-\w\.]+@([-\w]+\.)+[a-z]+$/i;
+    const regExpEmail = /^[-\w.]+@([-\w]+\.)+[a-z]+$/i;
 
     if(!value.firstName.match(regExpName)){
-        errors.firstName = "First name is required and must contains min 2 characters"
+        errors.firstName = "First name is required, min 2 characters"
     }
 
     if(!value.lastName.match(regExpName)){
-        errors.lastName = "Last name is required and must contains min 2 characters"
+        errors.lastName = "Last name is required, min 2 characters"
     }
 
     if(!value.email){
@@ -30,4 +30,4 @@ const validation = (value) => {
     return errors;
 }
 
-export default validation;
+export default formValidation;
