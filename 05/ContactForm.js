@@ -1,5 +1,11 @@
-import React,{useReducer} from 'react';
+import React,{useReducer, useState, useEffect} from 'react';
+import formValidation from './formValidation';
 // import './styles.css';
+
+// błąd Module parse failed: Unexpected token (10:4)
+//You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+
+// Dodawałam moduły, konfigurowałam webpack, błąd nadal występuje, nie potrafie sobie z nim poradzic, dlatego mam style poniej
 
 const stylesContainer ={
     display:'flex',
@@ -16,19 +22,19 @@ const stylesForm ={
 }
 
 const stylesInputs ={
-    margin:'15px',
-    padding:'5px',
+    margin:'2px',
+    padding:'2px',
     border:'none',
     borderBottom:'1px solid',
-    borderBottomColor: 'black', 
+    borderBottomColor: 'black',
+    width:'250px',
 }
 
-
-// import account from './account';
+const errorStyles ={
+    color:'red',
+}
 
 function ContactForm () {
-    // console.log(account);
-
     const initialState = {
         firstName:'',
         lastName:'',
@@ -45,20 +51,27 @@ function ContactForm () {
     }
 
     const [state, dispatch] = useReducer(reducer,initialState)
-
     const {firstName,lastName,email,phone,subject,message} = state;
 
-    function formValidation(){
+    const [errors, setErrors] = useState({});
+    console.log(errors)
 
-    }
+    // nie działa poprawnie, wysyła pusty formularz, potem wysyła ze błąd i dopiero pokazuje error
+    // potrzebne jeszcze cos do kontrolowania isValid i spr za kazdym razem czy valid, zmiana na true jesli error length === 0
+    // nie czyści inputów - nie wiem jak to zrobic przy uzyciu useReducer
 
     function handleSubmit(e) {
         e.preventDefault()
-        if(formValidation){
-            return alert('Wiadomosc została wysłana')
+        setErrors(formValidation(state))
+
+        if(Object.keys(errors).length === 0){
+            alert('wiadomosc została wysłane');
+            console.log(errors);
+            dispatch(initialState)
         }
-        return false
+        alert('Wypelnij poprawnie formularz');
     }
+
 
     return (
         <div style={stylesContainer}>
@@ -75,6 +88,7 @@ function ContactForm () {
                     onChange={e=>dispatch(e.target)}
                     required
                 />
+                {errors.firstName && <p style={errorStyles}>{errors.firstName}</p>}
 
                 <input
                     className='form__input'
@@ -86,6 +100,7 @@ function ContactForm () {
                     onChange={e=>dispatch(e.target)}
                     required
                 />
+                {errors.lastName && <p style={errorStyles}>{errors.lastName}</p>}
 
                 <input
                     className='form__input'
@@ -97,6 +112,7 @@ function ContactForm () {
                     onChange={e=>dispatch(e.target)}
                     required
                 />
+                {errors.email && <p style={errorStyles}>{errors.email}</p>}
 
                 <input
                     className='form__input'
@@ -118,6 +134,7 @@ function ContactForm () {
                     onChange={e=>dispatch(e.target)}
                     required
                 />
+                {errors.subject && <p style={errorStyles}>{errors.subject}</p>}
 
                 <textarea
                     className='form__input'
@@ -129,6 +146,8 @@ function ContactForm () {
                     onChange={e=>dispatch(e.target)}
                     required
                 />
+                {errors.message && <p style={errorStyles}>{errors.message}</p>}
+
                 <button type='submit' onClick={handleSubmit}>Send</button>
             </form>
         </div>
