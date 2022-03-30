@@ -1,13 +1,26 @@
-/* .form__container{
-    display: flex;
-    justify-content: center;
+.form__container {
+    display:flex;
+    justify-content: flex-start;
     align-items: center;
-    width: 500px;
-    height: 800px;
-    padding:50px;
-} */
-
-body{
-    background-color: aqua;
+    flex-direction:column;
 }
 
+.form__input {
+    margin:2px;
+    padding:2px;
+    border:none;
+    border-bottom: 1px solid;
+    border-bottom-color:black;
+    width:250px;
+}
+
+.form__box {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form__error {
+    color:red;
+}

@@ -1,29 +1,29 @@
-const formValidation = (value) => {
-    console.log(value);
+const formValidation = (values) => {
+    console.log(values);
 
     const errors = {};
     const regExpName = /^[a-zA-Z]{2,30}/
     const regExpEmail = /^[-\w.]+@([-\w]+\.)+[a-z]+$/i;
 
-    if(!value.firstName.match(regExpName)){
+    if(!values.firstName.match(regExpName)){
         errors.firstName = "First name is required, min 2 characters"
     }
 
-    if(!value.lastName.match(regExpName)){
+    if(!values.lastName.match(regExpName)){
         errors.lastName = "Last name is required, min 2 characters"
     }
 
-    if(!value.email){
+    if(!values.email){
         errors.email = "Email is required"
-    } else if (!value.email.match(regExpEmail)){
+    } else if (!values.email.match(regExpEmail)){
         errors.email = "Email is invalid"
     }
 
-    if(!value.subject){
+    if(!values.subject){
         errors.subject = "Subject is required"
     }
 
-    if(!value.message){
+    if(!values.message){
         errors.message = "Message is required"
     }
 
