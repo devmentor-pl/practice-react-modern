@@ -7,11 +7,8 @@ const useRandomItem = itemsList => {
 
     const randomItem = () => {
         const rand = Math.floor(Math.random() * itemsList.length);
-        console.log(rand);
-        setState(itemsList[rand]); // aktualizacja state
-        console.log(itemsList[rand]);
+        setState(itemsList[rand]); 
     };
-    console.log(state);
     return [state, randomItem];
 };
 
