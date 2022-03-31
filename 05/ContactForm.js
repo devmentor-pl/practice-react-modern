@@ -13,7 +13,7 @@ const initialState = {
 
 const reducer = (state,action) => {
     const {type, value} = action;
-    if(type === 'reset'){
+    if(type === 'resetInputs'){
         return value
     }
     return {...state, [type]:value}
@@ -34,7 +34,7 @@ function ContactForm () {
 
     function resetInputs(){
         const action = {
-            type: 'reset',
+            type: 'resetInputs',
             value: initialState
         }
         dispatch(action)
