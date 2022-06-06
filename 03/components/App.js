@@ -3,13 +3,19 @@ import React from 'react';
 import Box from './Box';
 import Div from './Div';
 
-const App = () => {
+import { TextContext } from '../context';
+
+function App() {
+    const { Provider } = TextContext;
+
     return (
         <section>
             <Box />
-            <Div />
+            <Provider value="sibling">
+                <Div />
+            </Provider>
         </section>
     );
-};
+}
 
 export default App;
