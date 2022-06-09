@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Clock from './Clock';
 
 class App extends React.Component {
@@ -13,7 +12,7 @@ class App extends React.Component {
             this.setState({ date });
         }, 1000);
     }
-
+    // eslint-disable-next-line
     componentWillUnmunt() {
         clearInterval(this.intervalId);
     }
