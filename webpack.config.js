@@ -5,6 +5,7 @@ const path = require("path");
 // importuję bibliotękę [path] z [node.js]
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // importuję odpowiedni plugin
+const ESLintPlugin = require('eslint-webpack-plugin');
 module.exports = {
   entry: `./${taskNumber}/app.js`,
   // definiuje plik wejściowy
@@ -37,7 +38,8 @@ module.exports = {
       // wskazuje plik źródłowy
       filename: "index.html"
       // określan nazwę dla pliku
-    })
+    }),
+    new ESLintPlugin()
   ]
 };
 // eksportuję ustawienia dla webpack-a
