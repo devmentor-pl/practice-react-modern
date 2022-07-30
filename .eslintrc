@@ -25,7 +25,9 @@
             "error",
             4
         ],
-        "react/state-in-constructor": [0, "never"]
+        "react/state-in-constructor": [0, "never"],
+        "no-debugger": "warn",
+        "no-void": "warn"
     },
     "globals": {
         "window": true,
