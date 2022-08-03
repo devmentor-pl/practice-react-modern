@@ -1,45 +1,79 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
-import {useChangeHandler} from './hooks'
+import { useChangeHandler } from './hooks'
 
 import account from './account';
+// import styles from './ContactForm.module.css'
 
 function ContactForm() {
     /* eslint no-console: "off" */
 
     console.log(account);
 
-    const {value: valueName, onChange: onChangeName} = useChangeHandler()
-    const {value: valueLast, onChange: onChangeLast} = useChangeHandler()
-    const {value: valueEmail, onChange: onChangeEmail} = useChangeHandler()
-    const {value: valuePhone, onChange: onChangePhone} = useChangeHandler()
-    const {value: valueSubject, onChange: onChangeSubject} = useChangeHandler()
-    const {value: valueNews, onChange: onChangeNews} = useChangeHandler()
-    
+    const firstName = useChangeHandler()
+    const lastName = useChangeHandler()
+    const email = useChangeHandler()
+    const phone = useChangeHandler()
+    const subject = useChangeHandler()
+    const news = useChangeHandler()
+
+    // const divFormName = {display: 'inline-block', width: '80px'}
+
     const onSubmit = e => {
         e.preventDefault()
         console.log('submit')
     }
     return (
         <form onSubmit={onSubmit}>
-            <label htmlFor="name">
-                <input name="name" value={valueName} onChange={onChangeName}/>
-            </label>
-            <label htmlFor="last">
-                <input name="last" value={valueLast} onChange={onChangeLast}/>
-            </label>
-            <label htmlFor="email">
-                <input name="email" value={valueEmail} onChange={onChangeEmail}/>
-            </label>
-            <label htmlFor="phone">
-                <input name="phone" value={valuePhone} onChange={onChangePhone}/>
-            </label>
-            <label htmlFor="subject">
-                <input name="subject" value={valueSubject} onChange={onChangeSubject}/>
-            </label>
-            <label htmlFor="news">
-                <input name="news" value={valueNews} onChange={onChangeNews}/>
-            </label>
+            <div>
+                <label htmlFor="name">
+                    <div style={{display: 'inline-block', width: '80px'}}>
+                        name 
+                    </div>
+                    <input name="firstName" {...firstName} id='firstName' />
+                </label>
+            </div>
+            <div>
+                <label htmlFor="lastName">
+                    <div style={{display: 'inline-block', width: '80px'}}>
+                        last
+                    </div>
+                    <input name="lastName" {...lastName} id='lastName' />
+                </label>
+            </div>
+            <div>
+                <label htmlFor="email">
+                    <div style={{display: 'inline-block', width: '80px'}}>
+                        email
+                    </div>
+                    <input name="email" {...email} />
+                </label>
+            </div>
+            <div>
+                <label htmlFor="phone">
+                    <div style={{display: 'inline-block', width: '80px'}}>
+                        phone
+                    </div>
+                    <input name="phone" {...phone} />
+                </label>
+            </div>
+            <div>
+                <label htmlFor="subject">
+                    <div style={{display: 'inline-block', width: '80px'}}>
+                        subject
+                    </div>
+                    <input name="subject" {...subject} />
+                </label>
+            </div>
+            <div>
+                <label htmlFor="news">
+                    <div style={{display: 'inline-block', width: '80px'}}>
+                        news
+                    </div>
+                    <input name="news" {...news} />
+                </label>
+            </div>
         </form>
     )
 }
