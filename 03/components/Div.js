@@ -1,18 +1,27 @@
 // ./src/components/Div.js
 import React from 'react';
-import {TextContext} from '../context'
+import {TextContext, ColorContext } from '../context'
 
 function Div() {
-    const {Consumer} = TextContext
+    const {Consumer: TextConsumer} = TextContext
+    const ColorConsumer = ColorContext.Consumer
     return (
         <div>
-            <Consumer>
+            <TextConsumer>
                 { 
                     ctx => (
-                        <h1>{ctx}</h1>
+                        <ColorConsumer>
+                            {
+                                color => (
+                                    <div style={{border: `1px solid ${color}`}}>
+                                        <h1>{ctx}</h1>
+                                    </div>
+                                )
+                            }
+                        </ColorConsumer>
                     )
                 }
-            </Consumer>
+            </TextConsumer>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia, justo et posuere viverra,
                 ligula turpis egestas nisi, id iaculis augue ex non nisi. Class aptent taciti sociosqu ad litora
