@@ -1,10 +1,18 @@
 // ./src/components/Div.js
 import React from 'react';
+import {TextContext} from '../context'
 
-const Div = () => {
+function Div() {
+    const {Consumer} = TextContext
     return (
         <div>
-            <h1>??</h1>
+            <Consumer>
+                { 
+                    ctx => (
+                        <h1>{ctx}</h1>
+                    )
+                }
+            </Consumer>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia, justo et posuere viverra,
                 ligula turpis egestas nisi, id iaculis augue ex non nisi. Class aptent taciti sociosqu ad litora
@@ -14,6 +22,6 @@ const Div = () => {
             </p>
         </div>
     );
-};
+}
 
 export default Div;
