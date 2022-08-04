@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 
 import account from './account';
 // import styles from './ContactForm.module.css'
@@ -9,15 +9,13 @@ function ContactForm() {
     /* eslint no-console: "off" */
     console.log(account());
 
+    const [errors, setErrors] = React.useState({ 'a': 10 })
+
     const divFormWrapper = { padding: '5px' }
     const divFormName = { display: 'inline-block', width: '80px' }
     const divError = { color: 'red' }
     const divFormInput = { display: 'inline-block' }
 
-    const onSubmit = e => {
-        e.preventDefault()
-        console.log('submit')
-    }
     const init = {
         firstName: '',
         lastName: '',
@@ -33,7 +31,49 @@ function ContactForm() {
     }
     const [state, dispatch] = useReducer(reducer, init);
     // eslint-disable-next-line no-unused-vars
-    const { firstName,lastName, email, phone, subject, news } = state
+    const { firstName, lastName, email, phone, subject, news } = state
+
+    const onSubmit = e => {
+        e.preventDefault()
+        console.log('submit')
+        setErrors({})
+        if (state.firstName.length < 3) {
+            setErrors(val => ({ ...val, firstName: 'Enter at least 3 chars' }))
+        }
+        if (state.lastName.length < 3) {
+            setErrors(val => ({ ...val, lastName: 'Enter at least 3 chars' }))
+        }
+        // eslint-disable-next-line no-useless-escape
+        const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const checkEmail = state.email.match(mailformat)
+        if (state.email.length < 3) {
+            setErrors(val => ({ ...val, email: 'Enter at least 3 chars' }))
+        } else if (!checkEmail) {
+            setErrors(val => ({ ...val, email: 'Email is not good' }))
+        }
+        if (state.phone.length < 3) {
+            setErrors(val => ({ ...val, phone: 'Enter at least 3 chars' }))
+        } else if (Number.isNaN(Number(state.phone))) {
+            console.log('Not a number')
+            setErrors(val => ({ ...val, phone: 'Not a number' }))
+        }
+        if (state.subject.length < 3) {
+            setErrors(val => ({ ...val, subject: 'Enter at least 3 chars' }))
+        }
+        if (state.news.length < 3) {
+            setErrors(val => ({ ...val, news: 'Enter at least 3 chars' }))
+        }
+    }
+
+    React.useEffect(() => {
+        const test = Object.keys(errors)
+        console.log(test)
+        if (test.length === 0) {
+            console.log('Form sending ....')
+        } else {
+            console.log('Form NOT send')
+        }
+    }, [errors])
 
     return (
         <form onSubmit={onSubmit}>
@@ -43,7 +83,7 @@ function ContactForm() {
                         name
                     </div>
                     <div style={divFormInput}>
-                        <div style={divError}>xxx</div>
+                        <div style={divError}>{errors.firstName}</div>
                         <input
                             name="firstName"
                             value={firstName}
@@ -59,7 +99,7 @@ function ContactForm() {
                         last
                     </div>
                     <div style={divFormInput}>
-                        <div style={divError}>xxx</div>
+                        <div style={divError}>{errors.firstName}</div>
                         <input
                             name="lastName"
                             value={lastName}
@@ -75,7 +115,7 @@ function ContactForm() {
                         email
                     </div>
                     <div style={divFormInput}>
-                        <div style={divError}>xxx</div>
+                        <div style={divError}>{errors.email}</div>
                         <input
                             name="email"
                             value={email}
@@ -91,7 +131,7 @@ function ContactForm() {
                         phone
                     </div>
                     <div style={divFormInput}>
-                        <div style={divError}>xxx</div>
+                        <div style={divError}>{errors.phone}</div>
                         <input
                             name="phone"
                             value={phone}
@@ -107,7 +147,7 @@ function ContactForm() {
                         subject
                     </div>
                     <div style={divFormInput}>
-                        <div style={divError}>xxx</div>
+                        <div style={divError}>{errors.subject}</div>
                         <input
                             name="subject"
                             value={subject}
@@ -123,7 +163,7 @@ function ContactForm() {
                         news
                     </div>
                     <div style={divFormInput}>
-                        <div style={divError}>xxx</div>
+                        <div style={divError}>{errors.news}</div>
                         <input
                             name="news"
                             value={news}
