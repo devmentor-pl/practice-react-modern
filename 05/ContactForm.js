@@ -1,13 +1,25 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
+/* eslint-disable no-shadow */
+/* eslint-disable no-sequences */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useReducer } from 'react';
 
-import account from './account';
+// import account from './account';
+import {mailTo, password} from './account';
 // import styles from './ContactForm.module.css'
 
 function ContactForm() {
     /* eslint no-console: "off" */
-    console.log(account());
+
+    // console.log(account());
+    // console.log(mailTo());
+    // console.log(password());
 
     const [errors, setErrors] = React.useState({ 'a': 10 })
 
@@ -54,7 +66,7 @@ function ContactForm() {
         if (state.phone.length < 3) {
             setErrors(val => ({ ...val, phone: 'Enter at least 3 chars' }))
         } else if (Number.isNaN(Number(state.phone))) {
-            console.log('Not a number')
+            // console.log('Not a number')
             setErrors(val => ({ ...val, phone: 'Not a number' }))
         }
         if (state.subject.length < 3) {
@@ -65,11 +77,35 @@ function ContactForm() {
         }
     }
 
+    const sendForm = () => {
+        /* SmtpJS.com - v3.0.0 */
+        // eslint-disable-next-line
+        const Email = { send(a) { return new Promise((n, e) => { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; const t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, (e) => { n(e) }) }) }, ajaxPost(e, n, t) { const a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { const e = a.responseText; t != null && t(e) }, a.send(n) }, ajax(e, n) { const t = Email.createCORSRequest("GET", e); t.onload = function () { const e = t.responseText; n != null && n(e) }, t.send() }, createCORSRequest(e, n) { let t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : typeof XDomainRequest !== "undefined" ? (t = new XDomainRequest).open(e, n) : t = null, t } };
+
+        function sendEmail() {
+            console.log('sendEmail')
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "andisyy@gmail.com",
+                Password: password(),
+                To: mailTo(),
+                From: "andisyy@gmail.com",
+                Subject: "Test email",
+                Body: "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+            }).then(
+                // eslint-disable-next-line
+                message => alert(message)
+            );
+        }
+        sendEmail()
+    }
+
     React.useEffect(() => {
-        const test = Object.keys(errors)
-        console.log(test)
-        if (test.length === 0) {
+        const propertyOfErrors = Object.keys(errors)
+        // console.log(propertyOfErrors)
+        if (propertyOfErrors.length === 0) {
             console.log('Form sending ....')
+            sendForm()
         } else {
             console.log('Form NOT send')
         }

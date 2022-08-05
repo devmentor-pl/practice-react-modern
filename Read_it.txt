@@ -1,0 +1,17 @@
+How to start
+------------
+npm start
+
+set mailer
+------------
+create account.js as in the example account_example
+insert your email & password
+
+
+
+
+
+
+
+
+
