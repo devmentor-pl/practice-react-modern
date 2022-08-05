@@ -1,0 +1,3 @@
+clearInterval in function component
+-----------------------------------
+https://stackoverflow.com/questions/56914921/is-useref-hook-a-must-to-set-and-clear-intervals-in-react

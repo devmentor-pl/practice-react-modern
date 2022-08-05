@@ -1,0 +1,44 @@
+Eslint
+===========
+paczki ESLinta
+--------------------------
+npx install-peerdeps -D eslint-config-airbnb
+
+file .eslintrc
+--------------------------
+
+plugin do konfiguracji webpacka
+--------------------------
+npm i -D eslint-webpack-plugin@3
+
+konfiguracja webpack.config.js 
+--------------------------
+
+propraw błędów przez ESLint
+--------------------------
+npx eslint --fix ./**/*.js
+
+poprawa błędów przez VSC
+-------------------------
+shift+ctrl+p 
+Fix all auto-fixable Problems
+
+paczka @babel/eslint-parser
+---------------------------
+npm i @babel/eslint-parser@7 -D
+
+Prittier
+===========================
+npm i -D prettier@2 eslint-config-prettier@8 
+
+file - .prettierrc
+---------------------------
+
+file - .eslintrc 
+---------------------------
+"extends": ["airbnb", "prettier"],
+
+ Prettier – Code Formater in VSC 
+ --------------------------
+
+
