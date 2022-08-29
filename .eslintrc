@@ -2,6 +2,10 @@
     "parser": "@babel/eslint-parser",
     "extends": ["airbnb", "prettier"],
     "rules": {
+        "no-console": "off",
+        "react/prop-types": "off",
+        "no-unsafe-optional-chaining": "off",
+        "no-nonoctal-decimal-escape": "off",
         "react/jsx-filename-extension": [
             1,
             {
