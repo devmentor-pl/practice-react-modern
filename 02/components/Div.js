@@ -1,9 +1,9 @@
 // ./src/components/Div.js
 import React from 'react';
-import PropTypes from 'prop-types';
+import TextContentex from '../context';
 
-const Div = props => {
-    const { title } = props;
+const Div = function Div() {
+    const title = React.useContext(TextContentex);
 
     return (
         <div>
@@ -19,8 +19,5 @@ const Div = props => {
     );
 };
 
-Div.propTypes = {
-    title: PropTypes.string.isRequired,
-};
 
 export default Div;
