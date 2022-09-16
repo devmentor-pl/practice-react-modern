@@ -1,10 +1,14 @@
 // ./src/components/Div.js
 import React from 'react';
+import { TextContext, ColorContext } from '../context';
 
-const Div = () => {
+const Div = function Div() {
+    const title = React.useContext(TextContext);
+    const color = React.useContext(ColorContext);
+
     return (
-        <div>
-            <h1>??</h1>
+        <div style={{ border: `1px solid ${color}` }}>
+            <h1>{title}</h1>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia, justo et posuere viverra,
                 ligula turpis egestas nisi, id iaculis augue ex non nisi. Class aptent taciti sociosqu ad litora
