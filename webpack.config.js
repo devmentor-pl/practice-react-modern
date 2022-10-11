@@ -1,4 +1,4 @@
-const taskNumber = '02';
+const taskNumber = '03';
 // numer przerabianego zadania
 const path = require('path');
 // importuję bibliotekę [path] z [node.js]
@@ -15,7 +15,7 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         // definiuje ścieżką wyjściową
         filename: 'app.min.js',
-    // definiuję nazwę pliku wyjściowego
+        // definiuję nazwę pliku wyjściowego
     },
     target: 'web',
     // niezbędne do uruchomienia automatycznego odświeżania z webpack-dev-server@3
@@ -33,7 +33,7 @@ module.exports = {
                 // mają być wykorzystywane
             },
         ],
-    // obecnie brak dodatkowych ustawień
+        // obecnie brak dodatkowych ustawień
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -42,7 +42,7 @@ module.exports = {
             filename: 'index.html',
             // określan nazwę dla pliku
         }),
-        new ESLintPlugin()
+        new ESLintPlugin(),
     ],
 };
 // eksportuję ustawienia dla webpack-a
