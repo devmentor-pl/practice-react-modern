@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ClockDate = props => {
+// eslint-disable-next-line func-names
+const ClockDate = function (props) {
     function getCorrectMonthFormat(monthNumber) {
         return (monthNumber + 1).toString().padStart(2, '0');
     }
@@ -19,6 +20,10 @@ const ClockDate = props => {
             {year}:{month}:{day}
         </section>
     );
+};
+
+ClockDate.propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ClockDate;

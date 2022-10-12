@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import ClockTime from './ClockTime';
 import ClockDate from './ClockDate';
 
-const Clock = props => {
+// eslint-disable-next-line func-names
+const Clock = function (props) {
+    const { date } = props;
     return (
         <>
-            <ClockTime date={props.date} />
-            <ClockDate date={props.date} />
+            <ClockTime date={date} />
+            <ClockDate date={date} />
         </>
     );
 };
@@ -18,3 +20,5 @@ Clock.propTypes = {
 };
 
 export default Clock;
+
+
