@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
-import fields from './Fields';
-import acc from './account';
+import fields from './fields';
+import SendEmail from './SendEmail';
+import checkValidation from './Validation';
 
 function ContactForm() {
     const init = {
@@ -24,41 +24,20 @@ function ContactForm() {
     const styleLabel = {
         margin: '5px',
     };
-    const checkValidation = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        // eslint-disable-next-line prefer-const
-        let wrongValues = [];
-        // eslint-disable-next-line object-curly-newline
-        fields.forEach(({ name, isRequired, pattern, error }) => {
-            const value = state[name];
-            if (isRequired) {
-                if (!pattern.test(value)) {
-                    wrongValues.push(error);
-                    setErrors(wrongValues);
-                }
-            }
-        });
+        const wrongValues = checkValidation(state);
+        setErrors(wrongValues);
         if (wrongValues.length === 0) {
             // eslint-disable-next-line no-console
             console.log('Form is OK');
             setErrors(...wrongValues);
-            emailjs
-                .sendForm(`${acc.serviceId}`, `${acc.temaplteId}`, form.current, `${acc.publicKey}`)
-                .then(
-                    (result) => {
-                        // eslint-disable-next-line no-console
-                        console.log(result, 'Succes');
-                    },
-                    (error) => {
-                        // eslint-disable-next-line no-console
-                        console.log(error.text, 'smth went wrong');
-                    },
-                );
+            SendEmail(form);
         }
     };
 
     return (
-        <form ref={form} style={styleForm} onSubmit={checkValidation}>
+        <form ref={form} style={styleForm} onSubmit={handleSubmit}>
             {fields.map(({ name, type, label }) => {
                 if (type === 'textarea') {
                     return (

@@ -5,13 +5,14 @@ function SpeedTest() {
     const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
     const [counter, setCounter] = useState(0);
     const [inputValue, setValue] = useState('');
-    const [result, setResult] = useState('');
+    const [matches, setMatches] = useState(0);
     const inputRef = useRef(null);
     const finishRef = useRef(null);
-
+    const [finish, setFinish] = useState(finishRef.current);
     const resetTimer = () => {
         clearInterval(inputRef.current);
         setCounter(counter - counter);
+        setMatches(0);
     };
     useEffect(() => {
         regenerateWord();
@@ -20,11 +21,15 @@ function SpeedTest() {
         // eslint-disable-next-line no-console
         console.log(word, inputValue);
         if (word === inputValue) {
-            // eslint-disable-next-line no-alert
-            clearInterval(inputRef.current);
-            setResult(counter);
-            setCounter(0);
-            finishRef.current.textContent = 'Finished';
+            setMatches((match) => match + inputValue.length);
+            setValue('');
+            regenerateWord();
+            // eslint-disable-next-line no-console
+            console.log(matches);
+        }
+        if (matches > 30) {
+            setFinish(`Result: ${counter}`);
+            resetTimer();
         }
     }, [inputValue]);
 
@@ -34,10 +39,9 @@ function SpeedTest() {
         }, 1000);
     };
     const handleReset = () => {
-        setResult(0);
         setValue('');
         setCounter(0);
-        finishRef.current.textContent = `Time: ${counter}`;
+        setFinish('');
     };
     return (
         <div>
@@ -49,7 +53,7 @@ function SpeedTest() {
                 onFocus={startTimer}
                 onBlur={resetTimer}
             />
-            <p>Result: {result}</p>
+            <p>{finish}</p>
             <button onClick={handleReset} type="button">
                 Reset
             </button>
