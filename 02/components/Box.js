@@ -1,4 +1,3 @@
-// ./src/components/Box.js
 import React from 'react';
 // import PropTypes from 'prop-types';
 // import { TextContext } from '../context';
