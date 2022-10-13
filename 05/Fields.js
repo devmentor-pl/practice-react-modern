@@ -1,0 +1,51 @@
+const fields = [
+    {
+        label: 'First name: ',
+        name: 'firstName',
+        type: 'text',
+        isRequired: true,
+        pattern: /[a-zA-Z]{2,}/,
+        error: 'Wrong name!',
+    },
+    {
+        label: 'Last name: ',
+        name: 'lastName',
+        type: 'text',
+        isRequired: true,
+        pattern: /[a-zA-Z]{2,}/,
+        error: 'Wrong surname!',
+    },
+    {
+        label: 'Email: ',
+        name: 'email',
+        type: 'email',
+        isRequired: true,
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        error: 'Wrong email!',
+    },
+    {
+        label: 'Phone number: ',
+        name: 'phone',
+        type: 'tel',
+        isRequired: false,
+        pattern: /[0-9]{3}-[0-9]{3}-[0-9]{3}/,
+        error: 'Wrong phone number!',
+    },
+    {
+        label: 'Topic: ',
+        name: 'topic',
+        type: 'text',
+        isRequired: true,
+        pattern: /^[A-Za-z0-9. ]{5,30}$/,
+        error: 'Wrong topic!',
+    },
+    {
+        label: 'Message: ',
+        name: 'message',
+        type: 'textarea',
+        isRequired: true,
+        pattern: /^[A-Za-z0-9. ]{5,1000}$/,
+        error: 'Wrong message!',
+    },
+];
+export default fields;
