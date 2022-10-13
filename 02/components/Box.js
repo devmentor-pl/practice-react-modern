@@ -1,16 +1,18 @@
 // ./src/components/Box.js
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+// import { TextContext } from '../context';
 import Div from './Div';
 
-const Box = props => {
-    const { text } = props;
+const Box = function () {
+    // const { text } = props;
 
-    return <Div title={text} />;
+    return <Div />;
 };
 
-Box.propTypes = {
+/* Box.propTypes = {
     text: PropTypes.string.isRequired,
-};
+}; */
 
 export default Box;
+// title={text}
