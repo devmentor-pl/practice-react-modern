@@ -1,13 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import TextContext from './context';
 
-// const TextContext = React.createContext();
-
-// const Div = function () {
 // eslint-disable-next-line react/prefer-stateless-function
 class Div extends React.Component {
-    // const { title } = props;
     render() {
         const { Consumer } = TextContext;
 

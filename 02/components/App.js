@@ -2,8 +2,6 @@ import React from 'react';
 import Box from './Box';
 import TextContext from './context';
 
-// const TextContext = React.createContext();
-
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
     state = {

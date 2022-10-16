@@ -18,7 +18,6 @@ const ContactForm = function () {
             name: 'firstNameAndLastName',
             label: 'firstNameAndLastName',
             required: true,
-            // pattern: '^([A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+)+()([A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+)+$',
             pattern: '^[a-zA-Z-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+ [a-zA-Z-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$',
         },
         {
