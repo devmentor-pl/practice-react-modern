@@ -1,7 +1,8 @@
-// ./src/components/App.js
 import React from 'react';
 import Box from './Box';
+import TextContext from './context';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component {
     state = {
         text: 'React HelloWorld Modern!',
@@ -9,9 +10,14 @@ class App extends React.Component {
 
     render() {
         const { text } = this.state;
-
-        return <Box text={text} />;
+        const { Provider } = TextContext;
+        return (
+            <Provider value={text}>
+                <Box />
+            </Provider>
+        );
     }
 }
 
 export default App;
+//  <Box text={text} />
