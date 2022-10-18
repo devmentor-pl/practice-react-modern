@@ -3,10 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Div from './Div';
 
-const Box = props => {
-    const { text } = props;
-
-    return <Div title={text} />;
+const Box = () => {
+    return <Div />;
 };
 
 Box.propTypes = {
