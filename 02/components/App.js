@@ -13,7 +13,7 @@ class App extends React.Component {
         const { Provider } = TextContext;
 
         return (
-            <Provider value={text}><Box text={text} /></Provider>
+            <Provider value={text}><Box/></Provider>
         );
     }
 }
