@@ -3,9 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import ContactForm from './ContactForm';
 
-const App = () => {
-    return <ContactForm />;
-};
+function Appad
 
 const root = createRoot(document.querySelector('#root'));
 root.render(<App />);
