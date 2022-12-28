@@ -1,4 +1,4 @@
-const taskNumber = "01";
+const taskNumber = "05";
 // numer przerabianego zadania
 
 const path = require("path");
@@ -28,7 +28,14 @@ module.exports = {
                 use: ["babel-loader"]
                 // określam jakie loader-y
                 // mają być wykorzystywane
-            }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader', // dodaje stylowanie do DOM poprzez utworzenie elementu <style>
+                    'css-loader', // odczytuje pliki CSS i dodaje je do bundla
+                ],
+            },
         ]
     // obecnie brak dodatkowych ustawień
     },
