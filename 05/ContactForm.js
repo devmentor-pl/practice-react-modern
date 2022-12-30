@@ -39,7 +39,7 @@ function ContactForm() {
     const handleSubmit = (e, form) => {
         e.preventDefault();
         const{name, email, phone, subject, message} = form.current
-        const errors = validateForm(form.current);
+        const errors = validateForm(form.current, fields);
         const obj = {
             name: name.value,
             email: email.value,
