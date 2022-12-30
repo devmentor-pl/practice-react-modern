@@ -14,8 +14,7 @@ class App extends React.Component {
         }, 1000);
     }
 
-    // eslint-disable-next-line react/no-unused-class-component-methods
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
