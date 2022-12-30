@@ -1,6 +1,4 @@
-import fields from "./fields";
-
-const validateForm = (form) => {
+const validateForm = (form, fields) => {
     let errors = null;
     fields.forEach(field => {
         const {name, required = false, pattern = null} = field;
