@@ -1,11 +1,13 @@
 // ./src/components/Div.js
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextContent from './context';
 
 const Div = props => {
     const { title } = props;
 
     return (
+        <Consumer>
         <div>
             <h1>{title}</h1>
             <p>
@@ -16,6 +18,7 @@ const Div = props => {
                 sagittis vitae, lobortis vitae ex. Donec congue dui leo, at auctor est laoreet gravida.
             </p>
         </div>
+        </Consumer>
     );
 };
 
