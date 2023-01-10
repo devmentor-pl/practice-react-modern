@@ -1,19 +1,19 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
-import TextContent from './context';
+import TextContext from './context';
 
 class App extends React.Component {
     state = {
-        text: 'React HelloWorld Modern!',
+        text: 'React Hello',
     };
 
     render() {
-        const { Provider } = TextContent;
+        const { Provider } = TextContext;
 
         return (
-            <Provider value = 'React HelloWorld Modern!'>
-                <Box text={text} />,
+            <Provider value = {this.state.text}>
+                <Box />,
             </Provider>
         )
     }

@@ -6,7 +6,7 @@
 import React from "react";
 
 
-const TextContent = React.createContext();
+const TextContext = React.createContext();
 
 
-export default {TextContent};
+export default TextContext;

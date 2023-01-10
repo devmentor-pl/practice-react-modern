@@ -39,7 +39,7 @@ module.exports = {
       filename: "index.html"
       // określan nazwę dla pliku
     }),
-    new ESLintintPlugin()
+    //new ESLintintPlugin()
   ]
 };
 // eksportuję ustawienia dla webpack-a
