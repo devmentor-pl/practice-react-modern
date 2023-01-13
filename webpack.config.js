@@ -1,4 +1,4 @@
-const taskNumber = "02";
+const taskNumber = "03";
 // numer przerabianego zadania
 
 const path = require("path");
@@ -39,7 +39,7 @@ module.exports = {
       filename: "index.html"
       // określan nazwę dla pliku
     }),
-    //new ESLintintPlugin()
+    new ESLintintPlugin()
   ]
 };
 // eksportuję ustawienia dla webpack-a
