@@ -1,5 +1,5 @@
 import React, {useState, useReducer} from 'react';
-import validateForm from './validateForm';
+import validateForm from './validateForm'; 
 
 function ContactForm () {
     const initialState = {
@@ -45,14 +45,14 @@ function ContactForm () {
         setErrors(validateForm(state))
         if (errors.length === 0) {
             clearInputs()
-        } 
-        const isErrors = errors.map(err=> ({text: err}) );
-        setErrors(isErrors);
+        } else {
+            setErrors(errors)
+        }
     }
 
     return (
         <div className="form-container">
-            <form className="form">
+            <form className="form" onSubmit={submitHandler}>
                 <label htmlFor="firstName" className="form-label">Firstname: 
                     <input 
                         className="form-input"
@@ -107,9 +107,9 @@ function ContactForm () {
                         onChange={onChange}
                     />
                 </label>
-                <button type='submit' onClick={submitHandler}>Send</button>
+                <button type='submit'>Send</button>
             </form>
-            {errors.length > 0 && <ul>{errors.map(({text})=><li>{text}</li>)}</ul>}
+            {errors.length > 0 && <ul>{errors.map((msg)=><li>{msg}</li>)}</ul>}
         </div>
     )
 
