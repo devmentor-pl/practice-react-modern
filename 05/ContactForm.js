@@ -42,12 +42,11 @@ function ContactForm () {
 
     function submitHandler(e) {
         e.preventDefault();
-        setErrors(validateForm(state))
-        if (errors.length === 0) {
+        const errList = validateForm(state)
+        if (errList.length === 0) {
             clearInputs()
-        } else {
-            setErrors(errors)
         }
+        setErrors(errList)
     }
 
     return (
