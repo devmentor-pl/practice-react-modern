@@ -9,7 +9,7 @@ module.exports = {
   entry: `./${taskNumber}/app.js`,
   // definiuje plik wejściowy
   mode: 'development',
-    // definiuję tryb działania
+  // definiuję tryb działania
   output: {
     path: path.resolve(__dirname, "build"),
     // definiuje ścieżką wyjściową
@@ -37,7 +37,8 @@ module.exports = {
       // wskazuje plik źródłowy
       filename: "index.html"
       // określan nazwę dla pliku
-    })
+    }),
+    new ESLintPlugin()
   ]
 };
 // eksportuję ustawienia dla webpack-a
