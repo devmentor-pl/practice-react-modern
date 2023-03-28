@@ -28,12 +28,21 @@ function SpeedTest() {
         }
     };
 
+    const handleCheck = () => {
+        for(let i = 0; i < typedWord.length; i+=1) {
+            if(word[i]!==typedWord[i]){
+                return 'red'
+            }
+        }
+        return null;
+    }
+
     const elapsedTime = () => endTime !== 0 ? endTime - startTime : 0;
 
     return (
         <div>
             <h1>{word}</h1>
-            <input value={typedWord} onChange={handleInputChange} onBlur={handleBlur} />
+            <input value={typedWord} onChange={handleInputChange} onBlur={handleBlur} onKeyUp={() => handleCheck()} style={{backgroundColor: handleCheck()}}/>
             {typedWord===word ? (regenerateWord(), setTypedWord('')) : null}
             <p>{(elapsedTime()/1000).toFixed(2)} sekund</p>
             {/* <p>{letters}</p> */}
@@ -41,6 +50,5 @@ function SpeedTest() {
         </div>
     );
 }
-
 export default SpeedTest;
 
