@@ -1,9 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
+import emailjs from '@emailjs/browser';
 
 // import account from './account';
 
-function ContactForm() {
+export function ContactForm() {
+    const sendingForm = useRef();
     // console.log(account);
     const [error, setError] = useState([])
     const [form, setForm] = useState({
@@ -15,7 +19,16 @@ function ContactForm() {
         message: ''
     })
 
-
+    const sendEmail = (e) => {
+        e.preventDefault();
+    
+        emailjs.sendForm('service_ty90xar', 'template_snpr5pf', sendingForm.current, 'TJjNZwHQN6ET25NlV')
+            .then((result) => {
+                console.log(result.text);
+            }, (errors) => {
+                console.log(errors.text);
+            });
+    };
     // eslint-disable-next-line no-shadow
     const validate = form => {    
         if(!form.email)
@@ -74,6 +87,7 @@ function ContactForm() {
                 topic: '',
                 message: ''
             });
+            sendEmail(e);
         }
         return null;
     }
@@ -93,7 +107,7 @@ function ContactForm() {
                     ))}
                 </ul>
             )}
-            <form style={{display: "flex", flexDirection: "column"}} onSubmit={handleSubmit}>
+            <form ref={sendingForm} style={{display: "flex", flexDirection: "column"}} onSubmit={handleSubmit}>
                 <label>
                     Imię:
                     <input type="text" name='name' onChange={formUpdate} value={form.name}/>
@@ -119,6 +133,8 @@ function ContactForm() {
             </form>
         </>
     );
+                    
+                    
 }
 
 export default ContactForm;
