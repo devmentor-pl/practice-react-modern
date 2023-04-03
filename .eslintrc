@@ -8,7 +8,14 @@
         "react/jsx-indent-props": ["error", 4],
         "react/state-in-constructor": [0, "never"],
         "linebreak-style": ["error", "windows"],
-        "react/jsx-one-expression-per-line": [0]
+        "react/jsx-one-expression-per-line": [0],
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ]
     },
     "globals": { "window": true, "document": true }
 }
