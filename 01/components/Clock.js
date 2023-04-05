@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ClockTime from './ClockTime';
 import ClockDate from './ClockDate';
 
-function Clock(props) {
+const Clock = (props) => {
     const { date } = props;
     return (
         <>
@@ -12,7 +12,7 @@ function Clock(props) {
             <ClockDate date={date} />
         </>
     );
-}
+};
 
 Clock.propTypes = {
     date: PropTypes.instanceOf(Date).isRequired,

@@ -2,7 +2,7 @@
 import React from 'react';
 import TextContext from '../context';
 
-function Div() {
+const Div = () => {
     const { Consumer } = TextContext;
     return (
         <div>
@@ -18,6 +18,6 @@ function Div() {
             </p>
         </div>
     );
-}
+};
 
 export default Div;

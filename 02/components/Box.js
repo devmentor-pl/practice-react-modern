@@ -2,8 +2,6 @@
 import React from 'react';
 import Div from './Div';
 
-function Box() {
-    return <Div />;
-}
+const Box = () => <Div />;
 
 export default Box;
