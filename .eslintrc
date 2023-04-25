@@ -14,7 +14,8 @@
       "react/jsx-indent-props": ["error", 4],
       "max-len": ["error", { "code": 100, "ignoreStrings": true }],
       "quotes": ["error", "single"],
-      "react/state-in-constructor": [0, "never"]
+      "react/state-in-constructor": [0, "never"],
+      "no-console": 0
   },
   "globals": {
     "window": true,
