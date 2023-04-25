@@ -52,11 +52,13 @@ function SpeedTest() {
         }
     }, [counter]);
 
-    const handleClick = () => {
+    const handleReset = () => {
         setFinish(false);
         setDisabled(false);
         setCounter(5);
         setTextLength(0);
+        setFocused(false);
+        regenerateWord();
     };
 
     return (
@@ -72,7 +74,7 @@ function SpeedTest() {
             {finish && <h2>Time&apos;s up!</h2>}
             <p>Time: {counter}s</p>
             <p>Correct letters: {textLength}</p>
-            <button type="button" onClick={() => handleClick()}>
+            <button type="button" onClick={() => handleReset()}>
                 Restart
             </button>
         </div>
