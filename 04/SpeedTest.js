@@ -28,7 +28,7 @@ function SpeedTest() {
 
         return () => stopInterval();
     }, [focused]);
-
+    
     useEffect(() => {
         if (text === word) {
             setTextLength((value) => value + text.length);
@@ -36,6 +36,11 @@ function SpeedTest() {
             regenerateWord();
         }
     }, [text]);
+
+    const handleClick = () => {
+        setTime(0);
+        setTextLength(0);
+    };
 
     return (
         <div>
@@ -48,6 +53,9 @@ function SpeedTest() {
             />
             <p>Time: {time}s</p>
             <p>Correct letters: {textLength}</p>
+            <button type="button" onClick={() => handleClick()}>
+                Reset
+            </button>
         </div>
     );
 }
