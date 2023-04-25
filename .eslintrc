@@ -2,19 +2,19 @@
   "parser": "@babel/eslint-parser",
   "extends": ["airbnb", "prettier"],
   "rules": {
-    "linebreak-style": ["error", "windows"],
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js"]
-      }
-    ],
-    "indent": ["error", 4],
-    "react/jsx-indent": ["error", 4],
-    "react/jsx-indent-props": ["error", 4],
-    "max-len": ["error", { "code": 100 }],
-    "quotes": ["error", "single"],
-    "react/state-in-constructor": [0, "never"]
+      "linebreak-style": ["error", "windows"],
+      "react/jsx-filename-extension": [
+          1,
+          {
+              "extensions": [".js"]
+          }
+      ],
+      "indent": ["error", 4],
+      "react/jsx-indent": ["error", 4],
+      "react/jsx-indent-props": ["error", 4],
+      "max-len": ["error", { "code": 100, "ignoreStrings": true }],
+      "quotes": ["error", "single"],
+      "react/state-in-constructor": [0, "never"]
   },
   "globals": {
     "window": true,
