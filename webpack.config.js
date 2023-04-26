@@ -1,4 +1,4 @@
-const taskNumber = '04';
+const taskNumber = '05';
 // numer przerabianego zadania
 
 const path = require('path');
@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 // Eslint plugin
 module.exports = {
-    entry: `./${taskNumber}/app.js`,
+    entry: `./${taskNumber}/src/app.js`,
     // definiuje plik wejściowy
     mode: 'development',
     // definiuję tryb działania
