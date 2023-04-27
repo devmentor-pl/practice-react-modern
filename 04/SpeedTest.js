@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import useRandomItem from './hooks';
 
 function SpeedTest() {
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
+    const [word, randomNewWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
     const [text, setText] = useState('');
     const [focused, setFocused] = useState(false);
     const [counter, setCounter] = useState(5);
@@ -16,50 +16,55 @@ function SpeedTest() {
     };
 
     useEffect(() => {
-        regenerateWord();
+        randomNewWord();
     }, []);
 
-    useEffect(() => {
-        if (focused === true && !finish) {
-            intervalRef.current = setInterval(() => {
-                setCounter((currCounter) => {
-                    const nextCounter = currCounter - 1;
+    const startGame = () => {
+        intervalRef.current = setInterval(() => {
+            setCounter((currCounter) => {
+                const nextCounter = currCounter - 1;
 
-                    if (nextCounter === 0) {
-                        stopInterval();
-                    }
+                if (nextCounter === 0) stopInterval();
 
-                    return nextCounter;
-                });
-            }, 1000);
-        }
-        return () => stopInterval();
-    }, [focused, finish]);
+                return nextCounter;
+            });
+        }, 1000);
+    };
 
-    useEffect(() => {
-        if (text === word && !finish) {
-            setTextLength((value) => value + text.length);
-            setText('');
-            regenerateWord();
-        }
-    }, [text, finish]);
+    const handleCorrectAnswer = () => {
+        setTextLength((value) => value + text.length);
+        setText('');
+        randomNewWord();
+    };
 
-    useEffect(() => {
-        if (counter === 0) {
-            setFinish(true);
-            setText('');
-            setDisabled(true);
-        }
-    }, [counter]);
+    const handleEndOfTime = () => {
+        setFinish(true);
+        setText('');
+        setDisabled(true);
+    };
 
-    const handleReset = () => {
+    const handleResetGame = () => {
         setFinish(false);
         setDisabled(false);
         setCounter(5);
         setTextLength(0);
         setFocused(false);
-        regenerateWord();
+        randomNewWord();
     };
+
+    useEffect(() => {
+        if (focused === true && !finish) startGame();
+
+        return () => stopInterval();
+    }, [focused, finish]);
+
+    useEffect(() => {
+        if (text === word && !finish) handleCorrectAnswer();
+    }, [text, finish]);
+
+    useEffect(() => {
+        if (counter === 0) handleEndOfTime();
+    }, [counter]);
 
     return (
         <div>
@@ -74,7 +79,10 @@ function SpeedTest() {
             {finish && <h2>Time&apos;s up!</h2>}
             <p>Time: {counter}s</p>
             <p>Correct letters: {textLength}</p>
-            <button type="button" onClick={() => handleReset()}>
+            <button
+                type="button"
+                onClick={() => handleResetGame()}
+            >
                 Restart
             </button>
         </div>
