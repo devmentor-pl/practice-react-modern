@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Clock from './Clock';
 
 class App extends React.Component {
@@ -14,7 +13,7 @@ class App extends React.Component {
         }, 1000);
     }
 
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
