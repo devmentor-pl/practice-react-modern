@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import formFields from '../formFields';
 import formValidation from '../formValidation';
-// import account from './account';
+import sendEmail from '../sendEmail';
 
 function ContactForm() {
     const init = {
@@ -11,7 +11,6 @@ function ContactForm() {
         phoneNumber: '',
         topic: '',
         message: '',
-        textarea: '',
     };
 
     const reducer = (state, { name, value }) => {
@@ -24,7 +23,7 @@ function ContactForm() {
     const [summary, setSummary] = useState('');
     const [state, dispatch] = useReducer(reducer, init);
 
-    const { firstName, lastName, email, phoneNumber, topic, message, textarea } = state;
+    const { firstName, lastName, email, phoneNumber, topic, message } = state;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,14 +35,19 @@ function ContactForm() {
             phoneNumber,
             topic,
             message,
-            textarea,
         };
 
         const formErrors = formValidation(data, formFields);
 
         if (formErrors.length === 0) {
-            setSummary(`Formularz wypełniony prawidłowo. Potwierdzenie wysłano na email: ${email}`);
             setErrors([]);
+            sendEmail({
+                full_name: `${firstName} ${lastName}`,
+                topic,
+                message,
+                email,
+            });
+            setSummary(`Formularz wypełniony prawidłowo. Wiadomość wysłana!`);
         } else {
             setErrors([...formErrors]);
         }
@@ -52,10 +56,13 @@ function ContactForm() {
     const fields = formFields.map((field) => {
         if (field.type === 'textarea') {
             return (
-                <>
-                    <label className="form__label" key={field.name} htmlFor={field.name}>
-                        {field.label}
-                    </label>
+                <label
+                    style={{ width: '100%' }}
+                    key={field.name}
+                    className="form__label"
+                    htmlFor={field.name}
+                >
+                    {field.label}{' '}
                     <textarea
                         style={{ width: '100%' }}
                         className="form__textarea"
@@ -63,15 +70,18 @@ function ContactForm() {
                         onChange={(e) => dispatch(e.target)}
                         value={state[field.name]}
                     />
-                </>
+                </label>
             );
         }
 
         return (
-            <>
-                <label className="form__label" key={field.name} htmlFor={field.name}>
-                    {field.label}
-                </label>
+            <label
+                style={{ width: '100%' }}
+                className="form__label"
+                key={field.name}
+                htmlFor={field.name}
+            >
+                {field.label}{' '}
                 <input
                     style={{ width: '100%' }}
                     className="form__input"
@@ -80,7 +90,7 @@ function ContactForm() {
                     value={state[field.name]}
                     type={field.type}
                 />
-            </>
+            </label>
         );
     });
 

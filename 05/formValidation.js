@@ -7,7 +7,7 @@ function formValidation(data, fields) {
         const { name, label, required = true, pattern = null, format } = field;
 
         if (required) {
-            if (value.length < 2) {
+            if (value.length < 3) {
                 errors.push({
                     name,
                     message: `Dane w polu "${label}" są wymagane.`,
