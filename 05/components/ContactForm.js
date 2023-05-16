@@ -54,41 +54,23 @@ function ContactForm() {
     };
 
     const fields = formFields.map((field) => {
-        if (field.type === 'textarea') {
-            return (
-                <label
-                    style={{ width: '100%' }}
-                    key={field.name}
-                    className="form__label"
-                    htmlFor={field.name}
-                >
-                    {field.label}{' '}
-                    <textarea
-                        style={{ width: '100%' }}
-                        className="form__textarea"
-                        name={field.name}
-                        onChange={(e) => dispatch(e.target)}
-                        value={state[field.name]}
-                    />
-                </label>
-            );
-        }
+        const { tagName = 'input' } = field;
+        const Field = tagName;
 
         return (
             <label
                 style={{ width: '100%' }}
-                className="form__label"
                 key={field.name}
+                className="form__label"
                 htmlFor={field.name}
             >
-                {field.label}{' '}
-                <input
+                {field.label}
+                <Field
                     style={{ width: '100%' }}
-                    className="form__input"
+                    className="form__textarea"
                     name={field.name}
                     onChange={(e) => dispatch(e.target)}
                     value={state[field.name]}
-                    type={field.type}
                 />
             </label>
         );

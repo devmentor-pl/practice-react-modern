@@ -32,7 +32,7 @@ const formFields = [
     {
         name: 'message',
         label: 'Wiadomość',
-        type: 'textarea',
+        tagName: 'textarea',
     },
 ];
 
