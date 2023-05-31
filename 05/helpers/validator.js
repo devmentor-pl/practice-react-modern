@@ -9,19 +9,19 @@ function validator(inputData, fieldsArr) {
 
         if (field.required) {
             if (value.length <= 2) {
-                errors.push({
-                    name: [field.name],
-                    info: 'this is too short',
-                });
-            }
-
-            if (field.pattern) {
-                const reg = new RegExp(field.pattern);
-                if (!reg.test(value)) {
-                    errors.push(`${field.name}${field.label} is invalid`);
-                }
+                errors.push(`${field.label} is too short`);
             }
         }
+
+        if (field.pattern) {
+            const reg = new RegExp(field.pattern);
+            if (!reg.test(value)) {
+                errors.push(`${field.label} is invalid`);
+            }
+        }
+
+        // eslint-disable-next-line
+        console.log(errors);
         return errors;
     });
 }

@@ -28,8 +28,12 @@ const ContactForm = () => {
 
     const handleForm = (e) => {
         e.preventDefault();
+        // eslint-disable-next-line
+        console.log(state);
 
         const errors = validator(state, fields);
+        // eslint-disable-next-line
+        // console.log(errors);
 
         if (errors.length > 0) {
             // eslint-disable-next-line no-alert

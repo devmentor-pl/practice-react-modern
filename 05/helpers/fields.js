@@ -27,7 +27,7 @@ const fields = [
         name: 'telephone',
         label: 'Phone number',
         required: false,
-        pattern: `^(?:+d{2})?d{9}$`,
+        pattern: /[0-9]{3}-[0-9]{3}-[0-9]{3}/,
         type: 'text',
         htmlTag: 'input',
     },
