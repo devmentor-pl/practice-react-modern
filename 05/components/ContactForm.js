@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useReducer, useState } from 'react';
-
 import { v4 as uuid } from 'uuid';
 import fields from '../helpers/fields';
 import validator from '../helpers/validator';
@@ -16,38 +15,39 @@ const ContactForm = () => {
         message: '',
     };
 
-    const reducer = (state, { name, value }) => {
-        const newState = { ...state };
-        newState[name] = value;
-        return newState;
+    const reducer = (state, { name, value, type = '' }) => {
+        if (type === 'reset') {
+            return initValues;
+        }
+        return { ...state, [name]: value };
     };
 
     const [state, dispatch] = useReducer(reducer, initValues);
 
-    const [info, setInfo] = useState('Fill the form');
+    const [info, setInfo] = useState('Fill in the form');
+    const [errorsList, setErrorsList] = useState([]);
 
     const handleForm = (e) => {
         e.preventDefault();
-        // eslint-disable-next-line
-        console.log(state);
 
         const errors = validator(state, fields);
-        // eslint-disable-next-line
-        // console.log(errors);
 
         if (errors.length > 0) {
             // eslint-disable-next-line no-alert
-            alert('Check the form');
+            alert('Please check the form');
         } else {
-            setInfo('You did a great job!');
+            setInfo('Thank you for the message!');
+            dispatch({ type: 'reset' });
         }
+
+        setErrorsList(errors);
     };
 
     const fieldInputs = fields.map((field) => {
         const Tag = field.htmlTag;
 
         return (
-            <label htmlFor={field.name} key={uuid()}>
+            <label htmlFor={field.name} key={field.name}>
                 {field.label}
                 <Tag
                     name={field.name}
@@ -61,16 +61,18 @@ const ContactForm = () => {
 
     return (
         <>
-            <p>{info}</p>
+            <h2 className="form__header">{info}</h2>
             <form onSubmit={(e) => handleForm(e)}>
                 {fieldInputs}
+                <ul>
+                    {errorsList.map((err) => (
+                        <li key={uuid()}>{err}</li>
+                    ))}
+                </ul>
                 <input type="submit" value="Send" />
             </form>
         </>
     );
-
-    // eslint-disable-next-line
-    console.log(fields);
 };
 
 export default ContactForm;
