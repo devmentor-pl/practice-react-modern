@@ -32,15 +32,14 @@ const ContactForm = () => {
 
         const errors = validator(state, fields);
 
-        if (errors.length > 0) {
-            // eslint-disable-next-line no-alert
-            alert('Please check the form');
-        } else {
+        if (errors.length === 0) {
             setInfo('Thank you for the message!');
             dispatch({ type: 'reset' });
+        } else {
+            setErrorsList(errors);
         }
 
-        setErrorsList(errors);
+       
     };
 
     const fieldInputs = fields.map((field) => {

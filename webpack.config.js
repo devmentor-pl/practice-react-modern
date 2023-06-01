@@ -1,4 +1,4 @@
-const taskNumber = '04';
+const taskNumber = '05';
 // numer przerabianego zadania
 
 const path = require('path');
@@ -27,8 +27,10 @@ module.exports = {
                 exclude: /node_modules/,
                 // określam wykluczenia
                 use: ['babel-loader'],
+
                 // określam jakie loader-y
                 // mają być wykorzystywane
+                // eslint-disable-next-line no-dupe-keys
             },
         ],
         // obecnie brak dodatkowych ustawień

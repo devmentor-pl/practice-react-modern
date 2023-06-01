@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ClockTime(props) {
+const ClockTime = (props) => {
     function getCorrectFormatNumber(number) {
         return number.toString().padStart(2, '0');
     }
