@@ -15,21 +15,6 @@ const SpeedTest = () => {
         },100)
     }
 
-
-    useEffect(() => {
-        if(word===null){ 
-            regenerateWord();
-        } else if (userInput===word){
-            clearInterval(intervalRef.current)
-            setResult(currResults => [...currResults,`${currResults.length+1}. ${word} ${counter.toFixed(3)} s`]);
-            setUserInput("");
-            setCounter(0);
-            regenerateWord();
-            focusHandler();
-        }
-    }, [userInput]);
-
-
     const blurHandler = () => {
         clearInterval(intervalRef.current)
     }
@@ -37,6 +22,24 @@ const SpeedTest = () => {
     const changeHandler = ({value}) => {
         setUserInput(value);
     }
+
+    const runNewWord = () => {
+        setUserInput("");
+        setCounter(0);
+        regenerateWord();
+        focusHandler();
+    }
+
+
+    useEffect(() => {
+        if(word===null){ 
+            regenerateWord();
+        } else if (userInput===word){
+            clearInterval(intervalRef.current)
+            setResult(currResults => [...currResults,`${currResults.length+1}. ${word} ${counter.toFixed(3)} s`]);
+            runNewWord();
+        }
+    }, [userInput]);
 
     const formatTime = (timeInSeconds) => {
         const hours = Math.floor(timeInSeconds / 3600);
