@@ -1,7 +1,25 @@
-import React,{useReducer} from 'react';
+import React,{useReducer, useRef} from 'react';
+import emailjs from '@emailjs/browser';
+import { serviceId,templateId,publicKey } from '../pass';
 import checkCorrectFieldsData from './Validation';
 
 const ContactForm = () => {
+
+    const formRef = useRef();
+    const sendMail = () => {
+        emailjs.sendForm(
+            serviceId, 
+            templateId, 
+            formRef.current, 
+            publicKey
+        )
+            .then((result) => {
+                console.log(result.text);
+                console.log('message sent');
+            }, (error) => {
+                console.log(error.text);
+            });
+    }
 
     const init = {
         names: "",
@@ -11,17 +29,17 @@ const ContactForm = () => {
         userMessage: ""
     }
     const reducer = (state, action) => {
-        
+
         const newState = {...state}
-        let id; let value;
+        let name; let value;
 
         switch (action.type) {
         case 'resetState' :
             return action.init;
         default:
-            id = action.id;
+            name = action.name;
             value = action.value;
-            return {...newState, [id]:value}
+            return {...newState, [name]:value}
         }
     }
 
@@ -31,6 +49,7 @@ const ContactForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if(checkCorrectFieldsData(state)){
+            sendMail();
             dispatch({ type: 'resetState', init });   
         };
     }
@@ -42,21 +61,21 @@ const ContactForm = () => {
     };
 
     return (
-        <form style={formStyles} onSubmit={(e) => handleSubmit(e)}>
+        <form ref={formRef} style={formStyles} onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="names">Name and Surname</label>
-            <input id="names" value={names} onChange={ e => dispatch(e.target)} />
+            <input name="names" value={names} onChange={ e => dispatch(e.target)} />
 
             <label htmlFor='email'>Email</label>
-            <input id="email" value={email} onChange={ e => dispatch(e.target)} />
+            <input name="email" value={email} onChange={ e => dispatch(e.target)} />
 
             <label htmlFor='phone'>Phone Number</label>
-            <input id="phone" value={phone} onChange={ e => dispatch(e.target)} />
+            <input name="phone" value={phone} onChange={ e => dispatch(e.target)} />
 
             <label htmlFor='subject'>Subject</label>
-            <input id="subject" value={subject} onChange={ e => dispatch(e.target)} />
+            <input name="subject" value={subject} onChange={ e => dispatch(e.target)} />
 
             <label htmlFor='userMessage'>Your Message</label>
-            <textarea id="userMessage" value={userMessage} onChange={ e => dispatch(e.target)} />
+            <textarea name="userMessage" value={userMessage} onChange={ e => dispatch(e.target)} />
 
             <input type='submit' value="Send" />
 
