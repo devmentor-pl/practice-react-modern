@@ -17,12 +17,6 @@ function SpeedTest() {
     const intervalRef = useRef(null);
     const inputRef = useRef(null);
 
-    // useEffect(() => {
-    //     regenerateWord();
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
     const startTimer = () => {
         const isCounterValid = counter < endTime;
         if (!isCounterValid) return;
