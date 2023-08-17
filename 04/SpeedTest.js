@@ -9,7 +9,6 @@ function SpeedTest() {
     const [inputValue, setInputValue] = useState('');
     const [wordsLength, setWordsLength] = useState(0);
     const [writtenWords, setWrittenWords] = useState([]);
-    // const [definition, setDefinitions] = useState([]);
     // eslint-disable-next-line no-unused-vars
     const [endTime, setEndTime] = useState(5);
     const [gameOn, setGameOn] = useState(false);
@@ -35,8 +34,6 @@ function SpeedTest() {
             intervalRef.current = null;
             setCounter(0);
         }
-
-        console.log(counter);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [counter]);
@@ -97,7 +94,7 @@ function SpeedTest() {
     return (
         <div>
             <p>
-                You have got <strong>{endTime} seconds</strong> to write as many{' '}
+                You have got <strong>{endTime} seconds</strong> to write as many
                 <strong>Welsh words</strong> as you can. Then we will provide you with their
                 definitions.
             </p>
