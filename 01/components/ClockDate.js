@@ -21,12 +21,10 @@ function ClockDate(props) {
     );
 }
 
-ClockDate.defaultProps = {
-    date: 0,
-};
-
+// Dostając informacje w terminalu ze nie ma wartości domyślnej
+// moge albo zrobic defaultProps albo isRequired żeby to naprawić
 ClockDate.propTypes = {
-    date: PropTypes.instanceOf(Date),
+    date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ClockDate;

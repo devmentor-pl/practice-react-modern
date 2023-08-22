@@ -45,6 +45,7 @@ function SpeedTest() {
             />
             <p>Time: {time}</p>
             <p>All Letters Typed: {sumValueLength}</p>
+            <p>Letters/Time: {time > 0 ? (sumValueLength / time).toFixed(1) : 0}</p>
         </div>
     );
 }
