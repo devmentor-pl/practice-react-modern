@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ClockDate = props => {
+function ClockDate(props) {
     function getCorrectMonthFormat(monthNumber) {
         return (monthNumber + 1).toString().padStart(2, '0');
     }
@@ -19,6 +19,12 @@ const ClockDate = props => {
             {year}:{month}:{day}
         </section>
     );
+}
+
+// Dostając informacje w terminalu ze nie ma wartości domyślnej
+// moge albo zrobic defaultProps albo isRequired żeby to naprawić
+ClockDate.propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ClockDate;
