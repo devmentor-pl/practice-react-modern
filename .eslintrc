@@ -12,8 +12,15 @@
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "react/state-in-constructor": [0, "never"],
-        "func-names": ["error", "as-needed"]
+        "react/function-component-definition": [
+            "error",
+            {
+                "namedComponents": ["function-declaration", "arrow-function"],
+                "unnamedComponents": "arrow-function"
+            }
+        ]
     },
+
     "globals": {
         "window": true,
         "document": true
