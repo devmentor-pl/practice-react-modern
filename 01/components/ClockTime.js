@@ -12,11 +12,7 @@ function ClockTime(props) {
 
     return (
         <section>
-            {hours}
-            :
-            {minutes}
-            :
-            {seconds}
+            {hours}:{minutes}:{seconds}
         </section>
     );
 }
