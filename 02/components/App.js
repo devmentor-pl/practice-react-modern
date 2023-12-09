@@ -7,10 +7,16 @@ class App extends React.Component {
         text: 'React HelloWorld Modern!',
     };
 
+    
     render() {
+        const { Provider } = textContent;
         const { text } = this.state;
 
-        return <Box text={text} />;
+        return(
+        <Provider value={text}>
+            <Box text={text} />;
+        </Provider>
+        ) 
     }
 }
 

@@ -4,10 +4,13 @@ import Box from './Box';
 import Div from './Div';
 
 const App = () => {
+    const { Provider } = TextContext;
     return (
         <section>
             <Box />
+            <Provider value = 'sibling'>
             <Div />
+            </Provider>
         </section>
     );
 };
