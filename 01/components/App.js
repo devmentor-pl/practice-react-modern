@@ -14,13 +14,12 @@ class App extends React.Component {
         }, 1000);
     }
 
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
     render() {
         const { date } = this.state;
-
         return date ? <Clock date={date} /> : null;
     }
 }
