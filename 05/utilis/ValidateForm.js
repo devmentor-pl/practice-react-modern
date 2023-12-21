@@ -1,6 +1,7 @@
-const validateFormFields = (state) => {
+const validateFormFields = (state, customFields) => {
     const errors = {};
-    const fields = [
+
+    const fields = customFields || [
         { name: 'firstName', label: 'First name', required: true, minLength: 2 },
         { name: 'lastName', label: 'Last name', required: true, minLength: 2 },
         {
@@ -38,4 +39,13 @@ const validateFormFields = (state) => {
     return errors;
 };
 
-export default validateFormFields;
+// Zadanie dodatkowe
+const generateFormFields = (customFields) =>
+    customFields.map((field) => ({
+        ...field,
+        value: '',
+        placeholder: field.placeholder || '',
+        type: field.type || 'text',
+    }));
+
+export { validateFormFields, generateFormFields };

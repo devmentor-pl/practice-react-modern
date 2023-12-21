@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import '../styles/styles.css';
 import RenderForm from './RenderForm';
-import validateFormFields from '../utilis/ValidateForm';
+import { validateFormFields } from '../utilis/ValidateForm';
 import handleEmailSubmission from '../services/EmailService';
 
 const initialState = {
