@@ -4,7 +4,13 @@ import useRandomItem from './hook';
 const INTERVAL_DURATION = 100;
 
 function SpeedTest() {
-    const [word, regenerateWord] = useRandomItem(['devmentor.pl', 'abc', 'JavaScript']);
+    const [word, regenerateWord] = useRandomItem([
+        'devmentor.pl',
+        'abc',
+        'JavaScript',
+        'React',
+        'LoremIpsum',
+    ]);
     const [inputText, setInputText] = useState('');
     const [startTime, setStartTime] = useState(null);
     const [totalChars, setTotalChars] = useState(0);
@@ -44,16 +50,8 @@ function SpeedTest() {
             setElapsedTime(elapsedTime + elapsedTimeInSeconds);
             regenerateWord();
             setInputText('');
-
-            if (inputRef.current) {
-                inputRef.current.blur();
-            }
             setStartTime(null);
-        }
-    };
-
-    const handleInputFocus = () => {
-        if (!startTime) {
+        } else if (!startTime) {
             setStartTime(Date.now());
         }
     };
@@ -66,6 +64,7 @@ function SpeedTest() {
         }
         setStartTime(null);
     };
+
     return (
         <div>
             <h1>{word}</h1>
@@ -73,7 +72,6 @@ function SpeedTest() {
                 ref={inputRef}
                 value={inputText}
                 onChange={handleInputChange}
-                onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
             />
             <p>Time elapsed: {currentTime.toFixed(2)} seconds</p>
