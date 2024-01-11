@@ -3,6 +3,7 @@ import React from 'react';
 import Clock from './Clock';
 
 class App extends React.Component {
+    // eslint-disable-next-line
     state = {
         date: new Date(),
     };
@@ -14,7 +15,7 @@ class App extends React.Component {
         }, 1000);
     }
 
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
