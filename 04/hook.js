@@ -10,7 +10,7 @@ const useRandomItem = (itemsList) => {
         setState(itemsList[rand]);
     };
 
-    return [state, randomItem];
+    return [state, randomItem, itemsList];
 };
 
 export default useRandomItem;
