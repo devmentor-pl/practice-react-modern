@@ -37,10 +37,12 @@ function SpeedTest() {
     };
 
     const winAlert = () => {
+        const calculateSpeed = length / time;
+
         if (wordsList.length === 0) {
             // eslint-disable-next-line
             alert(
-                `Gratulacje. Wpisałeś ${words.length} słowa o łącznej długośći ${length} znaków. Potrzebowałeś na to ${time} sekund.`,
+                `Gratulacje. Wpisałeś ${words.length} słowa o łącznej długośći ${length} znaków. Potrzebowałeś na to ${time} sekund. Piszesz z szybkośią ${calculateSpeed} znaków na sekundę.`,
             );
             stopCount();
         }
