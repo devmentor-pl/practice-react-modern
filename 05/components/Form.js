@@ -1,42 +1,71 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 import PropTypes from 'prop-types';
 
-// import ContactForm from './ContactForm';
+function Form({ onChange, onSubmit, fields }) {
+    const form = useForm();
+    const { register, handleSubmit, control, formState } = form;
+    const { errors } = formState;
 
-function Form({ onChange, onSubmit, data, fields }) {
     const inputs = fields.map((field) => (
-        <label htmlFor={field.name} key={field.name}>
-            <input
-                style={{ padding: '5px' }}
-                placeholder={field.placeholder}
-                type={field.type}
-                id={field.id}
-                name={field.name}
-                value={field.value}
-                onChange={onChange}
-            />
-        </label>
+        <div>
+            <label htmlFor={field.name} key={field.name}>
+                <input
+                    style={{ padding: '5px' }}
+                    placeholder={field.placeholder}
+                    type={field.type}
+                    id={field.id}
+                    name={field.name}
+                    // value={field.value}
+                    onChange={onChange}
+                    required
+                    /* eslint-disable-next-line react/jsx-props-no-spreading */
+                    {...register(field.name, {
+                        pattern: {
+                            value: field.pattern,
+                            message: field.message,
+                        },
+                        required: {
+                            value: true,
+                        },
+                    })}
+                />
+                <p>{errors[field.name]?.message}</p>
+            </label>
+        </div>
     ));
 
     return (
-        <form
-            className="form"
-            style={{ display: 'flex', flexDirection: 'column', maxWidth: '300px', gap: '10px' }}
-            onSubmit={onSubmit}
-        >
-            {inputs}
+        <div>
+            <form
+                // noValidate
+                className="form"
+                style={{ display: 'flex', flexDirection: 'column', maxWidth: '300px', gap: '10px' }}
+                onSubmit={handleSubmit(onSubmit)}
+            >
+                {inputs}
 
-            <textarea
-                style={{ padding: '5px' }}
-                placeholder="Wpisz wiadomość..."
-                name="message"
-                value={data.message}
-                onChange={onChange}
-                rows="5"
-                cols="33"
-            />
-            <input type="submit" value="Dodaj Spotkanie" />
-        </form>
+                <textarea
+                    style={{ padding: '5px' }}
+                    placeholder="Wpisz wiadomość..."
+                    name="message"
+                    // value={data.message}
+                    onChange={onChange}
+                    rows="5"
+                    cols="33"
+                    /* eslint-disable-next-line react/jsx-props-no-spreading */
+                    {...register('message', {
+                        required: {
+                            value: true,
+                        },
+                    })}
+                />
+                <p>{errors.message?.message}</p>
+                <input type="submit" value="Wyślij" />
+            </form>
+            <DevTool control={control} />
+        </div>
     );
 }
 

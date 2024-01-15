@@ -1,6 +1,6 @@
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'Handle input text':
+        case 'SET_FIELD':
             return {
                 ...state,
                 [action.field]: action.value,
