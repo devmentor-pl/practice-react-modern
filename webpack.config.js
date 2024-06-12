@@ -1,9 +1,10 @@
-const taskNumber = '03';
+const taskNumber = '04';
 // numer przerabianego zadania
 
 const path = require('path');
 // importuję bibliotękę [path] z [node.js]
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 // importuję odpowiedni plugin
 module.exports = {
     entry: `./${taskNumber}/app.js`,
@@ -28,6 +29,10 @@ module.exports = {
                 // określam jakie loader-y
                 // mają być wykorzystywane
             },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
         ],
         // obecnie brak dodatkowych ustawień
     },
@@ -38,6 +43,8 @@ module.exports = {
             filename: 'index.html',
             // określan nazwę dla pliku
         }),
+        new ESLintPlugin({
+            extensions: ['js', 'jsx'],
+        }),
     ],
 };
-// eksportuję ustawienia dla webpack-a
