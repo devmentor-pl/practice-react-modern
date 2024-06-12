@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// eslint-disable-function-component-definition 
 const ClockTime = props => {
     function getCorrectFormatNumber(number) {
         return number.toString().padStart(2, '0');
