@@ -1,0 +1,54 @@
+[
+    {
+        "label": "Name",
+        "name": "fullName",
+        "id": "fullName",
+        "type": "text",
+        "placeholder": "Your Full Name",
+        "required": true,
+        "pattern": "\\b([A-ZÀ-ÿa-z][-,a-z. ']+[ ]*)+",
+        "errorMessage": "Name is invalid."
+    },
+    {
+        "label": "E-mail",
+        "name": "email",
+        "id": "email",
+        "type": "email",
+        "placeholder": "Your E-mail",
+        "required": true,
+        "pattern": "\\S+@\\S+\\.\\S+",
+        "errorMessage": "Email is invalid.",
+        "autocomplete": true
+    },
+    {
+        "label": "Phone number",
+        "name": "phoneNumber",
+        "id": "phoneNumber",
+        "type": "tel",
+        "placeholder": "Your Phone Number (not required)",
+        "required": false,
+        "pattern": "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$",
+        "errorMessage": "Phone number is invalid."
+    },
+    {
+        "label": "Subject",
+        "name": "subject",
+        "id": "subject",
+        "type": "text",
+        "placeholder": "The Subject",
+        "required": true,
+        "pattern": null,
+        "errorMessage": null
+    },
+    {
+        "label": "Message",
+        "name": "message",
+        "id": "message",
+        "placeholder": "How can we help?",
+        "required": true,
+        "pattern": null,
+        "errorMessage": null,
+        "tagName": "textarea",
+        "rows": 5
+    }
+]
