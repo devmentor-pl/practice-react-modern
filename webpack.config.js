@@ -1,7 +1,8 @@
-const taskNumber = "01";
+const taskNumber = "04";
 // numer przerabianego zadania
 
 const path = require("path");
+const ESLintintPlugin = require('eslint-webpack-plugin');
 // importuję bibliotękę [path] z [node.js]
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // importuję odpowiedni plugin
@@ -37,7 +38,8 @@ module.exports = {
       // wskazuje plik źródłowy
       filename: "index.html"
       // określan nazwę dla pliku
-    })
+    }),
+    new ESLintintPlugin()
   ]
 };
 // eksportuję ustawienia dla webpack-a

@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import Div from './Div';
 
 const Box = props => {
-    const { text } = props;
-
-    return <Div title={text} />;
+    
+return <Div/>;
 };
 
-Box.propTypes = {
-    text: PropTypes.string.isRequired,
-};
+
 
 export default Box;

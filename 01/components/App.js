@@ -3,10 +3,11 @@ import React from 'react';
 import Clock from './Clock';
 
 class App extends React.Component {
-    state = {
-        date: new Date(),
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()}
+    }
+    
     componentDidMount() {
         this.intervalId = setInterval(() => {
             const date = new Date();
@@ -14,7 +15,7 @@ class App extends React.Component {
         }, 1000);
     }
 
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
