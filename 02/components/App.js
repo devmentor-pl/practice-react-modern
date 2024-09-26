@@ -2,6 +2,8 @@
 import React from 'react';
 import Box from './Box';
 
+import TitleContex from '../context';
+
 class App extends React.Component {
     state = {
         text: 'React HelloWorld Modern!',
@@ -9,8 +11,13 @@ class App extends React.Component {
 
     render() {
         const { text } = this.state;
+        const { Provider } = TitleContex;
 
-        return <Box text={text} />;
+        return (
+            <Provider value={text}>
+                <Box />
+            </Provider>
+        );
     }
 }
 
