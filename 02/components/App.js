@@ -1,6 +1,7 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
+import TitleContext from '../context';
 
 class App extends React.Component {
     state = {
@@ -8,9 +9,13 @@ class App extends React.Component {
     };
 
     render() {
+        const { Provider: TitleProvider } = TitleContext;
         const { text } = this.state;
-
-        return <Box text={text} />;
+        return (
+            <TitleProvider value={text}>
+                <Box />
+            </TitleProvider>
+        );
     }
 }
 

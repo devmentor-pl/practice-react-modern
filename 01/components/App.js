@@ -10,11 +10,13 @@ class App extends React.Component {
     componentDidMount() {
         this.intervalId = setInterval(() => {
             const date = new Date();
-            this.setState({ date });
+            this.setState({
+                date,
+            });
         }, 1000);
     }
 
-    componentWillUnmunt() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
