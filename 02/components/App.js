@@ -1,6 +1,7 @@
 // ./src/components/App.js
 import React from 'react';
 import Box from './Box';
+import TextContext from './src/context/textContext';
 
 class App extends React.Component {
     state = {
@@ -8,10 +9,12 @@ class App extends React.Component {
     };
 
     render() {
-        const { text } = this.state;
-
-        return <Box text={text} />;
+        const {text} = this.state
+        return <TextContext.Provider value={text}>
+            <Box  />
+        </TextContext.Provider>
     }
+
 }
 
 export default App;
