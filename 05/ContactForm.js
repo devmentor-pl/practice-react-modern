@@ -1,10 +1,29 @@
 import React from 'react';
+import Button from './components/Button';
+import FormFields from './components/FormFields';
+import Form from './components/Form';
+import { fieldsTypes, FormProvider } from './context/FormContext';
+// import account from './account';
 
-import account from './account';
+function ContactForm({ fields }) {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
 
-const ContactForm = () => {
-    console.log(account);
-    return <form>??</form>;
+    return (
+        <FormProvider fields={fields}>
+            <Form onSubmit={handleSubmit}>
+                <FormFields />
+                <Button type="submit" style={{ color: '#ffffff', backgroundColor: '#086ca2' }}>
+                    Wyślij
+                </Button>
+            </Form>
+        </FormProvider>
+    );
+}
+
+ContactForm.propTypes = {
+    fields: fieldsTypes,
 };
 
 export default ContactForm;

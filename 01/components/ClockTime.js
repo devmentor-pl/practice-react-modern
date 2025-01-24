@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ClockTime = props => {
+function ClockTime({ date }) {
     function getCorrectFormatNumber(number) {
         return number.toString().padStart(2, '0');
     }
-    const { date } = props;
+
     const hours = getCorrectFormatNumber(date.getHours());
     const minutes = getCorrectFormatNumber(date.getMinutes());
     const seconds = getCorrectFormatNumber(date.getSeconds());
