@@ -85,6 +85,8 @@ function ContactForm() {
     };
     return (
         <form onSubmit={handleSubmit}>
+            {success && <p style={{ color: 'green' }}>Formularz wysłany poprawnie</p>}
+
             <input
                 name="name"
                 value={values.name}
