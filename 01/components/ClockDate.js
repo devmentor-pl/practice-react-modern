@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const ClockDate = props => {
+function ClockDate(props) {
     function getCorrectMonthFormat(monthNumber) {
         return (monthNumber + 1).toString().padStart(2, '0');
     }
@@ -19,6 +18,6 @@ const ClockDate = props => {
             {year}:{month}:{day}
         </section>
     );
-};
+}
 
 export default ClockDate;
