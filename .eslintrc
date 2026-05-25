@@ -13,7 +13,8 @@
         "react/jsx-indent-props": ["error", 4],
         "react/state-in-constructor": [0, "never"],
         "func-names": ["error", "as-needed"],
-        "max-len": ["error", { "code": 100 }]
+        "max-len": ["error", { "code": 100 }],
+        "react/require-default-props": "off"
     },
     "globals": {
         "window": true,
