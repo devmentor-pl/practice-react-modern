@@ -1,0 +1,55 @@
+const fields = [
+    {
+        name: 'firstName',
+        label: 'Imię',
+        type: 'text',
+        regex: /^[\p{L}\- ]{2,}$/u,
+        liveRegex: /^[A-Za-zÀ-ÖØ-öø-ÿąćęłńóśźżĄĆĘŁŃÓŚŹŻ\- ]*$/,
+        error: 'Wpisz poprawne imię',
+        isRequired: true,
+    },
+    {
+        name: 'lastName',
+        label: 'Nazwisko',
+        type: 'text',
+        regex: /^[\p{L}\- ]{2,}$/u,
+        liveRegex: /^[A-Za-zÀ-ÖØ-öø-ÿąćęłńóśźżĄĆĘŁŃÓŚŹŻ\- ]*$/,
+        error: 'Wpisz poprawne nazwisko',
+        isRequired: true,
+    },
+    {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        error: 'Wpisz poprawny adres email',
+        isRequired: true,
+    },
+    {
+        name: 'phone',
+        label: 'Numer telefonu',
+        type: 'tel',
+        regex: /^(?:$|(?:\+48\s?)?(?:\d{3}[-\s]?\d{3}[-\s]?\d{3}))$/,
+        error: 'Wpisz poprawny numer telefonu',
+        isRequired: false,
+    },
+    {
+        name: 'topic',
+        label: 'Temat',
+        type: 'text',
+        regex: /^.{2,}$/,
+        error: 'Wpisz temat wiadomości',
+        isRequired: true,
+    },
+    {
+        name: 'message',
+        label: 'Wiadomość',
+        type: 'textarea',
+        error: 'Wpisz wiadomość',
+        isRequired: true,
+        minLength: 10,
+        maxLength: 2000,
+    },
+];
+
+export default fields;
